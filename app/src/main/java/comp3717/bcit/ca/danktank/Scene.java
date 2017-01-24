@@ -14,4 +14,5 @@ public interface Scene
     //Whenever scene is ending will tell scene manager to switch the active scene
     public void terminate();
     public void receiveTouch(MotionEvent event);
+    public void reset();
 }

@@ -13,10 +13,12 @@ public class SceneManager
 {
     private ArrayList<Scene> scenes = new ArrayList<>();
     public static int ACTIVE_SCENE;
+    private static int lastScene;
 
     public SceneManager()
     {
-        ACTIVE_SCENE = 0;
+        ACTIVE_SCENE = lastScene = 0;
+        scenes.add(new TitleScene());
         scenes.add(new GameplayScene());
     }
 
@@ -27,6 +29,12 @@ public class SceneManager
 
     public void update()
     {
+        //If Scene change occurred
+        if (lastScene != ACTIVE_SCENE)
+        {
+            scenes.get(ACTIVE_SCENE).reset();
+            lastScene = ACTIVE_SCENE;
+        }
         scenes.get(ACTIVE_SCENE).update();
     }
 

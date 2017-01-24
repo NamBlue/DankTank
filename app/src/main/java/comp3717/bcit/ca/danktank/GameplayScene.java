@@ -29,7 +29,7 @@ public class GameplayScene implements Scene
         player.update(playerPoint);
 
         obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
-    }
+}
 
     public void reset()
     {
@@ -103,7 +103,7 @@ public class GameplayScene implements Scene
                 }
                 if(gameOver &&System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
                 {
-                    reset();
+                    terminate();
                     gameOver = false;
                 }
                 break;
