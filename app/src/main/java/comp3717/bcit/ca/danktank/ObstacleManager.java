@@ -70,7 +70,7 @@ public class ObstacleManager
         startTime = System.currentTimeMillis();
 
         //10 seconds to move through screen height, increase speed as time goes on 2000.0 = two seconds per speed up
-        float speed = (float)(Math.sqrt(1 + (startTime - initTime) / 2000.0) * Constants.SCREEN_HEIGHT/10000.0f);
+        float speed = (float)(Math.sqrt(1 + (startTime - initTime) / 3000.0) * Constants.SCREEN_HEIGHT/10000.0f);
 
         for (Obstacle obstacle : obstacles)
         {

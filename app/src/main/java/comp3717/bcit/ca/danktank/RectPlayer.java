@@ -33,9 +33,9 @@ public class RectPlayer implements GameObject
         //For Decoding, Producing, Modifying Bitmaps etc.
         BitmapFactory bitmapFactory = new BitmapFactory();
         //Make sure image names are all lowercase or will cause errors!
-        Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue);
-        Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue_walk1);
-        Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.alienblue_walk2);
+        Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.idle);
+        Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.move1);
+        Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.move2);
 
         idle = new Animation(new Bitmap[]{idleImg}, 5);
         walkRight = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
