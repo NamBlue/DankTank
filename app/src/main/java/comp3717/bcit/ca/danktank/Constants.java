@@ -13,4 +13,5 @@ public class Constants
     //Delay before displaying game over
     public static int GAMEOVER_TIME = 2000;
     public static Context CURRENT_CONTEXT;
+    public static long INIT_TIME;
 }

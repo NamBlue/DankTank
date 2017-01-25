@@ -21,6 +21,9 @@ public class GameplayScene implements Scene
     private boolean movingPlayer = false;
     private boolean gameOver = false;
     private long gameOverTime;
+    private OrientationData orientationData;
+    //speed to move the player faster as it is more tilted, tracks time elapsed between frames
+    private long frameTime;
 
     public GameplayScene()
     {
@@ -29,6 +32,10 @@ public class GameplayScene implements Scene
         player.update(playerPoint);
 
         obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
+
+        orientationData = new OrientationData();
+        orientationData.register();
+        frameTime = System.currentTimeMillis();
 }
 
     public void reset()
@@ -37,6 +44,7 @@ public class GameplayScene implements Scene
         player.update(playerPoint);
         obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
         movingPlayer = false;
+        orientationData.newGame();
     }
 
 
@@ -57,6 +65,50 @@ public class GameplayScene implements Scene
     {
         if (!gameOver)
         {
+            //Keeps the time elapsed to the right time when game is resumed
+            if(frameTime < Constants.INIT_TIME)
+            {
+                frameTime = Constants.INIT_TIME;
+            }
+
+            int elapsedTine = (int)(System.currentTimeMillis() - frameTime);
+            frameTime = System.currentTimeMillis();
+
+            if (orientationData.getOrientation() != null && orientationData.getStartingOrientation() != null)
+            {
+                //index 1 of orientation is the pitch for Y axis movement
+                //pitch goes from PI to -PI
+                //roll goes from PI/2 to - PI/2 (Need to multiply by 2)
+                float pitchDelta = orientationData.getOrientation()[1] - orientationData.getStartingOrientation()[1];
+                float rollDelta = orientationData.getOrientation()[2] - orientationData.getStartingOrientation()[2];
+
+                //1000f means 2000msec to move across the screen when fully tilted
+                float xspeed = 2 * rollDelta * Constants.SCREEN_WIDTH/2000f;
+                float yspeed = pitchDelta * Constants.SCREEN_HEIGHT/2000f;
+
+                //5 is the pixel margin for error correction
+                playerPoint.x += Math.abs(xspeed * elapsedTine) > 5 ? xspeed*elapsedTine : 0;
+                playerPoint.y -= Math.abs(yspeed * elapsedTine) > 5 ? yspeed*elapsedTine : 0;
+            }
+
+            //Bounding player to screen
+            if(playerPoint.x < 0)
+            {
+                playerPoint.x = 0;
+            }
+            else if (playerPoint.x > Constants.SCREEN_WIDTH)
+            {
+                playerPoint.x = Constants.SCREEN_WIDTH;
+            }
+            if(playerPoint.y < 0)
+            {
+                playerPoint.y = 0;
+            }
+            else if (playerPoint.y > Constants.SCREEN_HEIGHT)
+            {
+                playerPoint.y = Constants.SCREEN_HEIGHT;
+            }
+
             player.update(playerPoint);
             obstacleManager.update();
             if (obstacleManager.playerCollide(player))
@@ -105,6 +157,7 @@ public class GameplayScene implements Scene
                 {
                     terminate();
                     gameOver = false;
+
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
