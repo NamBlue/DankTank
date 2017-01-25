@@ -24,7 +24,7 @@ public class MainActivity extends Activity
         Constants.SCREEN_WIDTH = displayMetrics.widthPixels;
         Constants.SCREEN_HEIGHT = displayMetrics.heightPixels;
 
-
+        //// // TODO: 1/24/2017 Create a framelayout to allow UI overlay
         setContentView(new GamePanel(this));
     }
 }
