@@ -46,12 +46,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceDestroyed(SurfaceHolder holder)
     {
         boolean retry = true;
-        while (true)
+        while (retry)
         {
             try
             {
-                thread.setRunning(false);
-                thread.join();
+                if (thread != null)
+                {
+                    thread.setRunning(false);
+                    thread.join();
+                }
             }
             catch (Exception e)
             {
@@ -77,8 +80,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void draw(Canvas canvas)
     {
-        super.draw(canvas);
-        sceneManager.draw(canvas);
+        if (canvas != null)
+        {
+            super.draw(canvas);
+            sceneManager.draw(canvas);
+        }
     }
 
 }
