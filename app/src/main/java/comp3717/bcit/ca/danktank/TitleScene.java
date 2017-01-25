@@ -1,11 +1,15 @@
 package comp3717.bcit.ca.danktank;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.PictureDrawable;
 import android.view.MotionEvent;
+import android.graphics.Bitmap;
 
 /**
  * Created by NamBlue on 1/20/2017.
@@ -14,26 +18,33 @@ import android.view.MotionEvent;
 public class TitleScene implements Scene
 {
     //Used to set the bounds for the gameover text box
-    private Rect rectBound = new Rect();
+    private Rect screen = new Rect();
+
+    private Bitmap[] frames;
+    private int frameIndex;
+    private BitmapFactory bitmapFactory;
+    private Bitmap title;
 
     public TitleScene()
     {
+        bitmapFactory = new BitmapFactory();
+        title = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.titlebackground);
     }
 
     public void reset()
     {
-    }
 
+    }
 
     private void drawCentreText(Canvas canvas, Paint paint, String text)
     {
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(rectBound);
-        int cHeight = rectBound.height();
-        int cWidth = rectBound.width();
-        paint.getTextBounds(text, 0, text.length(), rectBound);
-        float x = cWidth / 2f - rectBound.width() / 2f - rectBound.left;
-        float y = cHeight / 2f - rectBound.height() / 2f - rectBound.bottom;
+        canvas.getClipBounds(screen);
+        int cHeight = screen.height();
+        int cWidth = screen.width();
+        paint.getTextBounds(text, 0, text.length(), screen);
+        float x = cWidth / 2f - screen.width() / 2f - screen.left;
+        float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
         canvas.drawText(text, x ,y ,paint);
     }
 
@@ -47,6 +58,9 @@ public class TitleScene implements Scene
     public void draw(Canvas canvas)
     {
         canvas.drawColor(Color.BLACK);
+        canvas.getClipBounds(screen);
+        canvas.drawBitmap(title, null, screen, null);
+
 
         Paint paint = new Paint();
         paint.setTextSize(100);
