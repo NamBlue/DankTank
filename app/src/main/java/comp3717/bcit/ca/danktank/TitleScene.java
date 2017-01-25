@@ -20,8 +20,6 @@ public class TitleScene implements Scene
     //Used to set the bounds for the gameover text box
     private Rect screen = new Rect();
 
-    private Bitmap[] frames;
-    private int frameIndex;
     private BitmapFactory bitmapFactory;
     private Bitmap title;
 
