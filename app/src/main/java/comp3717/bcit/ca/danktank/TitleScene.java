@@ -78,7 +78,7 @@ public class TitleScene implements Scene
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                SceneManager.ACTIVE_SCENE = 1;
+                SceneManager.ACTIVE_SCENE = 2;
                 break;
         }
     }

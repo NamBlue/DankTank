@@ -20,6 +20,8 @@ public class SceneManager
         ACTIVE_SCENE = lastScene = 0;
         scenes.add(new TitleScene());
         scenes.add(new GameplayScene());
+        scenes.add(new LevelSelectScreen());
+        scenes.add(new PauseScene());
     }
 
     public void receiveTouch(MotionEvent event)
