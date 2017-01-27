@@ -9,8 +9,11 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.PictureDrawable;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.graphics.Bitmap;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by NamBlue on 1/20/2017.
@@ -93,9 +96,10 @@ public class TitleScene implements Scene
                 x = (int)event.getRawX();
                 y = (int)event.getRawY();
 
-                //code issue here
-                if(y > screen.height()){
-                    SceneManager.ACTIVE_SCENE = 3;
+                //code issue here with the screen.height() the following hack allows the bottom 25%
+                //to point to the instructions scene
+                if(y > (3 * Constants.SCREEN_HEIGHT/4)){
+                    SceneManager.ACTIVE_SCENE = 4;
                 }
                 else{SceneManager.ACTIVE_SCENE = 2;}
                 break;

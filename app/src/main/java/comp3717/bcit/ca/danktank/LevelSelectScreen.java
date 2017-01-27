@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 
 public class LevelSelectScreen implements Scene {
     private Rect screen = new Rect();
+    private Rect backButton = new Rect(0, 0, 150, 150);
 
     @Override
     public void update() {
@@ -29,6 +30,7 @@ public class LevelSelectScreen implements Scene {
         Paint paint = new Paint();
         paint.setTextSize(100);
         paint.setColor(Color.BLUE);
+        canvas.drawRect(backButton, paint);
         drawCentreText(canvas, paint, "Level 1");
     }
 
@@ -54,7 +56,12 @@ public class LevelSelectScreen implements Scene {
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                SceneManager.ACTIVE_SCENE = 1;
+                if(backButton.contains((int)event.getX(), (int)event.getY())){
+                    terminate();
+                }
+                else {
+                    SceneManager.ACTIVE_SCENE = 1;
+                }
                 break;
         }
     }
