@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.PictureDrawable;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.graphics.Bitmap;
 
@@ -19,9 +20,10 @@ public class TitleScene implements Scene
 {
     //Used to set the bounds for the gameover text box
     private Rect screen = new Rect();
-
     private BitmapFactory bitmapFactory;
     private Bitmap title;
+    int x;
+    int y;
 
     public TitleScene()
     {
@@ -34,7 +36,7 @@ public class TitleScene implements Scene
 
     }
 
-    private void drawCentreText(Canvas canvas, Paint paint, String text)
+    private void drawCentreStart(Canvas canvas, Paint paint, String text)
     {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.getClipBounds(screen);
@@ -55,15 +57,25 @@ public class TitleScene implements Scene
     @Override
     public void draw(Canvas canvas)
     {
-        canvas.drawColor(Color.BLACK);
         canvas.getClipBounds(screen);
         canvas.drawBitmap(title, null, screen, null);
-
-
         Paint paint = new Paint();
         paint.setTextSize(100);
-        paint.setColor(Color.BLUE);
-        drawCentreText(canvas, paint, "Click to Start!");
+        paint.setColor(Color.RED);
+        drawCentreStart(canvas, paint, "Click to Start!");
+        drawCentreInstruct(canvas, paint, "Instructions");
+    }
+
+    private void drawCentreInstruct(Canvas canvas, Paint paint, String instructions) {
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.getClipBounds(screen);
+        int cHeight = screen.height();
+        int cWidth = screen.width();
+        paint.getTextBounds(instructions, 0, instructions.length(), screen);
+        float x = cWidth / 2f - screen.width() / 2f - screen.left;
+        float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
+        y = y *2;
+        canvas.drawText(instructions, x ,y ,paint);
     }
 
     @Override
@@ -78,7 +90,14 @@ public class TitleScene implements Scene
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                SceneManager.ACTIVE_SCENE = 2;
+                x = (int)event.getRawX();
+                y = (int)event.getRawY();
+
+                //code issue here
+                if(y > screen.height()){
+                    SceneManager.ACTIVE_SCENE = 3;
+                }
+                else{SceneManager.ACTIVE_SCENE = 2;}
                 break;
         }
     }
