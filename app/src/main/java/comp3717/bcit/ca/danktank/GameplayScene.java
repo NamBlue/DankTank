@@ -16,6 +16,10 @@ public class GameplayScene implements Scene
     //Used to set the bounds for the gameover text box
     private Rect rectBound = new Rect();
     private Rect pauseButton;
+    private Rect moveLeft;
+    private Rect moveRight;
+    private Rect moveUp;
+    private Rect moveDown;
     private RectPlayer player;
     private Point playerPoint;
     private ObstacleManager obstacleManager;
@@ -31,6 +35,13 @@ public class GameplayScene implements Scene
         player = new RectPlayer(new Rect(100, 100, 225, 225), Color.rgb(255, 0, 0));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         pauseButton = new Rect(Constants.SCREEN_WIDTH - 150, 0, Constants.SCREEN_WIDTH, 150);
+
+        moveLeft = new Rect(50, Constants.SCREEN_HEIGHT - 350, 150, Constants.SCREEN_HEIGHT - 250);
+        moveRight = new Rect(200, Constants.SCREEN_HEIGHT - 350, 300, Constants.SCREEN_HEIGHT - 250);
+        moveUp = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
+        moveDown = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
+
+
         player.update(playerPoint);
 
         obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
@@ -133,7 +144,10 @@ public class GameplayScene implements Scene
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         canvas.drawRect(pauseButton, paint);
-
+        canvas.drawRect(moveLeft, paint);
+        canvas.drawRect(moveRight, paint);
+        canvas.drawRect(moveUp, paint);
+        canvas.drawRect(moveDown, paint);
         if (gameOver)
         {
             //Paint paint = new Paint();
@@ -158,6 +172,26 @@ public class GameplayScene implements Scene
                 if(!gameOver && player.getRectangle().contains((int)event.getX(), (int) event.getY()))
                 {
                     movingPlayer = true;
+                }
+
+                if(!gameOver && moveLeft.contains((int)event.getX(), (int) event.getY()))
+                {
+                    playerPoint.set(playerPoint.x - 25, playerPoint.y);
+                }
+
+                if(!gameOver && moveRight.contains((int)event.getX(), (int) event.getY()))
+                {
+                    playerPoint.set(playerPoint.x + 25, playerPoint.y);
+                }
+
+                if(!gameOver && moveUp.contains((int)event.getX(), (int) event.getY()))
+                {
+                    playerPoint.set(playerPoint.x, playerPoint.y - 25);
+                }
+
+                if(!gameOver && moveDown.contains((int)event.getX(), (int) event.getY()))
+                {
+                    playerPoint.set(playerPoint.x, playerPoint.y + 25);
                 }
                 //Added by harman to test the pause button
                 if(!gameOver && pauseButton.contains((int)event.getX(), (int)event.getY())){
