@@ -3,13 +3,9 @@ package comp3717.bcit.ca.danktank;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.PictureDrawable;
-import android.util.Log;
-import android.view.Display;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.graphics.Bitmap;
 
@@ -28,11 +24,14 @@ public class TitleScene implements Scene
     private Bitmap title;
     int x;
     int y;
+    MediaPlayer mySound;
 
     public TitleScene()
     {
         bitmapFactory = new BitmapFactory();
         title = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.titlebackground);
+        mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
+
     }
 
     public void reset()
@@ -55,7 +54,7 @@ public class TitleScene implements Scene
     @Override
     public void update()
     {
-
+        mySound.start();
     }
 
     @Override
@@ -87,6 +86,7 @@ public class TitleScene implements Scene
     public void terminate()
     {
         SceneManager.ACTIVE_SCENE = 0;
+
     }
 
     @Override
@@ -103,7 +103,10 @@ public class TitleScene implements Scene
                 if(test.contains(x,y)){
                     SceneManager.ACTIVE_SCENE = 4;
                 }
-                else{SceneManager.ACTIVE_SCENE = 2;}
+                else{
+                    SceneManager.ACTIVE_SCENE = 2;
+
+                }
                 break;
         }
     }
