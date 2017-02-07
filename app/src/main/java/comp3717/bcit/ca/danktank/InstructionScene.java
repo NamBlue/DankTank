@@ -26,22 +26,40 @@ public class InstructionScene implements Scene {
     public void draw(Canvas canvas){
         canvas.drawColor(Color.BLACK);
         Paint paint = new Paint();
+        drawTitle(canvas, paint, "How to play");
+        drawBackButton(canvas, paint);
+        drawInstructions(canvas, paint, "1.\n" + "2.\n" + "3.\n");
+
+
+    }
+
+    private void drawBackButton(Canvas canvas, Paint paint)
+    {
+        paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(100);
         paint.setColor(Color.BLUE);
         canvas.drawRect(backButton, paint);
-        drawCentreText(canvas, paint, "Instructions");
+        paint.setColor(Color.RED);
+        canvas.drawText("<-",50,100,paint);
+
     }
 
-    private void drawCentreText(Canvas canvas, Paint paint, String text)
+    private void drawTitle(Canvas canvas, Paint paint, String text)
+    {
+        paint.setTextSize(100);
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setColor(Color.BLUE);
+        float x = Constants.SCREEN_WIDTH/4;
+        float y = Constants.SCREEN_HEIGHT/6;
+        canvas.drawText(text, x, y ,paint);
+    }
+
+    private void drawInstructions(Canvas canvas, Paint paint, String text)
     {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.getClipBounds(screen);
-        int cHeight = screen.height();
-        int cWidth = screen.width();
         paint.getTextBounds(text, 0, text.length(), screen);
-        float x = cWidth / 2f - screen.width() / 2f - screen.left;
-        float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
-        canvas.drawText(text, x ,y ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/4, Constants.SCREEN_HEIGHT/4 ,paint);
     }
 
     public void receiveTouch(MotionEvent event)

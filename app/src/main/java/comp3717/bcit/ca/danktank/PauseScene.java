@@ -27,7 +27,7 @@ public class PauseScene implements Scene {
         Paint paint = new Paint();
         paint.setTextSize(100);
         paint.setColor(Color.BLUE);
-        drawCentreText(canvas, paint, "Pause Menu");
+        drawCentreText(canvas, paint, "Paused");
     }
 
     private void drawCentreText(Canvas canvas, Paint paint, String text)
@@ -38,8 +38,12 @@ public class PauseScene implements Scene {
         int cWidth = screen.width();
         paint.getTextBounds(text, 0, text.length(), screen);
         float x = cWidth / 2f - screen.width() / 2f - screen.left;
-        float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
-        canvas.drawText(text, x ,y ,paint);
+        float y = Constants.SCREEN_HEIGHT/7;
+        canvas.drawText(text, x , y,paint);
+        canvas.drawText("Resume", x, y*3, paint);
+        canvas.drawText("Restart", x, y*4, paint);
+        canvas.drawText("Return to Level Select", x, y*5, paint);
+        canvas.drawText("Quit", x, y*6, paint);
     }
 
     @Override

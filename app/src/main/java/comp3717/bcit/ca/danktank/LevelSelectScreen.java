@@ -31,6 +31,11 @@ public class LevelSelectScreen implements Scene {
         paint.setTextSize(100);
         paint.setColor(Color.BLUE);
         canvas.drawRect(backButton, paint);
+
+        paint.setColor(Color.RED);
+        canvas.drawText("<-",50,100,paint);
+
+        paint.setColor(Color.BLUE);
         drawCentreText(canvas, paint, "Level 1");
     }
 

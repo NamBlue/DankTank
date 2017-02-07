@@ -23,6 +23,7 @@ public class SceneManager
         scenes.add(new LevelSelectScreen());
         scenes.add(new PauseScene());
         scenes.add(new InstructionScene());
+        scenes.add(new ConfirmationScene());
     }
 
     public void receiveTouch(MotionEvent event)
