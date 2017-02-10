@@ -18,6 +18,10 @@ import android.graphics.Bitmap;
 public class LevelSelectScreen implements Scene {
     private Rect screen = new Rect();
     private Rect backButton = new Rect(0, 0, 150, 150);
+    private Rect level1Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT *5/10);
+    private Rect level2Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*5/10);
+    private Rect level3Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT*9/10);
+    private Rect level4Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*9/10);
 
     @Override
     public void update() {
@@ -28,27 +32,67 @@ public class LevelSelectScreen implements Scene {
     public void draw(Canvas canvas) {
         canvas.drawColor(Color.BLACK);
         Paint paint = new Paint();
+
+        drawBackButton(canvas, paint);
+        drawLevelButtons(canvas, paint);
+        drawLevel1Text(canvas, paint, "Level 1");
+        drawLevel2Text(canvas, paint, "Level 2");
+        drawLevel3Text(canvas, paint, "Level 3");
+        drawLevel4Text(canvas, paint, "Level 4");
+    }
+
+    private void drawBackButton(Canvas canvas, Paint paint)
+    {
+        paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(100);
         paint.setColor(Color.BLUE);
         canvas.drawRect(backButton, paint);
-
         paint.setColor(Color.RED);
-        canvas.drawText("<-",50,100,paint);
-
-        paint.setColor(Color.BLUE);
-        drawCentreText(canvas, paint, "Level 1");
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("<-",25,100,paint);
     }
 
-    private void drawCentreText(Canvas canvas, Paint paint, String text)
+    private void drawLevelButtons(Canvas canvas, Paint paint){
+        paint.setColor(Color.RED);
+        canvas.drawRect(level1Button, paint);
+        paint.setColor(Color.GREEN);
+        canvas.drawRect(level2Button, paint);
+        paint.setColor(Color.YELLOW);
+        canvas.drawRect(level3Button, paint);
+        paint.setColor(Color.GRAY);
+        canvas.drawRect(level4Button, paint);
+    }
+
+    private void drawLevel1Text(Canvas canvas, Paint paint, String text)
     {
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(screen);
-        int cHeight = screen.height();
-        int cWidth = screen.width();
-        paint.getTextBounds(text, 0, text.length(), screen);
-        float x = cWidth / 2f - screen.width() / 2f - screen.left;
-        float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
-        canvas.drawText(text, x ,y ,paint);
+        paint.setTextSize(100);
+        paint.setColor(Color.WHITE);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/10 ,Constants.SCREEN_HEIGHT*2/10 ,paint);
+    }
+
+    private void drawLevel2Text(Canvas canvas, Paint paint, String text)
+    {
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextSize(100);
+        paint.setColor(Color.WHITE);
+        canvas.drawText(text, Constants.SCREEN_WIDTH*6/10 ,Constants.SCREEN_HEIGHT*2/10 ,paint);
+    }
+
+    private void drawLevel3Text(Canvas canvas, Paint paint, String text)
+    {
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextSize(100);
+        paint.setColor(Color.WHITE);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/10 ,Constants.SCREEN_HEIGHT*6/10 ,paint);
+    }
+
+    private void drawLevel4Text(Canvas canvas, Paint paint, String text)
+    {
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextSize(100);
+        paint.setColor(Color.WHITE);
+        canvas.drawText(text, Constants.SCREEN_WIDTH*6/10 ,Constants.SCREEN_HEIGHT*6/10 ,paint);
     }
 
     @Override

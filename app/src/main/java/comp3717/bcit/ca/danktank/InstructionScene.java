@@ -28,10 +28,10 @@ public class InstructionScene implements Scene {
         Paint paint = new Paint();
         drawTitle(canvas, paint, "How to play");
         drawBackButton(canvas, paint);
-        drawInstructions(canvas, paint, "1.\n" + "2.\n" + "3.\n");
-
+        drawInstructions(canvas, paint, "1.\n");
 
     }
+
 
     private void drawBackButton(Canvas canvas, Paint paint)
     {
@@ -40,7 +40,8 @@ public class InstructionScene implements Scene {
         paint.setColor(Color.BLUE);
         canvas.drawRect(backButton, paint);
         paint.setColor(Color.RED);
-        canvas.drawText("<-",50,100,paint);
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("<-",25,100,paint);
 
     }
 
@@ -49,9 +50,7 @@ public class InstructionScene implements Scene {
         paint.setTextSize(100);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setColor(Color.BLUE);
-        float x = Constants.SCREEN_WIDTH/4;
-        float y = Constants.SCREEN_HEIGHT/6;
-        canvas.drawText(text, x, y ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/4, Constants.SCREEN_HEIGHT/8 ,paint);
     }
 
     private void drawInstructions(Canvas canvas, Paint paint, String text)
@@ -59,7 +58,7 @@ public class InstructionScene implements Scene {
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.getClipBounds(screen);
         paint.getTextBounds(text, 0, text.length(), screen);
-        canvas.drawText(text, Constants.SCREEN_WIDTH/4, Constants.SCREEN_HEIGHT/4 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT/4 ,paint);
     }
 
     public void receiveTouch(MotionEvent event)
