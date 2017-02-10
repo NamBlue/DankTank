@@ -15,6 +15,10 @@ import android.view.MotionEvent;
 
 public class PauseScene implements Scene {
     private Rect screen = new Rect();
+    private Rect resumeButton = new Rect();
+    private Rect restartButton = new Rect();
+    private Rect levelSelectButton = new Rect();
+    private Rect QuitButton = new Rect();
 
     @Override
     public void update() {
@@ -25,25 +29,28 @@ public class PauseScene implements Scene {
     public void draw(Canvas canvas){
         canvas.drawColor(Color.BLACK);
         Paint paint = new Paint();
-        paint.setTextSize(100);
-        paint.setColor(Color.BLUE);
-        drawCentreText(canvas, paint, "Paused");
+        drawTitle(canvas, paint, "Paused");
+        drawOptions(canvas, paint);
     }
 
-    private void drawCentreText(Canvas canvas, Paint paint, String text)
+    private void drawTitle(Canvas canvas, Paint paint, String text)
+    {
+        paint.setTextSize(100);
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setColor(Color.BLUE);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/4, Constants.SCREEN_HEIGHT/8 ,paint);
+
+    }
+
+    private void drawOptions(Canvas canvas, Paint paint)
     {
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(screen);
-        int cHeight = screen.height();
-        int cWidth = screen.width();
-        paint.getTextBounds(text, 0, text.length(), screen);
-        float x = cWidth / 2f - screen.width() / 2f - screen.left;
-        float y = Constants.SCREEN_HEIGHT/7;
-        canvas.drawText(text, x , y,paint);
-        canvas.drawText("Resume", x, y*3, paint);
-        canvas.drawText("Restart", x, y*4, paint);
-        canvas.drawText("Return to Level Select", x, y*5, paint);
-        canvas.drawText("Quit", x, y*6, paint);
+        paint.setColor(Color.BLUE);
+        paint.setTextSize(75);
+        canvas.drawText("Resume", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*3/8 ,paint);
+        canvas.drawText("Restart", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*4/8 ,paint);
+        canvas.drawText("Return to level select", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*5/8 ,paint);
+        canvas.drawText("Quit", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*6/8 ,paint);
     }
 
     @Override
@@ -56,7 +63,7 @@ public class PauseScene implements Scene {
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                SceneManager.ACTIVE_SCENE = 1;
+                SceneManager.ACTIVE_SCENE = 5;
                 break;
         }
     }

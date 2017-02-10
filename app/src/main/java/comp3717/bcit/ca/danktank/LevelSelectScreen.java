@@ -16,7 +16,6 @@ import android.graphics.Bitmap;
  */
 
 public class LevelSelectScreen implements Scene {
-    private Rect screen = new Rect();
     private Rect backButton = new Rect(0, 0, 150, 150);
     private Rect level1Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT *5/10);
     private Rect level2Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*5/10);
@@ -108,9 +107,10 @@ public class LevelSelectScreen implements Scene {
                 if(backButton.contains((int)event.getX(), (int)event.getY())){
                     terminate();
                 }
-                else {
+                if(level1Button.contains((int)event.getX(), (int)event.getY())){
                     SceneManager.ACTIVE_SCENE = 1;
                 }
+
                 break;
         }
     }

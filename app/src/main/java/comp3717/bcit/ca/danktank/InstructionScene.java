@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
+import android.widget.Button;
 
 
 /**
@@ -29,7 +30,6 @@ public class InstructionScene implements Scene {
         drawTitle(canvas, paint, "How to play");
         drawBackButton(canvas, paint);
         drawInstructions(canvas, paint, "1.\n");
-
     }
 
 

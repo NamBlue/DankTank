@@ -15,7 +15,7 @@ import android.view.MotionEvent;
  */
 
 public class ConfirmationScene implements Scene {
-    private Rect screen = new Rect();
+
 
     @Override
     public void update() {
@@ -26,23 +26,26 @@ public class ConfirmationScene implements Scene {
     public void draw(Canvas canvas){
         canvas.drawColor(Color.BLACK);
         Paint paint = new Paint();
-        paint.setTextSize(100);
-        paint.setColor(Color.BLUE);
+
         drawCentreText(canvas, paint, "Are you sure you want to quit?");
+        drawOptions(canvas, paint);
     }
 
     private void drawCentreText(Canvas canvas, Paint paint, String text)
     {
+        paint.setTextSize(75);
         paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(screen);
-        int cHeight = screen.height();
-        int cWidth = screen.width();
-        paint.getTextBounds(text, 0, text.length(), screen);
-        float x = cWidth / 2f - screen.width() / 2f - screen.left;
-        float y = Constants.SCREEN_HEIGHT/7;
-        canvas.drawText(text, x , y,paint);
-        canvas.drawText("Resume", x, y*3, paint);
+        paint.setColor(Color.BLUE);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT/8 ,paint);
+    }
 
+    private void drawOptions(Canvas canvas, Paint paint)
+    {
+        paint.setTextSize(75);
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setColor(Color.BLUE);
+        canvas.drawText("Yes", Constants.SCREEN_WIDTH/5, Constants.SCREEN_HEIGHT*4/8 ,paint);
+        canvas.drawText("No", Constants.SCREEN_WIDTH/5, Constants.SCREEN_HEIGHT*5/8 ,paint);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class ConfirmationScene implements Scene {
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                SceneManager.ACTIVE_SCENE = 1;
+                SceneManager.ACTIVE_SCENE = 2;
                 break;
         }
     }
