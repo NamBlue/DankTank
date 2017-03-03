@@ -15,4 +15,6 @@ public class Constants
     public static Context CURRENT_CONTEXT;
     public static long INIT_TIME;
     public static final int PLAYER_SPEED = 15; //For player movement speed
+    public static final int BULLET_WIDTH = 15; //For bullet width
+    public static final int BULLET_HEIGHT = 35; //For bullet height
 }

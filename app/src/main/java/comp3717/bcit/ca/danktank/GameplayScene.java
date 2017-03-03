@@ -48,7 +48,7 @@ public class GameplayScene implements Scene
 
         player.update(playerPoint);
 
-        obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
+        obstacleManager = new ObstacleManager(50, 150, Color.BLACK);
 
         orientationData = new OrientationData();
         orientationData.register();
@@ -59,7 +59,7 @@ public class GameplayScene implements Scene
     {
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
-        obstacleManager = new ObstacleManager(200, 350, 75, Color.BLACK);
+        obstacleManager = new ObstacleManager(50, 150, Color.BLACK);
         movingPlayer = false;
         orientationData.newGame();
     }
