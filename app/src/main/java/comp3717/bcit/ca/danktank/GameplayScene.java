@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 
 /**
@@ -29,6 +30,8 @@ public class GameplayScene implements Scene
     private OrientationData orientationData;
     //speed to move the player faster as it is more tilted, tracks time elapsed between frames
     private long frameTime;
+    //For storing current player direction
+    private Enums.MoveDirection moveDirection;
 
     public GameplayScene()
     {
@@ -41,6 +44,7 @@ public class GameplayScene implements Scene
         moveUp = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
         moveDown = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
 
+        moveDirection = Enums.MoveDirection.None;
 
         player.update(playerPoint);
 
@@ -87,6 +91,7 @@ public class GameplayScene implements Scene
             int elapsedTine = (int)(System.currentTimeMillis() - frameTime);
             frameTime = System.currentTimeMillis();
 
+            //For gyroscope
             if (orientationData.getOrientation() != null && orientationData.getStartingOrientation() != null)
             {
                 //index 1 of orientation is the pitch for Y axis movement
@@ -102,6 +107,28 @@ public class GameplayScene implements Scene
                 //5 is the pixel margin for error correction
                 playerPoint.x += Math.abs(xspeed * elapsedTine) > 5 ? xspeed*elapsedTine : 0;
                 playerPoint.y -= Math.abs(yspeed * elapsedTine) > 5 ? yspeed*elapsedTine : 0;
+            }
+
+            //For directional key controls
+            if(movingPlayer)
+            {
+                switch(moveDirection)
+                {
+                    case Left:
+                        playerPoint.set(playerPoint.x - Constants.PLAYER_SPEED, playerPoint.y);
+                        break;
+                    case Right:
+                        playerPoint.set(playerPoint.x + Constants.PLAYER_SPEED, playerPoint.y);
+                        break;
+                    case Up:
+                        playerPoint.set(playerPoint.x, playerPoint.y - Constants.PLAYER_SPEED);
+                        break;
+                    case Down:
+                        playerPoint.set(playerPoint.x, playerPoint.y + Constants.PLAYER_SPEED);
+                        break;
+                    default:
+                        break;
+                }
             }
 
             //Bounding player to screen
@@ -169,47 +196,59 @@ public class GameplayScene implements Scene
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                if(!gameOver && player.getRectangle().contains((int)event.getX(), (int) event.getY()))
+                if(!gameOver)
                 {
-                    movingPlayer = true;
-                }
+                    /* Decprecated - for drag controls
+                    if (player.getRectangle().contains((int) event.getX(), (int) event.getY()))
+                    {
+                        movingPlayer = true;
+                    }
+                    */
 
-                if(!gameOver && moveLeft.contains((int)event.getX(), (int) event.getY()))
-                {
-                    playerPoint.set(playerPoint.x - 25, playerPoint.y);
-                }
+                    if (moveLeft.contains((int) event.getX(), (int) event.getY()))
+                    {
+                        movingPlayer = true;
+                        moveDirection = Enums.MoveDirection.Left;
+                    }
 
-                if(!gameOver && moveRight.contains((int)event.getX(), (int) event.getY()))
-                {
-                    playerPoint.set(playerPoint.x + 25, playerPoint.y);
-                }
+                    if (moveRight.contains((int) event.getX(), (int) event.getY()))
+                    {
+                        movingPlayer = true;
+                        moveDirection = Enums.MoveDirection.Right;
+                    }
 
-                if(!gameOver && moveUp.contains((int)event.getX(), (int) event.getY()))
-                {
-                    playerPoint.set(playerPoint.x, playerPoint.y - 25);
-                }
+                    if (moveUp.contains((int) event.getX(), (int) event.getY()))
+                    {
+                        movingPlayer = true;
+                        moveDirection = Enums.MoveDirection.Up;
+                    }
 
-                if(!gameOver && moveDown.contains((int)event.getX(), (int) event.getY()))
-                {
-                    playerPoint.set(playerPoint.x, playerPoint.y + 25);
+                    if (moveDown.contains((int) event.getX(), (int) event.getY()))
+                    {
+                        movingPlayer = true;
+                        moveDirection = Enums.MoveDirection.Down;
+                    }
+                    //Added by harman to test the pause button
+                    if (pauseButton.contains((int) event.getX(), (int) event.getY()))
+                    {
+                        SceneManager.ACTIVE_SCENE = 3;
+                    }
+
                 }
-                //Added by harman to test the pause button
-                if(!gameOver && pauseButton.contains((int)event.getX(), (int)event.getY())){
-                    SceneManager.ACTIVE_SCENE = 3;
-                }
-                if(gameOver &&System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
+                else if (gameOver && System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
                 {
                     terminate();
                     gameOver = false;
-
                 }
                 break;
+            /* Deprecated - for drag controls
             case MotionEvent.ACTION_MOVE:
                 if (!gameOver && movingPlayer)
                 {
                     playerPoint.set((int) event.getX(), (int) event.getY());
                 }
                 break;
+            */
             case MotionEvent.ACTION_UP:
                 movingPlayer = false;
                 break;
