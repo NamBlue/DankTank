@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 
 /**
@@ -16,11 +15,8 @@ public class GameplayScene implements Scene
 {
     //Used to set the bounds for the gameover text box
     private Rect rectBound = new Rect();
-    private Rect pauseButton;
-    private Rect moveLeft;
-    private Rect moveRight;
-    private Rect moveUp;
-    private Rect moveDown;
+    private Rect pauseButton, moveLeftButton, moveRightButton,
+            moveUpButton, moveDownButton, fireButton;
     private RectPlayer player;
     private Point playerPoint;
     private ObstacleManager obstacleManager;
@@ -39,11 +35,11 @@ public class GameplayScene implements Scene
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         pauseButton = new Rect(Constants.SCREEN_WIDTH - 150, 0, Constants.SCREEN_WIDTH, 150);
 
-        moveLeft = new Rect(50, Constants.SCREEN_HEIGHT - 350, 150, Constants.SCREEN_HEIGHT - 250);
-        moveRight = new Rect(200, Constants.SCREEN_HEIGHT - 350, 300, Constants.SCREEN_HEIGHT - 250);
-        moveUp = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
-        moveDown = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
-
+        moveLeftButton = new Rect(50, Constants.SCREEN_HEIGHT - 350, 150, Constants.SCREEN_HEIGHT - 250);
+        moveRightButton = new Rect(200, Constants.SCREEN_HEIGHT - 350, 300, Constants.SCREEN_HEIGHT - 250);
+        moveUpButton = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
+        moveDownButton = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
+        fireButton = new Rect(Constants.SCREEN_WIDTH - 150, Constants.SCREEN_HEIGHT - 350, Constants.SCREEN_WIDTH - 50, Constants.SCREEN_HEIGHT - 250);
         moveDirection = Enums.MoveDirection.None;
 
         player.update(playerPoint);
@@ -171,10 +167,11 @@ public class GameplayScene implements Scene
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         canvas.drawRect(pauseButton, paint);
-        canvas.drawRect(moveLeft, paint);
-        canvas.drawRect(moveRight, paint);
-        canvas.drawRect(moveUp, paint);
-        canvas.drawRect(moveDown, paint);
+        canvas.drawRect(moveLeftButton, paint);
+        canvas.drawRect(moveRightButton, paint);
+        canvas.drawRect(moveUpButton, paint);
+        canvas.drawRect(moveDownButton, paint);
+        canvas.drawRect(fireButton, paint);
         if (gameOver)
         {
             //Paint paint = new Paint();
@@ -205,25 +202,25 @@ public class GameplayScene implements Scene
                     }
                     */
 
-                    if (moveLeft.contains((int) event.getX(), (int) event.getY()))
+                    if (moveLeftButton.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Left;
                     }
 
-                    if (moveRight.contains((int) event.getX(), (int) event.getY()))
+                    if (moveRightButton.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Right;
                     }
 
-                    if (moveUp.contains((int) event.getX(), (int) event.getY()))
+                    if (moveUpButton.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Up;
                     }
 
-                    if (moveDown.contains((int) event.getX(), (int) event.getY()))
+                    if (moveDownButton.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Down;
