@@ -9,6 +9,8 @@ import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.graphics.Bitmap;
 
+import java.io.IOException;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -24,7 +26,7 @@ public class TitleScene implements Scene
     private Bitmap title;
     int x;
     int y;
-    MediaPlayer mySound;
+    private static MediaPlayer mySound;
 
     public TitleScene()
     {
@@ -85,8 +87,8 @@ public class TitleScene implements Scene
     @Override
     public void terminate()
     {
+        mySound.stop();
         SceneManager.ACTIVE_SCENE = 0;
-
     }
 
     @Override
@@ -104,6 +106,12 @@ public class TitleScene implements Scene
                     SceneManager.ACTIVE_SCENE = 4;
                 }
                 else{
+                    mySound.stop();
+                    try {
+                        mySound.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     SceneManager.ACTIVE_SCENE = 2;
 
                 }

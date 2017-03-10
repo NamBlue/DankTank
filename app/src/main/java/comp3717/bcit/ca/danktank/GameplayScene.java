@@ -5,7 +5,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
+
+import java.io.IOException;
 
 /**
  * Created by NamBlue on 1/20/2017.
@@ -28,6 +31,7 @@ public class GameplayScene implements Scene
     private long frameTime;
     //For storing current player direction
     private Enums.MoveDirection moveDirection;
+    private MediaPlayer mySound;
 
     public GameplayScene()
     {
@@ -41,7 +45,7 @@ public class GameplayScene implements Scene
         moveDownButton = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
         fireButton = new Rect(Constants.SCREEN_WIDTH - 150, Constants.SCREEN_HEIGHT - 350, Constants.SCREEN_WIDTH - 50, Constants.SCREEN_HEIGHT - 250);
         moveDirection = Enums.MoveDirection.None;
-
+        mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
         player.update(playerPoint);
 
         obstacleManager = new ObstacleManager(50, 150, Color.BLACK);
@@ -76,6 +80,7 @@ public class GameplayScene implements Scene
     @Override
     public void update()
     {
+        mySound.start();
         if (!gameOver)
         {
             //Keeps the time elapsed to the right time when game is resumed
@@ -184,6 +189,12 @@ public class GameplayScene implements Scene
     @Override
     public void terminate()
     {
+        mySound.stop();
+        try {
+            mySound.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SceneManager.ACTIVE_SCENE = 0;
     }
 
@@ -228,6 +239,12 @@ public class GameplayScene implements Scene
                     //Added by harman to test the pause button
                     if (pauseButton.contains((int) event.getX(), (int) event.getY()))
                     {
+                        mySound.stop();
+                        try {
+                            mySound.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         SceneManager.ACTIVE_SCENE = 3;
                     }
 

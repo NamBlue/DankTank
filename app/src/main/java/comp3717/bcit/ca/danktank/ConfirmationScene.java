@@ -36,7 +36,7 @@ public class ConfirmationScene implements Scene {
         paint.setTextSize(75);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setColor(Color.BLUE);
-        canvas.drawText(text, Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT/8 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/14, Constants.SCREEN_HEIGHT/8 ,paint);
     }
 
     private void drawOptions(Canvas canvas, Paint paint)
