@@ -10,11 +10,11 @@ import java.util.ArrayList;
  * Created by NamBlue on 1/20/2017.
  */
 
-public class ObstacleManager
+public class BulletManager
 {
     //Higher index = lower on screen = higher y value
-    private ArrayList<Obstacle> obstacles;
-    //Gap between obstacles
+    private ArrayList<Bullet> bullets;
+    //Gap between bullets
     private int obstacleGap;
     private int obstacleHeight;
     private int color;
@@ -23,7 +23,7 @@ public class ObstacleManager
 
     private int score = 0;
 
-    public ObstacleManager(int obstacleGap, int obstacleHeight, int color)
+    public BulletManager(int obstacleGap, int obstacleHeight, int color)
     {
         this.obstacleGap = obstacleGap;
         this.obstacleHeight = obstacleHeight;
@@ -31,7 +31,7 @@ public class ObstacleManager
 
         startTime = initTime = System.currentTimeMillis();
 
-        obstacles = new ArrayList<>();
+        bullets = new ArrayList<>();
 
         populateObstacles();
     }
@@ -43,16 +43,16 @@ public class ObstacleManager
         while(currY < 0)
         {
             int xStart = (int)(Math.random() * (Constants.SCREEN_WIDTH));
-            obstacles.add(new Obstacle(color, xStart, currY));
+            bullets.add(new Bullet(color, xStart, currY));
             currY += obstacleHeight + obstacleGap;
         }
     }
 
     public boolean playerCollide(RectPlayer player)
     {
-        for(Obstacle obstacle : obstacles)
+        for(Bullet bullet : bullets)
         {
-            if(obstacle.playerCollided(player))
+            if(bullet.playerCollided(player))
             {
                 return true;
             }
@@ -72,24 +72,24 @@ public class ObstacleManager
         //8000 ms to move through screen height, increase speed as time goes on 1000.0 = one seconds per speed up
         float speed = (float)(Math.sqrt(1 + (startTime - initTime) / 1000.0) * Constants.SCREEN_HEIGHT/8000.0f);
 
-        for (Obstacle obstacle : obstacles)
+        for (Bullet bullet : bullets)
         {
-            obstacle.incrementY(speed * elapsedTime);
+            bullet.move(speed * elapsedTime);
         }
-        if (obstacles.get(obstacles.size() - 1).getRectangle().top >= Constants.SCREEN_HEIGHT)
+        if (bullets.get(bullets.size() - 1).getRectangle().top >= Constants.SCREEN_HEIGHT)
         {
             int xStart = (int)(Math.random() * (Constants.SCREEN_WIDTH));
-            obstacles.add(0, new Obstacle(color, xStart, obstacles.get(0).getRectangle().top - obstacleHeight - obstacleGap));
-            obstacles.remove(obstacles.size() - 1);
+            bullets.add(0, new Bullet(color, xStart, bullets.get(0).getRectangle().top - obstacleHeight - obstacleGap));
+            bullets.remove(bullets.size() - 1);
             score++;
         }
     }
 
     public void draw(Canvas canvas)
     {
-        for(Obstacle obstacle : obstacles)
+        for(Bullet bullet : bullets)
         {
-            obstacle.draw(canvas);
+            bullet.draw(canvas);
         }
         Paint paint = new Paint();
         paint.setTextSize(100);

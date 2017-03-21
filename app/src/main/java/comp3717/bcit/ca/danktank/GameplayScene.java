@@ -22,7 +22,7 @@ public class GameplayScene implements Scene
             moveUpButton, moveDownButton, fireButton;
     private RectPlayer player;
     private Point playerPoint;
-    private ObstacleManager obstacleManager;
+    private BulletManager bulletManager;
     private boolean movingPlayer = false;
     private boolean gameOver = false;
     private long gameOverTime;
@@ -48,7 +48,7 @@ public class GameplayScene implements Scene
         mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
         player.update(playerPoint);
 
-        obstacleManager = new ObstacleManager(50, 150, Color.BLACK);
+        bulletManager = new BulletManager(50, 150, Color.BLACK);
 
         orientationData = new OrientationData();
         orientationData.register();
@@ -59,7 +59,7 @@ public class GameplayScene implements Scene
     {
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
-        obstacleManager = new ObstacleManager(50, 150, Color.BLACK);
+        bulletManager = new BulletManager(50, 150, Color.BLACK);
         movingPlayer = false;
         orientationData.newGame();
     }
@@ -151,8 +151,8 @@ public class GameplayScene implements Scene
             }
 
             player.update(playerPoint);
-            obstacleManager.update();
-            if (obstacleManager.playerCollide(player))
+            bulletManager.update();
+            if (bulletManager.playerCollide(player))
             {
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
@@ -167,7 +167,7 @@ public class GameplayScene implements Scene
 
         player.draw(canvas);
 
-        obstacleManager.draw(canvas);
+        bulletManager.draw(canvas);
 
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
