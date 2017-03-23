@@ -11,7 +11,7 @@ import android.graphics.Rect;
  * Created by NamBlue on 1/19/2017.
  */
 
-public class RectPlayer implements GameObject
+public class Player implements GameObject
 {
     private Rect rectangle;
     private int color;
@@ -26,7 +26,7 @@ public class RectPlayer implements GameObject
         return rectangle;
     }
 
-    public RectPlayer(Rect rectangle, int color)
+    public Player(Rect rectangle, int color)
     {
         this.rectangle = rectangle;
         this.color = color;

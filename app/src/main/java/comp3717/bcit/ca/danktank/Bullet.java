@@ -3,7 +3,6 @@ package comp3717.bcit.ca.danktank;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.provider.Settings;
 
 /**
  * Created by NamBlue on 1/19/2017.
@@ -58,7 +57,7 @@ public class Bullet implements GameObject
         this.rectangle = new Rect(left, top, right, bottom);
     }
 
-    public boolean playerCollided(RectPlayer player)
+    public boolean playerCollided(Player player)
     {
         return Rect.intersects(rectangle, player.getRectangle());
     }

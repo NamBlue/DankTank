@@ -20,7 +20,7 @@ public class GameplayScene implements Scene
     private Rect rectBound = new Rect();
     private Rect pauseButton, moveLeftButton, moveRightButton,
             moveUpButton, moveDownButton, fireButton;
-    private RectPlayer player;
+    private Player player;
     private Point playerPoint;
     private BulletManager bulletManager;
     private boolean movingPlayer = false;
@@ -36,7 +36,7 @@ public class GameplayScene implements Scene
 
     public GameplayScene()
     {
-        player = new RectPlayer(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
+        player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         pauseButton = new Rect(Constants.SCREEN_WIDTH - 150, 0, Constants.SCREEN_WIDTH, 150);
 

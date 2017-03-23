@@ -40,7 +40,7 @@ public class BulletManager
         bullets.add(new Bullet(color, xStart, yStart, moveDirection));
     }
 
-    public boolean playerCollide(RectPlayer player)
+    public boolean playerCollide(Player player)
     {
         for(Bullet bullet : bullets)
         {
