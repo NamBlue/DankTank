@@ -24,6 +24,7 @@ public class GameplayScene implements Scene
     private Point playerPoint;
     private BulletManager bulletManager;
     private boolean movingPlayer = false;
+    private boolean playerFiring = false;
     private boolean gameOver = false;
     private long gameOverTime;
     private OrientationData orientationData;
@@ -35,7 +36,7 @@ public class GameplayScene implements Scene
 
     public GameplayScene()
     {
-        player = new RectPlayer(new Rect(100, 100, 225, 225), Color.rgb(255, 0, 0));
+        player = new RectPlayer(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         pauseButton = new Rect(Constants.SCREEN_WIDTH - 150, 0, Constants.SCREEN_WIDTH, 150);
 
@@ -44,7 +45,7 @@ public class GameplayScene implements Scene
         moveUpButton = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
         moveDownButton = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
         fireButton = new Rect(Constants.SCREEN_WIDTH - 150, Constants.SCREEN_HEIGHT - 350, Constants.SCREEN_WIDTH - 50, Constants.SCREEN_HEIGHT - 250);
-        moveDirection = Enums.MoveDirection.None;
+        moveDirection = Enums.MoveDirection.Up;
         mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
         player.update(playerPoint);
 
@@ -61,6 +62,7 @@ public class GameplayScene implements Scene
         player.update(playerPoint);
         bulletManager = new BulletManager(50, 150, Color.BLACK);
         movingPlayer = false;
+        playerFiring = false;
         orientationData.newGame();
     }
 
@@ -130,6 +132,28 @@ public class GameplayScene implements Scene
                     default:
                         break;
                 }
+            }
+
+            if(playerFiring)
+            {
+                switch(moveDirection)
+                {
+                    case Left:
+                        bulletManager.addBullet(playerPoint.x - Constants.BULLET_GAP, playerPoint.y, moveDirection);
+                        break;
+                    case Right:
+                        bulletManager.addBullet(playerPoint.x + Constants.BULLET_GAP, playerPoint.y, moveDirection);
+                        break;
+                    case Up:
+                        bulletManager.addBullet(playerPoint.x, playerPoint.y - Constants.BULLET_GAP, moveDirection);
+                        break;
+                    case Down:
+                        bulletManager.addBullet(playerPoint.x, playerPoint.y + Constants.BULLET_GAP, moveDirection);
+                        break;
+                    default:
+                        break;
+                }
+                playerFiring = false;
             }
 
             //Bounding player to screen
@@ -213,6 +237,11 @@ public class GameplayScene implements Scene
                     }
                     */
 
+                    if (fireButton.contains((int) event.getX(), (int) event.getY()))
+                    {
+                        playerFiring = true;
+                    }
+
                     if (moveLeftButton.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
@@ -251,7 +280,7 @@ public class GameplayScene implements Scene
                 }
                 else if (gameOver && System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
                 {
-                    terminate();
+                    reset();
                     gameOver = false;
                 }
                 break;

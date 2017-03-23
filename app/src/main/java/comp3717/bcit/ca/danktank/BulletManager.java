@@ -33,19 +33,11 @@ public class BulletManager
 
         bullets = new ArrayList<>();
 
-        populateObstacles();
     }
 
-    private void populateObstacles()
+    public void addBullet(int xStart, int yStart, Enums.MoveDirection moveDirection)
     {
-        int currY = -5 * Constants.SCREEN_HEIGHT/4;
-
-        while(currY < 0)
-        {
-            int xStart = (int)(Math.random() * (Constants.SCREEN_WIDTH));
-            bullets.add(new Bullet(color, xStart, currY));
-            currY += obstacleHeight + obstacleGap;
-        }
+        bullets.add(new Bullet(color, xStart, yStart, moveDirection));
     }
 
     public boolean playerCollide(RectPlayer player)
@@ -62,28 +54,28 @@ public class BulletManager
 
     public void update()
     {
-        if(startTime < Constants.INIT_TIME)
+        if(bullets.size() > 0)
         {
-            startTime = Constants.INIT_TIME;
-        }
-        int elapsedTime = (int)(System.currentTimeMillis() - startTime);
-        startTime = System.currentTimeMillis();
-
-        //8000 ms to move through screen height, increase speed as time goes on 1000.0 = one seconds per speed up
-        float speed = (float)(Math.sqrt(1 + (startTime - initTime) / 1000.0) * Constants.SCREEN_HEIGHT/8000.0f);
-
-        for (Bullet bullet : bullets)
-        {
-            bullet.move(speed * elapsedTime);
-        }
-        if (bullets.get(bullets.size() - 1).getRectangle().top >= Constants.SCREEN_HEIGHT)
-        {
-            int xStart = (int)(Math.random() * (Constants.SCREEN_WIDTH));
-            bullets.add(0, new Bullet(color, xStart, bullets.get(0).getRectangle().top - obstacleHeight - obstacleGap));
-            bullets.remove(bullets.size() - 1);
-            score++;
+            for (Bullet bullet : bullets)
+            {
+                bullet.update();
+            }
+            clearBullet();
         }
     }
+
+    /**
+     * Remove bullets that are off-screen
+     */
+    private void clearBullet()
+    {
+        int x = bullets.get(bullets.size() - 1).getRectangle().centerX(), y = bullets.get(bullets.size() - 1).getRectangle().centerY();
+        if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+        {
+            bullets.remove(0);
+        }
+    }
+
 
     public void draw(Canvas canvas)
     {
