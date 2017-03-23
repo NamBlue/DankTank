@@ -1,4 +1,4 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

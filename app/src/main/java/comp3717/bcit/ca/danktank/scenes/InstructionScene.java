@@ -1,11 +1,13 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.scenes;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
-import android.widget.Button;
+
+import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.managers.SceneManager;
 
 
 /**

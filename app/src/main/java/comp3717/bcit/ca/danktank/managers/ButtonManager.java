@@ -1,7 +1,9 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.managers;
 
 import android.content.Context;
 import android.widget.Button;
+
+import comp3717.bcit.ca.danktank.Constants;
 
 /**
  * Created by steve on 2017-02-10.

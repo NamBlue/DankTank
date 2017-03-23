@@ -1,15 +1,13 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.scenes;
 
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.PictureDrawable;
 import android.view.MotionEvent;
-import android.graphics.Bitmap;
+
+import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.managers.SceneManager;
 
 /**
  * Created by steve on 2017-01-26.

@@ -1,4 +1,4 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
+
+import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.R;
+import comp3717.bcit.ca.danktank.managers.AnimationManager;
 
 /**
  * Created by NamBlue on 1/19/2017.

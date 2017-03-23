@@ -1,7 +1,9 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.managers;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import comp3717.bcit.ca.danktank.objects.Animation;
 
 /**
  * Created by NamBlue on 1/20/2017.

@@ -1,10 +1,15 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.managers;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
+
+import comp3717.bcit.ca.danktank.objects.Bullet;
+import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.Enums;
+import comp3717.bcit.ca.danktank.objects.Player;
 
 /**
  * Created by NamBlue on 1/20/2017.

@@ -1,8 +1,11 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.objects;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+
+import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.Enums;
 
 /**
  * Created by NamBlue on 1/19/2017.

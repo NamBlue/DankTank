@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import comp3717.bcit.ca.danktank.managers.SceneManager;
+
 /**
  * Created by namblue on 1/19/2017.
  */

@@ -1,4 +1,4 @@
-package comp3717.bcit.ca.danktank;
+package comp3717.bcit.ca.danktank.scenes;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;
