@@ -33,12 +33,21 @@ public class TitleScene implements Scene
         bitmapFactory = new BitmapFactory();
         title = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.titlebackground);
         mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
-
+        //mySound.start();
     }
 
+
+    @Override
     public void reset()
     {
+        //mySound.start();
+    }
 
+    @Override
+    public void onExit()
+    {
+        //mySound.pause();
+        //mySound.seekTo(0);
     }
 
     private void drawCentreStart(Canvas canvas, Paint paint, String text)
@@ -56,7 +65,7 @@ public class TitleScene implements Scene
     @Override
     public void update()
     {
-        mySound.start();
+
     }
 
     @Override
@@ -82,13 +91,6 @@ public class TitleScene implements Scene
         float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
         y = y *2;
         canvas.drawText(instructions, x ,y ,paint);
-    }
-
-    @Override
-    public void terminate()
-    {
-        mySound.stop();
-        SceneManager.ACTIVE_SCENE = 0;
     }
 
     @Override

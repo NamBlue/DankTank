@@ -67,17 +67,19 @@ public class InstructionScene implements Scene {
         {
             case MotionEvent.ACTION_DOWN:
                 if(backButton.contains((int)event.getX(), (int)event.getY())){
-                    terminate();
+                    SceneManager.ACTIVE_SCENE = 0;
                 }
                 break;
         }
     }
+    @Override
+    public void reset(){
 
-    public void terminate(){
-        SceneManager.ACTIVE_SCENE = 0;
     }
 
-    public void reset(){
+    @Override
+    public void onExit()
+    {
 
     }
 }

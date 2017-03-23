@@ -11,8 +11,13 @@ public interface Scene
 {
     public void update();
     public void draw(Canvas canvas);
-    //Whenever scene is ending will tell scene manager to switch the active scene
-    public void terminate();
     public void receiveTouch(MotionEvent event);
+    /**
+     * Invoked on re-entering of a scene, used to restart the scene to initial state
+     */
     public void reset();
+    /**
+     * Invoked on exit of a scene, used to clean up resources
+     */
+    public void onExit();
 }

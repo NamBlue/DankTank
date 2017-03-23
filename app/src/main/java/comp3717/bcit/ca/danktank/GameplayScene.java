@@ -58,6 +58,7 @@ public class GameplayScene implements Scene
 
     public void reset()
     {
+        player.reset();
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
         bulletManager = new BulletManager(50, 150, Color.BLACK);
@@ -82,7 +83,6 @@ public class GameplayScene implements Scene
     @Override
     public void update()
     {
-        mySound.start();
         if (!gameOver)
         {
             //Keeps the time elapsed to the right time when game is resumed
@@ -211,15 +211,9 @@ public class GameplayScene implements Scene
     }
 
     @Override
-    public void terminate()
+    public void onExit()
     {
-        mySound.stop();
-        try {
-            mySound.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        SceneManager.ACTIVE_SCENE = 0;
+
     }
 
     @Override

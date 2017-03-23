@@ -10,4 +10,5 @@ public interface GameObject
 {
     public void draw(Canvas canvas);
     public void update();
+    public void reset();
 }

@@ -61,11 +61,6 @@ public class PauseScene implements Scene {
     }
 
     @Override
-    public void terminate() {
-        SceneManager.ACTIVE_SCENE = 0;
-    }
-
-    @Override
     public void receiveTouch(MotionEvent event) {
         switch (event.getAction())
         {
@@ -97,6 +92,12 @@ public class PauseScene implements Scene {
 
     @Override
     public void reset() {
+
+    }
+
+    @Override
+    public void onExit()
+    {
 
     }
 }

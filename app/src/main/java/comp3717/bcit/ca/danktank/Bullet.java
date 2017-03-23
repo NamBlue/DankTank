@@ -103,4 +103,10 @@ public class Bullet implements GameObject
         move();
     }
 
+    @Override
+    public void reset()
+    {
+
+    }
+
 }

@@ -20,7 +20,7 @@ public class SceneManager
         ACTIVE_SCENE = lastScene = 0;
         scenes.add(new TitleScene());
         scenes.add(new GameplayScene());
-        scenes.add(new LevelSelectScreen());
+        scenes.add(new LevelSelectScene());
         scenes.add(new PauseScene());
         scenes.add(new InstructionScene());
         scenes.add(new ConfirmationScene());
@@ -36,6 +36,7 @@ public class SceneManager
         //If Scene change occurred
         if (lastScene != ACTIVE_SCENE)
         {
+            scenes.get(lastScene).onExit();
             scenes.get(ACTIVE_SCENE).reset();
             lastScene = ACTIVE_SCENE;
         }

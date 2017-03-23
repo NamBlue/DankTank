@@ -12,7 +12,6 @@ public class Enums
         Right,
         Up,
         Down,
-        None
     }
 }
 

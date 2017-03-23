@@ -15,10 +15,11 @@ public class RectPlayer implements GameObject
 {
     private Rect rectangle;
     private int color;
-    private Animation idle;
-    private Animation walkRight;
-    private Animation walkLeft;
+    private Animation idleUp, idleDown, idleLeft, idleRight;
+    private Animation walkLeft, walkRight, walkUp, walkDown;
     private AnimationManager animationManager;
+    private int directionState;
+    private  boolean startingState;
 
     public Rect getRectangle()
     {
@@ -29,7 +30,8 @@ public class RectPlayer implements GameObject
     {
         this.rectangle = rectangle;
         this.color = color;
-
+        directionState = 0;
+        startingState = true;
         //For Decoding, Producing, Modifying Bitmaps etc.
         BitmapFactory bitmapFactory = new BitmapFactory();
         //Make sure image names are all lowercase or will cause errors!
@@ -37,17 +39,33 @@ public class RectPlayer implements GameObject
         Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.move1);
         Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.move2);
 
-        idle = new Animation(new Bitmap[]{idleImg}, 5);
+
+        idleRight = new Animation(new Bitmap[]{walk1}, 5);
         walkRight = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
 
         //walkleft requires to reflect the image on the vertical axis.
         Matrix matrix = new Matrix();
-        matrix.preScale(-1, 1);
+        matrix.setRotate(-90);
+        walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
+        walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
+        idleUp = new Animation(new Bitmap[]{walk1}, 5);
+        walkUp = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
+
+        matrix.reset();
+        matrix.setRotate(-90);
+        idleImg = Bitmap.createBitmap(idleImg, 0, 0, idleImg.getWidth(), idleImg.getHeight(), matrix, false);
         walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
         walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
         walkLeft = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
+        idleLeft = new Animation(new Bitmap[]{walk1}, 5);
 
-        animationManager = new AnimationManager(new Animation[]{idle, walkRight, walkLeft});
+        matrix.reset();
+        matrix.setRotate(-90);
+        walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
+        walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
+        idleDown  = new Animation(new Bitmap[]{walk1}, 5);
+        walkDown = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
+        animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight});
     }
 
     @Override
@@ -65,27 +83,63 @@ public class RectPlayer implements GameObject
         animationManager.update();
     }
 
+    @Override
+    public void reset()
+    {
+        startingState = true;
+        directionState = 0;
+    }
+
     public void update(Point point)
     {
         float oldleft = rectangle.left;
+        float oldtop = rectangle.top;
 
         rectangle.set(point.x - rectangle.width()/2,
                         point.y - rectangle.height()/2,
                         point.x + rectangle.width()/2,
                         point.y + rectangle.height()/2);
-        //0 for idle, 1 walking right, 2 walking left animations;
-        int state = 0;
-        //5 for bigger movements before animation changes
+        //0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight, 4 walkUP, 5 walkDown, 6 walking left, 7 walking right animations;
+        // > 5 for bigger movements before animating movements, else idle
         if (rectangle.left - oldleft > 5)
         {
-            state = 1;
+            directionState = 7;
         }
         else if (rectangle.left - oldleft < -5)
         {
-            state = 2;
+            directionState = 6;
+        }
+        else if (rectangle.top - oldtop > 5)
+        {
+            directionState = 5;
+        }
+        else if (rectangle.top - oldtop < - 5)
+        {
+            directionState = 4;
+        }
+        else if (directionState == 7)
+        {
+            directionState = 3;
+        }
+        else if (directionState == 6)
+        {
+            directionState = 2;
+        }
+        else if (directionState == 5)
+        {
+            directionState = 1;
+        }
+        else if (directionState == 4)
+        {
+            directionState = 0;
+        }
+        if (startingState)
+        {
+            directionState = 0;
+            startingState = false;
         }
 
-        animationManager.playAnimation(state);
+        animationManager.playAnimation(directionState);
         animationManager.update();
     }
 
