@@ -1,5 +1,7 @@
 package comp3717.bcit.ca.danktank.scenes;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -41,13 +43,25 @@ public class GameplayScene implements Scene
     //For storing current player direction
     private Enums.MoveDirection moveDirection;
     private MediaPlayer mySound;
+    private Bitmap up_image;
+    private Bitmap down_image;
+    private Bitmap right_image;
+    private Bitmap left_image;
+    private Bitmap pause_image;
+    private Bitmap fire_image;
 
     public GameplayScene()
     {
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         pauseButton = new Rect(Constants.SCREEN_WIDTH - 150, 0, Constants.SCREEN_WIDTH, 150);
-
+        BitmapFactory bitmapFactory = new BitmapFactory();
+        up_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.up_button);
+        down_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.down_button);
+        right_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.right_button);
+        left_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.left_button);
+        pause_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pause_button);
+        fire_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.shoot_button);
         moveLeftButton = new Rect(50, Constants.SCREEN_HEIGHT - 350, 150, Constants.SCREEN_HEIGHT - 250);
         moveRightButton = new Rect(200, Constants.SCREEN_HEIGHT - 350, 300, Constants.SCREEN_HEIGHT - 250);
         moveUpButton = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
@@ -202,13 +216,12 @@ public class GameplayScene implements Scene
         bulletManager.draw(canvas);
 
         Paint paint = new Paint();
-        paint.setColor(Color.BLUE);
-        canvas.drawRect(pauseButton, paint);
-        canvas.drawRect(moveLeftButton, paint);
-        canvas.drawRect(moveRightButton, paint);
-        canvas.drawRect(moveUpButton, paint);
-        canvas.drawRect(moveDownButton, paint);
-        canvas.drawRect(fireButton, paint);
+        canvas.drawBitmap(up_image, null, moveUpButton, new Paint());
+        canvas.drawBitmap(down_image, null, moveDownButton, new Paint());
+        canvas.drawBitmap(left_image, null, moveLeftButton, new Paint());
+        canvas.drawBitmap(right_image, null, moveRightButton, new Paint());
+        canvas.drawBitmap(pause_image, null, pauseButton, new Paint());
+        canvas.drawBitmap(fire_image, null, fireButton, new Paint());
         if (gameOver)
         {
             //Paint paint = new Paint();
