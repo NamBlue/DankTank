@@ -3,6 +3,7 @@ package comp3717.bcit.ca.danktank.managers;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 import java.util.ArrayList;
 
@@ -45,12 +46,13 @@ public class BulletManager
         bullets.add(new Bullet(color, xStart, yStart, moveDirection));
     }
 
-    public boolean playerCollide(Player player)
+    public boolean collided(Rect object)
     {
         for(Bullet bullet : bullets)
         {
-            if(bullet.playerCollided(player))
+            if(bullet.collided(object))
             {
+                bullets.remove(bullet);
                 return true;
             }
         }

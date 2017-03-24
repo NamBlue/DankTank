@@ -11,11 +11,13 @@ import android.media.MediaPlayer;
 import android.view.MotionEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import comp3717.bcit.ca.danktank.managers.BulletManager;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.OrientationData;
+import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
@@ -49,6 +51,7 @@ public class GameplayScene implements Scene
     private Bitmap left_image;
     private Bitmap pause_image;
     private Bitmap fire_image;
+    private ArrayList<Enemy> enemies;
 
     public GameplayScene()
     {
@@ -70,6 +73,11 @@ public class GameplayScene implements Scene
         moveDirection = Enums.MoveDirection.Up;
         mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
         player.update(playerPoint);
+
+        enemies = new ArrayList<>();
+        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0)));
+        for(Enemy enemy : enemies)
+        enemy.update(new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/4));
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
 
@@ -198,10 +206,15 @@ public class GameplayScene implements Scene
 
             player.update(playerPoint);
             bulletManager.update();
-            if (bulletManager.playerCollide(player))
+            if (bulletManager.collided(player.getRectangle()))
             {
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
+            }
+            for(Enemy enemy: enemies)
+            {
+                if (bulletManager.collided(enemy.getRectangle()))
+                    enemies.remove(enemy);
             }
         }
     }
@@ -212,6 +225,10 @@ public class GameplayScene implements Scene
         canvas.drawColor(Color.WHITE);
 
         player.draw(canvas);
+        for(Enemy enemy: enemies)
+        {
+            enemy.draw(canvas);
+        }
 
         bulletManager.draw(canvas);
 

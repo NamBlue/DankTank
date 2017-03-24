@@ -60,9 +60,9 @@ public class Bullet implements GameObject
         this.rectangle = new Rect(left, top, right, bottom);
     }
 
-    public boolean playerCollided(Player player)
+    public boolean collided(Rect object)
     {
-        return Rect.intersects(rectangle, player.getRectangle());
+        return Rect.intersects(rectangle, object);
     }
 
     private void move()
@@ -88,7 +88,6 @@ public class Bullet implements GameObject
             default:
                 break;
         }
-        System.out.println(direction);
     }
 
     @Override

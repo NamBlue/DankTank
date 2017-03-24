@@ -15,7 +15,7 @@ import comp3717.bcit.ca.danktank.managers.AnimationManager;
  * Created by NamBlue on 1/19/2017.
  */
 
-public class Player implements GameObject
+public class Enemy implements GameObject
 {
     private Rect rectangle;
     private int color;
@@ -30,7 +30,7 @@ public class Player implements GameObject
         return rectangle;
     }
 
-    public Player(Rect rectangle, int color)
+    public Enemy(Rect rectangle, int color)
     {
         this.rectangle = rectangle;
         this.color = color;
@@ -42,36 +42,34 @@ public class Player implements GameObject
         Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_idle);
         Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move1);
         Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move2);
-        Bitmap walk3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move3);
+        Bitmap walk3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move2);
 
-        idleUp = new Animation(new Bitmap[]{idleImg}, 5);
-        walkUp = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
+
+        idleUp = new Animation(new Bitmap[]{walk1}, 5);
+        walkUp = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
 
         //walkleft requires to reflect the image on the vertical axis.
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
-        idleImg = Bitmap.createBitmap(idleImg, 0, 0, idleImg.getWidth(), idleImg.getHeight(), matrix, false);
         walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
         walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
-        walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
-        idleRight = new Animation(new Bitmap[]{idleImg}, 5);
-        walkRight = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
+        idleRight = new Animation(new Bitmap[]{walk1}, 5);
+        walkRight = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
 
+        matrix.reset();
         matrix.setRotate(-180);
         idleImg = Bitmap.createBitmap(idleImg, 0, 0, idleImg.getWidth(), idleImg.getHeight(), matrix, false);
         walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
         walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
-        walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
-        idleLeft = new Animation(new Bitmap[]{idleImg}, 5);
-        walkLeft = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
+        walkLeft = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
+        idleLeft = new Animation(new Bitmap[]{walk1}, 5);
 
+        matrix.reset();
         matrix.setRotate(-90);
-        idleImg = Bitmap.createBitmap(idleImg, 0, 0, idleImg.getWidth(), idleImg.getHeight(), matrix, false);
         walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
         walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
-        walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
-        idleDown  = new Animation(new Bitmap[]{idleImg}, 5);
-        walkDown = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
+        idleDown  = new Animation(new Bitmap[]{walk1}, 5);
+        walkDown = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
         animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight});
     }
 
