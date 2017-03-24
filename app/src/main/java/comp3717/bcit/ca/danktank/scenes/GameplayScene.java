@@ -75,9 +75,16 @@ public class GameplayScene implements Scene
         player.update(playerPoint);
 
         enemies = new ArrayList<>();
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0)));
+        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
+        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
+        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
+        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
+        int i = 0;
         for(Enemy enemy : enemies)
-        enemy.update(new Point(Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/4));
+        {
+            enemy.update(new Point(i * Constants.SCREEN_WIDTH / 4 + enemy.getRectangle().width(), Constants.SCREEN_HEIGHT / 4));
+            i++;
+        }
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
 

@@ -53,6 +53,7 @@ public class BulletManager
             if(bullet.collided(object))
             {
                 bullets.remove(bullet);
+                score += 100;
                 return true;
             }
         }

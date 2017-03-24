@@ -39,37 +39,39 @@ public class Enemy implements GameObject
         //For Decoding, Producing, Modifying Bitmaps etc.
         BitmapFactory bitmapFactory = new BitmapFactory();
         //Make sure image names are all lowercase or will cause errors!
-        Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_idle);
-        Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move1);
-        Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move2);
-        Bitmap walk3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move2);
+        Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_idle);
+        Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_move1);
+        Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_move2);
+        Bitmap walk3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_move3);
 
-
-        idleUp = new Animation(new Bitmap[]{walk1}, 5);
-        walkUp = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
+        idleUp = new Animation(new Bitmap[]{idleImg}, 5);
+        walkUp = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
 
         //walkleft requires to reflect the image on the vertical axis.
         Matrix matrix = new Matrix();
         matrix.setRotate(90);
+        idleImg = Bitmap.createBitmap(idleImg, 0, 0, idleImg.getWidth(), idleImg.getHeight(), matrix, false);
         walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
         walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
-        idleRight = new Animation(new Bitmap[]{walk1}, 5);
-        walkRight = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
+        walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
+        idleRight = new Animation(new Bitmap[]{idleImg}, 5);
+        walkRight = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
 
-        matrix.reset();
         matrix.setRotate(-180);
         idleImg = Bitmap.createBitmap(idleImg, 0, 0, idleImg.getWidth(), idleImg.getHeight(), matrix, false);
         walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
         walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
-        walkLeft = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
-        idleLeft = new Animation(new Bitmap[]{walk1}, 5);
+        walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
+        idleLeft = new Animation(new Bitmap[]{idleImg}, 5);
+        walkLeft = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
 
-        matrix.reset();
         matrix.setRotate(-90);
+        idleImg = Bitmap.createBitmap(idleImg, 0, 0, idleImg.getWidth(), idleImg.getHeight(), matrix, false);
         walk1 = Bitmap.createBitmap(walk1, 0, 0, walk1.getWidth(), walk1.getHeight(), matrix, false);
         walk2 = Bitmap.createBitmap(walk2, 0, 0, walk2.getWidth(), walk2.getHeight(), matrix, false);
-        idleDown  = new Animation(new Bitmap[]{walk1}, 5);
-        walkDown = new Animation(new Bitmap[]{walk1, walk2}, 0.5f);
+        walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
+        idleDown  = new Animation(new Bitmap[]{idleImg}, 5);
+        walkDown = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
         animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight});
     }
 
@@ -140,7 +142,7 @@ public class Enemy implements GameObject
         }
         if (startingState)
         {
-            directionState = 0;
+            directionState = 1;
             startingState = false;
         }
 
