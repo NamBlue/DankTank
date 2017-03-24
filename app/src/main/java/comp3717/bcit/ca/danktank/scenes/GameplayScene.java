@@ -61,7 +61,7 @@ public class GameplayScene implements Scene
         right_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.right_button);
         left_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.left_button);
         pause_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pause_button);
-        fire_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.shoot_button);
+        fire_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.fire_button);
         moveLeftButton = new Rect(50, Constants.SCREEN_HEIGHT - 350, 150, Constants.SCREEN_HEIGHT - 250);
         moveRightButton = new Rect(200, Constants.SCREEN_HEIGHT - 350, 300, Constants.SCREEN_HEIGHT - 250);
         moveUpButton = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
