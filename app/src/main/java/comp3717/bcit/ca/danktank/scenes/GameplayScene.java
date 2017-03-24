@@ -17,6 +17,7 @@ import comp3717.bcit.ca.danktank.managers.BulletManager;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.OrientationData;
+import comp3717.bcit.ca.danktank.managers.EnemyManager;
 import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
@@ -35,6 +36,7 @@ public class GameplayScene implements Scene
     private Player player;
     private Point playerPoint;
     private BulletManager bulletManager;
+    private EnemyManager enemyManager;
     private boolean movingPlayer = false;
     private boolean playerFiring = false;
     private boolean gameOver = false;
@@ -74,19 +76,12 @@ public class GameplayScene implements Scene
         mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
         player.update(playerPoint);
 
-        enemies = new ArrayList<>();
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-        int i = 0;
-        for(Enemy enemy : enemies)
-        {
-            enemy.update(new Point(i * Constants.SCREEN_WIDTH / 4 + enemy.getRectangle().width(), Constants.SCREEN_HEIGHT / 4));
-            i++;
-        }
-
         bulletManager = new BulletManager(50, 150, Color.BLACK);
+        enemyManager = new EnemyManager(bulletManager);
+
+        enemies = enemyManager.getEnemies();
+
+
 
         orientationData = new OrientationData();
         orientationData.register();
@@ -221,7 +216,13 @@ public class GameplayScene implements Scene
             for(Enemy enemy: enemies)
             {
                 if (bulletManager.collided(enemy.getRectangle()))
-                    enemies.remove(enemy);
+                {
+                    enemyManager.killEnemy(enemy);
+                }
+                else
+                {
+                    enemy.update();
+                }
             }
         }
     }
@@ -232,12 +233,9 @@ public class GameplayScene implements Scene
         canvas.drawColor(Color.WHITE);
 
         player.draw(canvas);
-        for(Enemy enemy: enemies)
-        {
-            enemy.draw(canvas);
-        }
 
         bulletManager.draw(canvas);
+        enemyManager.draw(canvas);
 
         Paint paint = new Paint();
         canvas.drawBitmap(up_image, null, moveUpButton, new Paint());
