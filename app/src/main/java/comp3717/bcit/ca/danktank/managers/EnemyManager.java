@@ -7,6 +7,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.objects.Bullet;
@@ -20,9 +21,11 @@ public class EnemyManager
 {
     private ArrayList<Enemy> enemies;
     private BulletManager bulletManager;
+    private Random random;
 
     public EnemyManager(BulletManager bulletManager)
     {
+        random = new Random();
         this.bulletManager = bulletManager;
         enemies = new ArrayList<>();
         enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
@@ -45,7 +48,12 @@ public class EnemyManager
 
     public void update()
     {
-
+        if(enemies.size() < 4)
+        {
+            int x = (int)(random.nextFloat() * Constants.SCREEN_WIDTH / 4 + enemies.get(enemies.size() - 1).getRectangle().width());
+            enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
+            enemies.get(enemies.size() - 1).update(new Point(x, Constants.SCREEN_HEIGHT / 4));
+        }
     }
 
     public void draw(Canvas canvas)

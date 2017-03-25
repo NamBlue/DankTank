@@ -224,6 +224,7 @@ public class GameplayScene implements Scene
                     enemy.update();
                 }
             }
+            enemyManager.update();
         }
     }
 
