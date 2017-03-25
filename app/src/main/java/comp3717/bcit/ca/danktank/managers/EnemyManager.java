@@ -22,23 +22,14 @@ public class EnemyManager
     private ArrayList<Enemy> enemies;
     private BulletManager bulletManager;
     private Random random;
+    public int enemySize;
 
-    public EnemyManager(BulletManager bulletManager)
+    public EnemyManager()
     {
         random = new Random();
-        this.bulletManager = bulletManager;
         enemies = new ArrayList<>();
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-        enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-
+        enemySize = 0;
         int i = 0;
-        for(Enemy enemy : enemies)
-        {
-            enemy.update(new Point(i * Constants.SCREEN_WIDTH / 4 + enemy.getRectangle().width(), Constants.SCREEN_HEIGHT / 4));
-            i++;
-        }
     }
 
     public void killEnemy(Enemy enemy)
@@ -48,11 +39,12 @@ public class EnemyManager
 
     public void update()
     {
-        if(enemies.size() < 4)
+        if(enemies.size() < enemySize)
         {
-            int x = (int)(random.nextFloat() * Constants.SCREEN_WIDTH / 4 + enemies.get(enemies.size() - 1).getRectangle().width());
+            int x = (int)((random.nextFloat() * (Constants.SCREEN_WIDTH - Constants.ENEMY_SIZE)) + (Constants.ENEMY_SIZE / 2));
+            int y = (int)((random.nextFloat() * (Constants.SCREEN_HEIGHT - Constants.ENEMY_SIZE) / 2) + (Constants.ENEMY_SIZE / 2));
             enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-            enemies.get(enemies.size() - 1).update(new Point(x, Constants.SCREEN_HEIGHT / 4));
+            enemies.get(enemies.size() - 1).update(new Point(x, y));
         }
     }
 

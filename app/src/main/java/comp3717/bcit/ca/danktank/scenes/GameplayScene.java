@@ -77,7 +77,8 @@ public class GameplayScene implements Scene
         player.update(playerPoint);
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
-        enemyManager = new EnemyManager(bulletManager);
+        enemyManager = new EnemyManager();
+        enemyManager.enemySize = 4;
 
         enemies = enemyManager.getEnemies();
 
