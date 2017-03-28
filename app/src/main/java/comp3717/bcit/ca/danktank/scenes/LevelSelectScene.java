@@ -1,5 +1,7 @@
 package comp3717.bcit.ca.danktank.scenes;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -7,6 +9,7 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
 
 /**
@@ -14,11 +17,23 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
  */
 
 public class LevelSelectScene implements Scene {
-    private Rect backButton = new Rect(0, 0, 150, 150);
-    private Rect level1Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT *5/10);
-    private Rect level2Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*5/10);
-    private Rect level3Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT*9/10);
-    private Rect level4Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*9/10);
+    private Rect backButton;
+    private Rect level1Button;
+    private Rect level2Button;
+    private Rect level3Button;
+    private Rect level4Button;
+    private Bitmap back_image;
+
+
+    public LevelSelectScene(){
+        backButton = new Rect(0, 0, 150, 150);
+        level1Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT *5/10);
+        level2Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*5/10);
+        level3Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT*9/10);
+        level4Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*9/10);
+        BitmapFactory bitmapFactory = new BitmapFactory();
+        back_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.back_button);
+    }
 
     @Override
     public void update() {
@@ -40,13 +55,7 @@ public class LevelSelectScene implements Scene {
 
     private void drawBackButton(Canvas canvas, Paint paint)
     {
-        paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTextSize(100);
-        paint.setColor(Color.BLUE);
-        canvas.drawRect(backButton, paint);
-        paint.setColor(Color.RED);
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("<-",25,100,paint);
+        canvas.drawBitmap(back_image, null, backButton, paint);
     }
 
     private void drawLevelButtons(Canvas canvas, Paint paint){

@@ -28,14 +28,12 @@ public class TitleScene implements Scene
     private Bitmap title;
     int x;
     int y;
-    private static MediaPlayer mySound;
 
     public TitleScene()
     {
         bitmapFactory = new BitmapFactory();
         title = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.titlebackground);
-        mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
-        //mySound.start();
+
     }
 
 
@@ -110,12 +108,6 @@ public class TitleScene implements Scene
                     SceneManager.ACTIVE_SCENE = 4;
                 }
                 else{
-                    mySound.stop();
-                    try {
-                        mySound.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     SceneManager.ACTIVE_SCENE = 2;
 
                 }

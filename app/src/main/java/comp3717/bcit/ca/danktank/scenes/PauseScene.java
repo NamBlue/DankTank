@@ -69,26 +69,24 @@ public class PauseScene implements Scene {
             case MotionEvent.ACTION_DOWN:
                 if (resumeButton.contains((int) event.getX(), (int) event.getY()))
                 {
-
-
+                    SceneManager.ACTIVE_SCENE = 1;
+                    break;
                 }
                 if (restartButton.contains((int) event.getX(), (int) event.getY()))
                 {
-
-
+                    SceneManager.ACTIVE_SCENE = 1;
+                    break;
                 }
                 if (levelSelectButton.contains((int) event.getX(), (int) event.getY()))
                 {
-
-
+                    SceneManager.ACTIVE_SCENE = 2;
+                    break;
                 }
                 if (QuitButton.contains((int) event.getX(), (int) event.getY()))
                 {
-
-
+                    SceneManager.ACTIVE_SCENE = 0;
+                    break;
                 }
-                SceneManager.ACTIVE_SCENE = 5;
-                break;
         }
     }
 

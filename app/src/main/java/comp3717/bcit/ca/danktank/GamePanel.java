@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import comp3717.bcit.ca.danktank.managers.MusicManager;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
 
 /**
@@ -18,6 +19,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private SceneManager sceneManager;
 
+    private MusicManager musicManager;
+
     public GamePanel(Context context)
     {
         super(context);
@@ -26,7 +29,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         Constants.CURRENT_CONTEXT = context;
         thread = new MainThread(getHolder(), this);
         sceneManager = new SceneManager();
-
+        musicManager = new MusicManager();
         setFocusable(true);
     }
 
@@ -78,6 +81,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void update()
     {
         sceneManager.update();
+        musicManager.update();
     }
 
     @Override

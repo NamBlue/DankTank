@@ -46,7 +46,6 @@ public class GameplayScene implements Scene
     private long frameTime;
     //For storing current player direction
     private Enums.MoveDirection moveDirection;
-    private MediaPlayer mySound;
     private Bitmap up_image;
     private Bitmap down_image;
     private Bitmap right_image;
@@ -73,7 +72,6 @@ public class GameplayScene implements Scene
         moveDownButton = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
         fireButton = new Rect(Constants.SCREEN_WIDTH - 150, Constants.SCREEN_HEIGHT - 350, Constants.SCREEN_WIDTH - 50, Constants.SCREEN_HEIGHT - 250);
         moveDirection = Enums.MoveDirection.Up;
-        mySound = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
         player.update(playerPoint);
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
@@ -307,12 +305,6 @@ public class GameplayScene implements Scene
                     //Added by harman to test the pause button
                     if (pauseButton.contains((int) event.getX(), (int) event.getY()))
                     {
-                        mySound.stop();
-                        try {
-                            mySound.prepare();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                         SceneManager.ACTIVE_SCENE = 3;
                     }
 
