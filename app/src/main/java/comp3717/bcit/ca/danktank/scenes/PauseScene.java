@@ -17,11 +17,10 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
 
 public class PauseScene implements Scene {
     private Rect screen = new Rect();
-    private Rect resumeButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*6/20, Constants.SCREEN_WIDTH*5/8, Constants.SCREEN_HEIGHT*8/20);
-    private Rect restartButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*9/20, Constants.SCREEN_WIDTH*5/8, Constants.SCREEN_HEIGHT*11/20);
-    private Rect levelSelectButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*12/20, Constants.SCREEN_WIDTH*5/8, Constants.SCREEN_HEIGHT*14/20);
-    private Rect QuitButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*15/20, Constants.SCREEN_WIDTH*5/8, Constants.SCREEN_HEIGHT*17/20);
-
+    private Rect resumeButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*6/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*8/20);
+    private Rect restartButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*9/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*11/20);
+    private Rect levelSelectButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*12/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*14/20);
+    private Rect QuitButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*15/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*17/20);
     @Override
     public void update() {
 
@@ -40,13 +39,14 @@ public class PauseScene implements Scene {
         paint.setTextSize(100);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setColor(Color.BLUE);
-        canvas.drawText(text, Constants.SCREEN_WIDTH/4, Constants.SCREEN_HEIGHT/8 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH*3/10, Constants.SCREEN_HEIGHT/8 ,paint);
 
     }
 
     private void drawOptions(Canvas canvas, Paint paint)
     {
         paint.setTextAlign(Paint.Align.LEFT);
+
         paint.setColor(Color.BLUE);
 
         canvas.drawRect(resumeButton, paint);
@@ -55,11 +55,11 @@ public class PauseScene implements Scene {
         canvas.drawRect(QuitButton, paint);
 
         paint.setColor(Color.RED);
-        paint.setTextSize((int)((Constants.SCREEN_HEIGHT * Constants.SCREEN_WIDTH)/900 *0.05));
-        canvas.drawText("Resume", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*6/20,paint);
-        canvas.drawText("Restart", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*9/20 ,paint);
-        canvas.drawText("Return to level select", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*12/20 ,paint);
-        canvas.drawText("Quit", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*15/20 ,paint);
+        paint.setTextSize(75);
+        canvas.drawText("Resume", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*7/20,paint);
+        canvas.drawText("Restart", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*10/20 ,paint);
+        canvas.drawText("Return to level select", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*13/20 ,paint);
+        canvas.drawText("Quit", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*16/20 ,paint);
     }
 
     @Override

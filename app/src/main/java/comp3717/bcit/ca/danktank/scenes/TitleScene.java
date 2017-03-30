@@ -23,7 +23,7 @@ public class TitleScene implements Scene
 {
     //Used to set the bounds for the gameover text box
     private Rect screen = new Rect();
-    private Rect test = new Rect();
+    private Rect instructions_button = new Rect(0,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
     private BitmapFactory bitmapFactory;
     private Bitmap title;
     int x;
@@ -78,7 +78,6 @@ public class TitleScene implements Scene
         paint.setColor(Color.RED);
         drawCentreStart(canvas, paint, "Click to Start!");
         drawCentreInstruct(canvas, paint, "Instructions");
-        test.set(0, (int)(0.75 * Constants.SCREEN_HEIGHT), Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
     }
 
     private void drawCentreInstruct(Canvas canvas, Paint paint, String instructions) {
@@ -99,12 +98,10 @@ public class TitleScene implements Scene
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                x = (int)event.getRawX();
-                y = (int)event.getRawY();
 
                 //code issue here with the screen.height() the following hack allows the bottom 25%
                 //to point to the instructions scene
-                if(test.contains(x,y)){
+                if(instructions_button.contains((int) event.getX(), (int) event.getY())){
                     SceneManager.ACTIVE_SCENE = 4;
                 }
                 else{
