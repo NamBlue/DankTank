@@ -11,6 +11,7 @@ import comp3717.bcit.ca.danktank.scenes.InstructionScene;
 import comp3717.bcit.ca.danktank.scenes.LevelSelectScene;
 import comp3717.bcit.ca.danktank.scenes.PauseScene;
 import comp3717.bcit.ca.danktank.scenes.Scene;
+import comp3717.bcit.ca.danktank.scenes.ScoreScene;
 import comp3717.bcit.ca.danktank.scenes.TitleScene;
 
 /**
@@ -36,6 +37,7 @@ public class SceneManager
         scenes.add(new PauseScene());
         scenes.add(new InstructionScene());
         scenes.add(new ConfirmationScene());
+        scenes.add(new ScoreScene());
     }
 
     public void receiveTouch(MotionEvent event)

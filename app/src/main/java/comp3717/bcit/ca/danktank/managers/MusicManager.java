@@ -57,16 +57,6 @@ public class MusicManager {
                         e.printStackTrace();
                     }
                     break;
-                case 3:
-                    try{
-                    if(mPlayer.isPlaying()){
-                        mPlayer.pause();
-                    }
-                    } catch(Exception e){
-                        // TODO: handle exception
-                        e.printStackTrace();
-                    }
-                    break;
                 case 2:
                     try{
                         if(!mPlayer.isPlaying()){
@@ -77,6 +67,16 @@ public class MusicManager {
                             mPlayer.setLooping(true);
                             mPlayer.start();
                         }
+                    } catch(Exception e){
+                        // TODO: handle exception
+                        e.printStackTrace();
+                    }
+                    break;
+                case 3:
+                    try{
+                    if(mPlayer.isPlaying()){
+                        mPlayer.pause();
+                    }
                     } catch(Exception e){
                         // TODO: handle exception
                         e.printStackTrace();
