@@ -23,16 +23,22 @@ public class LevelSelectScene implements Scene {
     private Rect level3Button;
     private Rect level4Button;
     private Bitmap back_image;
+    private Bitmap Lock2_image;
+    private Bitmap Lock3_image;
+    private Bitmap Lock4_image;
 
 
     public LevelSelectScene(){
         backButton = new Rect(0, 0, 150, 150);
-        level1Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT *5/10);
-        level2Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*2/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*5/10);
-        level3Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT*9/10);
-        level4Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*6/10, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*9/10);
+        level1Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*3/20, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT *9/20);
+        level2Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*3/20, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*9/20);
+        level3Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*12/20, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT*18/20);
+        level4Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*12/20, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*18/20);
         BitmapFactory bitmapFactory = new BitmapFactory();
         back_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.back_button);
+        Lock2_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock2);
+        Lock3_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock3);
+        Lock4_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock4);
     }
 
     @Override
@@ -62,43 +68,51 @@ public class LevelSelectScene implements Scene {
         paint.setColor(Color.RED);
         canvas.drawRect(level1Button, paint);
         paint.setColor(Color.GREEN);
-        canvas.drawRect(level2Button, paint);
+        canvas.drawBitmap(Lock2_image, null, level2Button, new Paint());
         paint.setColor(Color.YELLOW);
-        canvas.drawRect(level3Button, paint);
+        canvas.drawBitmap(Lock3_image, null, level3Button, new Paint());
         paint.setColor(Color.GRAY);
-        canvas.drawRect(level4Button, paint);
+        canvas.drawBitmap(Lock4_image, null, level4Button, new Paint());
     }
 
     private void drawLevel1Text(Canvas canvas, Paint paint, String text)
     {
-        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(100);
         paint.setColor(Color.BLACK);
-        canvas.drawText(text, Constants.SCREEN_WIDTH/10 ,Constants.SCREEN_HEIGHT*2/10 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*3/20 ,paint);
+        paint.setTextSize(75);
+        canvas.drawText("Play", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
     }
 
     private void drawLevel2Text(Canvas canvas, Paint paint, String text)
     {
-        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(100);
         paint.setColor(Color.BLACK);
-        canvas.drawText(text, Constants.SCREEN_WIDTH*6/10 ,Constants.SCREEN_HEIGHT*2/10 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*3/20 ,paint);
+        paint.setTextSize(75);
+        canvas.drawText("Locked", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
     }
 
     private void drawLevel3Text(Canvas canvas, Paint paint, String text)
     {
-        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(100);
         paint.setColor(Color.BLACK);
-        canvas.drawText(text, Constants.SCREEN_WIDTH/10 ,Constants.SCREEN_HEIGHT*6/10 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*12/20 ,paint);
+        paint.setTextSize(75);
+        canvas.drawText("Locked", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
     }
 
     private void drawLevel4Text(Canvas canvas, Paint paint, String text)
     {
-        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(100);
         paint.setColor(Color.BLACK);
-        canvas.drawText(text, Constants.SCREEN_WIDTH*6/10 ,Constants.SCREEN_HEIGHT*6/10 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*12/20 ,paint);
+        paint.setTextSize(75);
+        canvas.drawText("Locked", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
     }
 
     @Override
