@@ -29,7 +29,7 @@ public class PauseScene implements Scene {
 
     @Override
     public void draw(Canvas canvas){
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.WHITE);
         Paint paint = new Paint();
         drawTitle(canvas, paint, "Paused");
         drawOptions(canvas, paint);

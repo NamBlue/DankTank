@@ -66,11 +66,11 @@ public class GameplayScene implements Scene
         left_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.left_button);
         pause_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pause_button);
         fire_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.fire_button);
-        moveLeftButton = new Rect(50, Constants.SCREEN_HEIGHT - 350, 150, Constants.SCREEN_HEIGHT - 250);
-        moveRightButton = new Rect(200, Constants.SCREEN_HEIGHT - 350, 300, Constants.SCREEN_HEIGHT - 250);
-        moveUpButton = new Rect(125, Constants.SCREEN_HEIGHT - 475, 225, Constants.SCREEN_HEIGHT - 375);
-        moveDownButton = new Rect(125, Constants.SCREEN_HEIGHT - 225, 225, Constants.SCREEN_HEIGHT - 125);
-        fireButton = new Rect(Constants.SCREEN_WIDTH - 150, Constants.SCREEN_HEIGHT - 350, Constants.SCREEN_WIDTH - 50, Constants.SCREEN_HEIGHT - 250);
+        moveLeftButton = new Rect(50, Constants.SCREEN_HEIGHT - 300, 150, Constants.SCREEN_HEIGHT - 200);
+        moveRightButton = new Rect(200, Constants.SCREEN_HEIGHT - 300, 300, Constants.SCREEN_HEIGHT - 200);
+        moveUpButton = new Rect(125, Constants.SCREEN_HEIGHT - 425, 225, Constants.SCREEN_HEIGHT - 325);
+        moveDownButton = new Rect(125, Constants.SCREEN_HEIGHT - 175, 225, Constants.SCREEN_HEIGHT - 75);
+        fireButton = new Rect(Constants.SCREEN_WIDTH - 200, Constants.SCREEN_HEIGHT - 300, Constants.SCREEN_WIDTH - 50, Constants.SCREEN_HEIGHT - 175);
         moveDirection = Enums.MoveDirection.Up;
         player.update(playerPoint);
 

@@ -42,7 +42,7 @@ public class LevelSelectScene implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
+        canvas.drawColor(Color.WHITE);
         Paint paint = new Paint();
 
         drawBackButton(canvas, paint);
@@ -73,7 +73,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(100);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.BLACK);
         canvas.drawText(text, Constants.SCREEN_WIDTH/10 ,Constants.SCREEN_HEIGHT*2/10 ,paint);
     }
 
@@ -81,7 +81,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(100);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.BLACK);
         canvas.drawText(text, Constants.SCREEN_WIDTH*6/10 ,Constants.SCREEN_HEIGHT*2/10 ,paint);
     }
 
@@ -89,7 +89,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(100);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.BLACK);
         canvas.drawText(text, Constants.SCREEN_WIDTH/10 ,Constants.SCREEN_HEIGHT*6/10 ,paint);
     }
 
@@ -97,7 +97,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize(100);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.BLACK);
         canvas.drawText(text, Constants.SCREEN_WIDTH*6/10 ,Constants.SCREEN_HEIGHT*6/10 ,paint);
     }
 
