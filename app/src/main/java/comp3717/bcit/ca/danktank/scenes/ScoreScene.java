@@ -14,7 +14,7 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
  */
 
 public class ScoreScene implements Scene {
-
+    private Rect levelselect_button = new Rect(0,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
 
     public void update(){
 
@@ -24,19 +24,26 @@ public class ScoreScene implements Scene {
         Paint paint = new Paint();
         paint.setTextSize(100);
         paint.setColor(Color.RED);
-        canvas.drawText("Score", Constants.SCREEN_WIDTH/4, Constants.SCREEN_HEIGHT/10 ,paint);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("Score", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/20 ,paint);
+        paint.setColor(Color.RED);
+        paint.setTextSize(50);
+        canvas.drawText("Item name", Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
+        canvas.drawText("Quantity", Constants.SCREEN_WIDTH*2/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
+        canvas.drawText("Description", Constants.SCREEN_WIDTH*3/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
+        paint.setTextSize(100);
+        canvas.drawText("Back to Level Select", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*18/20 ,paint);
     }
     public void receiveTouch(MotionEvent event){
 
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                if (true)
+                if (levelselect_button.contains((int) event.getX(), (int) event.getY()))
                 {
                     SceneManager.ACTIVE_SCENE = 2;
                     break;
                 }
-
         }
     }
     /**
