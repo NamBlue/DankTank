@@ -22,7 +22,7 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
 public class TitleScene implements Scene
 {
     //Used to set the bounds for the gameover text box
-    private Rect screen = new Rect();
+    private Rect screen = new Rect(0,0,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
     private Rect instructions_button = new Rect(0,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
     private BitmapFactory bitmapFactory;
     private Bitmap title;
@@ -52,14 +52,9 @@ public class TitleScene implements Scene
 
     private void drawCentreStart(Canvas canvas, Paint paint, String text)
     {
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(screen);
-        int cHeight = screen.height();
-        int cWidth = screen.width();
-        paint.getTextBounds(text, 0, text.length(), screen);
-        float x = cWidth / 2f - screen.width() / 2f - screen.left;
-        float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
-        canvas.drawText(text, x ,y ,paint);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 ,paint);
+        canvas.drawText("The Dank Tank", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*2/20 ,paint);
     }
 
     @Override
@@ -71,7 +66,6 @@ public class TitleScene implements Scene
     @Override
     public void draw(Canvas canvas)
     {
-        canvas.getClipBounds(screen);
         canvas.drawBitmap(title, null, screen, null);
         Paint paint = new Paint();
         paint.setTextSize(100);
@@ -81,15 +75,9 @@ public class TitleScene implements Scene
     }
 
     private void drawCentreInstruct(Canvas canvas, Paint paint, String instructions) {
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(screen);
-        int cHeight = screen.height();
-        int cWidth = screen.width();
-        paint.getTextBounds(instructions, 0, instructions.length(), screen);
-        float x = cWidth / 2f - screen.width() / 2f - screen.left;
-        float y = cHeight / 2f - screen.height() / 2f - screen.bottom;
-        y = y *2;
-        canvas.drawText(instructions, x ,y ,paint);
+
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText(instructions, Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*19/20 ,paint);
     }
 
     @Override

@@ -45,14 +45,14 @@ public class InstructionScene implements Scene {
         player_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_idle);
         tank1_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_idle);
 
-        moveLeftButton = new Rect(Constants.SCREEN_WIDTH*6/20, Constants.SCREEN_HEIGHT*2/10 + 150, Constants.SCREEN_WIDTH*7/20, Constants.SCREEN_HEIGHT*3/10 + 25);
-        moveRightButton = new Rect(Constants.SCREEN_WIDTH*6/20 +100, Constants.SCREEN_HEIGHT*2/10 + 150, Constants.SCREEN_WIDTH*7/20 + 100, Constants.SCREEN_HEIGHT*3/10 +25);
-        moveUpButton = new Rect(Constants.SCREEN_WIDTH*6/20 + 50, Constants.SCREEN_HEIGHT*2/10 + 75, Constants.SCREEN_WIDTH*7/20 + 50, Constants.SCREEN_HEIGHT*3/10 - 50);
-        moveDownButton = new Rect(Constants.SCREEN_WIDTH*6/20 + 50, Constants.SCREEN_HEIGHT*3/10 + 50, Constants.SCREEN_WIDTH*7/20 + 50, Constants.SCREEN_HEIGHT*4/10 - 75);
-        fireButton = new Rect(Constants.SCREEN_WIDTH*4/20 + 50, Constants.SCREEN_HEIGHT*4/10, Constants.SCREEN_WIDTH*7/20 + 50, Constants.SCREEN_HEIGHT*6/10 - 200);
-        pauseButton = new Rect(Constants.SCREEN_WIDTH*4/20 + 50, Constants.SCREEN_HEIGHT*5/10 + 100, Constants.SCREEN_WIDTH*7/20 + 50, Constants.SCREEN_HEIGHT*7/10 - 100);
-        player = new Rect(Constants.SCREEN_WIDTH*5/20 + 50, Constants.SCREEN_HEIGHT*6/10 + 100, Constants.SCREEN_WIDTH*8/20 + 50, Constants.SCREEN_HEIGHT*8/10 - 100);
-        tank1 = new Rect(Constants.SCREEN_WIDTH*9/20 + 50, Constants.SCREEN_HEIGHT*7/10 + 100, Constants.SCREEN_WIDTH*12/20 + 50, Constants.SCREEN_HEIGHT*9/10 - 100);
+        moveLeftButton = new Rect(Constants.SCREEN_WIDTH*6/20, Constants.SCREEN_HEIGHT*8/20, Constants.SCREEN_WIDTH*7/20, Constants.SCREEN_HEIGHT*9/20);
+        moveRightButton = new Rect(Constants.SCREEN_WIDTH*8/20, Constants.SCREEN_HEIGHT*8/20, Constants.SCREEN_WIDTH*7/20 + 100, Constants.SCREEN_HEIGHT*9/20);
+        moveUpButton = new Rect(Constants.SCREEN_WIDTH*7/20, Constants.SCREEN_HEIGHT*7/20, Constants.SCREEN_WIDTH*7/20 + 50, Constants.SCREEN_HEIGHT*8/20);
+        moveDownButton = new Rect(Constants.SCREEN_WIDTH*7/20, Constants.SCREEN_HEIGHT*8/20, Constants.SCREEN_WIDTH*7/20 + 50, Constants.SCREEN_HEIGHT*9/20);
+        fireButton = new Rect(Constants.SCREEN_WIDTH*5/20, Constants.SCREEN_HEIGHT*10/20, Constants.SCREEN_WIDTH*7/20 + 50, Constants.SCREEN_HEIGHT*12/20);
+        pauseButton = new Rect(Constants.SCREEN_WIDTH*4/20, Constants.SCREEN_HEIGHT*13/20, Constants.SCREEN_WIDTH*6/20 + 50, Constants.SCREEN_HEIGHT*15/20);
+        player = new Rect(Constants.SCREEN_WIDTH*6/20, Constants.SCREEN_HEIGHT*15/20, Constants.SCREEN_WIDTH*8/20 + 50, Constants.SCREEN_HEIGHT*17/20);
+        tank1 = new Rect(Constants.SCREEN_WIDTH*10/20, Constants.SCREEN_HEIGHT*9/10, Constants.SCREEN_WIDTH*12/20 + 50, Constants.SCREEN_HEIGHT);
     }
 
     public void update(){
@@ -80,25 +80,26 @@ public class InstructionScene implements Scene {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setColor(Color.RED);
         paint.setTextSize(75);
-        canvas.drawText("Objective", Constants.SCREEN_WIDTH/3, Constants.SCREEN_HEIGHT*2/10 - 50 ,paint);
+        canvas.drawText("Objective", Constants.SCREEN_WIDTH/3, Constants.SCREEN_HEIGHT*3/20 ,paint);
         paint.setTextSize(50);
         paint.setColor(Color.BLACK);
-        canvas.drawText("Shoot down as many enemy tanks as you can", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*2/10 ,paint);
-        canvas.drawText("1. Press the              buttons to move your tank", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*3/10 ,paint);
+        canvas.drawText("-Shoot down as many enemy tanks as you can", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*4/20 ,paint);
+        canvas.drawText("-Recover the paintings:", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*5/20 ,paint);
+        canvas.drawText("1. Press the              buttons to move your tank", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*8/20 ,paint);
         canvas.drawBitmap(up_image, null, moveUpButton, new Paint());
         canvas.drawBitmap(down_image, null, moveDownButton, new Paint());
         canvas.drawBitmap(left_image, null, moveLeftButton, new Paint());
         canvas.drawBitmap(right_image, null, moveRightButton, new Paint());
 
-        canvas.drawText("2. Press                  button to shoot", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*5/10 - 100 ,paint);
+        canvas.drawText("2. Press                  button to shoot", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*11/20 ,paint);
         canvas.drawBitmap(fire_image, null, fireButton, new Paint());
 
-        canvas.drawText("3. Press                  button to pause the game", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*6/10 ,paint);
+        canvas.drawText("3. Press           button to pause the game", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*7/10 ,paint);
         canvas.drawBitmap(pause_image, null, pauseButton, new Paint());
 
-        canvas.drawText("Your tank: ", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*7/10 ,paint);
+        canvas.drawText("Your tank: ", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*8/10 ,paint);
         canvas.drawBitmap(player_image, null, player, new Paint());
-        canvas.drawText("The enemy tanks: ", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*8/10 ,paint);
+        canvas.drawText("The enemy tanks: ", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*9/10 ,paint);
         canvas.drawBitmap(tank1_image, null, tank1, new Paint());
     }
 

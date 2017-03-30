@@ -37,18 +37,15 @@ public class PauseScene implements Scene {
     private void drawTitle(Canvas canvas, Paint paint, String text)
     {
         paint.setTextSize(100);
-        paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.BLUE);
-        canvas.drawText(text, Constants.SCREEN_WIDTH*3/10, Constants.SCREEN_HEIGHT/8 ,paint);
+        canvas.drawText(text, Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/8 ,paint);
 
     }
 
     private void drawOptions(Canvas canvas, Paint paint)
     {
-        paint.setTextAlign(Paint.Align.LEFT);
-
         paint.setColor(Color.BLUE);
-
         canvas.drawRect(resumeButton, paint);
         canvas.drawRect(restartButton, paint);
         canvas.drawRect(levelSelectButton, paint);
@@ -56,10 +53,11 @@ public class PauseScene implements Scene {
 
         paint.setColor(Color.RED);
         paint.setTextSize(75);
-        canvas.drawText("Resume", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*7/20,paint);
-        canvas.drawText("Restart", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*10/20 ,paint);
-        canvas.drawText("Return to level select", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*13/20 ,paint);
-        canvas.drawText("Quit", Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*16/20 ,paint);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("Resume", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*7/20,paint);
+        canvas.drawText("Restart", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*10/20 ,paint);
+        canvas.drawText("Return to level select", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*13/20 ,paint);
+        canvas.drawText("Quit", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*16/20 ,paint);
     }
 
     @Override
