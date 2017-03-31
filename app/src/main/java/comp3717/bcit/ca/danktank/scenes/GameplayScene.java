@@ -168,21 +168,21 @@ public class GameplayScene implements Scene
             }
 
             //Bounding player to screen
-            if(playerPoint.x < 0)
+            if(playerPoint.x < 0 + Constants.PLAYER_SIZE / 2)
             {
-                playerPoint.x = 0;
+                playerPoint.x = 0 + Constants.PLAYER_SIZE / 2;
             }
-            else if (playerPoint.x > Constants.SCREEN_WIDTH)
+            else if (playerPoint.x > Constants.SCREEN_WIDTH - Constants.PLAYER_SIZE / 2)
             {
-                playerPoint.x = Constants.SCREEN_WIDTH;
+                playerPoint.x = Constants.SCREEN_WIDTH - Constants.PLAYER_SIZE / 2;
             }
-            if(playerPoint.y < 0)
+            if(playerPoint.y < 0 + Constants.PLAYER_SIZE / 2)
             {
-                playerPoint.y = 0;
+                playerPoint.y = 0 + Constants.PLAYER_SIZE / 2;
             }
-            else if (playerPoint.y > Constants.SCREEN_HEIGHT)
+            else if (playerPoint.y > Constants.SCREEN_HEIGHT - Constants.PLAYER_SIZE / 2)
             {
-                playerPoint.y = Constants.SCREEN_HEIGHT;
+                playerPoint.y = Constants.SCREEN_HEIGHT - Constants.PLAYER_SIZE / 2;
             }
 
             player.update(playerPoint);
