@@ -101,6 +101,11 @@ public class Enemy implements GameObject
         animationManager.draw(canvas, rectangle);
     }
 
+    public boolean collided(Rect object)
+    {
+        return Rect.intersects(rectangle, object);
+    }
+
     @Override
     public void update()
     {

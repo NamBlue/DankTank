@@ -143,6 +143,49 @@ public class GameplayScene implements Scene
                     default:
                         break;
                 }
+                //Bounding player to screen
+                if(playerPoint.x < 0 + Constants.PLAYER_SIZE / 2)
+                {
+                    playerPoint.x = 0 + Constants.PLAYER_SIZE / 2;
+                }
+                else if (playerPoint.x > Constants.SCREEN_WIDTH - Constants.PLAYER_SIZE / 2)
+                {
+                    playerPoint.x = Constants.SCREEN_WIDTH - Constants.PLAYER_SIZE / 2;
+                }
+                if(playerPoint.y < 0 + Constants.PLAYER_SIZE / 2)
+                {
+                    playerPoint.y = 0 + Constants.PLAYER_SIZE / 2;
+                }
+                else if (playerPoint.y > Constants.SCREEN_HEIGHT - Constants.PLAYER_SIZE / 2)
+                {
+                    playerPoint.y = Constants.SCREEN_HEIGHT - Constants.PLAYER_SIZE / 2;
+                }
+            }
+
+            Rect temp = new Rect(playerPoint.x - Constants.PLAYER_SIZE /2,
+                    playerPoint.y - Constants.PLAYER_SIZE /2,
+                    playerPoint.x + Constants.PLAYER_SIZE /2,
+                    playerPoint.y + Constants.PLAYER_SIZE /2);
+
+            if (enemyManager.collided(temp))
+            {
+                switch(moveDirection)
+                {
+                    case Left:
+                        playerPoint.set(playerPoint.x + Constants.PLAYER_SPEED, playerPoint.y);
+                        break;
+                    case Right:
+                        playerPoint.set(playerPoint.x - Constants.PLAYER_SPEED, playerPoint.y);
+                        break;
+                    case Up:
+                        playerPoint.set(playerPoint.x, playerPoint.y + Constants.PLAYER_SPEED);
+                        break;
+                    case Down:
+                        playerPoint.set(playerPoint.x, playerPoint.y - Constants.PLAYER_SPEED);
+                        break;
+                    default:
+                        break;
+                }
             }
 
             if(playerFiring)
@@ -167,24 +210,6 @@ public class GameplayScene implements Scene
                 playerFiring = false;
             }
 
-            //Bounding player to screen
-            if(playerPoint.x < 0 + Constants.PLAYER_SIZE / 2)
-            {
-                playerPoint.x = 0 + Constants.PLAYER_SIZE / 2;
-            }
-            else if (playerPoint.x > Constants.SCREEN_WIDTH - Constants.PLAYER_SIZE / 2)
-            {
-                playerPoint.x = Constants.SCREEN_WIDTH - Constants.PLAYER_SIZE / 2;
-            }
-            if(playerPoint.y < 0 + Constants.PLAYER_SIZE / 2)
-            {
-                playerPoint.y = 0 + Constants.PLAYER_SIZE / 2;
-            }
-            else if (playerPoint.y > Constants.SCREEN_HEIGHT - Constants.PLAYER_SIZE / 2)
-            {
-                playerPoint.y = Constants.SCREEN_HEIGHT - Constants.PLAYER_SIZE / 2;
-            }
-
             player.update(playerPoint);
             bulletManager.update();
             if (bulletManager.collided(player.getRectangle()))
@@ -192,6 +217,7 @@ public class GameplayScene implements Scene
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
             }
+
             for(Enemy enemy: enemies)
             {
                 if (bulletManager.collided(enemy.getRectangle()))

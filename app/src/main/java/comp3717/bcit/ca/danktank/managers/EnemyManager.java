@@ -58,6 +58,18 @@ public class EnemyManager
         frames ++;
     }
 
+    public boolean collided(Rect object)
+    {
+        for(Enemy enemy : enemies)
+        {
+            if(enemy.collided(object))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void reset()
     {
         enemies.clear();

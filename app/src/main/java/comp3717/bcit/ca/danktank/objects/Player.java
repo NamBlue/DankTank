@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.AnimationManager;
 
