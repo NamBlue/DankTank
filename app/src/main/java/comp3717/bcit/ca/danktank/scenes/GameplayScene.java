@@ -7,10 +7,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.media.MediaPlayer;
 import android.view.MotionEvent;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import comp3717.bcit.ca.danktank.managers.BulletManager;
@@ -102,6 +100,7 @@ public class GameplayScene implements Scene
         movingPlayer = false;
         playerFiring = false;
         orientationData.newGame();
+        enemyManager.reset();
     }
 
 

@@ -23,13 +23,14 @@ public class EnemyManager
     private BulletManager bulletManager;
     private Random random;
     public int enemySize;
+    private int frames;
 
     public EnemyManager()
     {
         random = new Random();
         enemies = new ArrayList<>();
         enemySize = 0;
-        int i = 0;
+        frames = 0;
     }
 
     public boolean killEnemy(Enemy enemy)
@@ -39,12 +40,13 @@ public class EnemyManager
 
     public void update()
     {
-        if(enemies.size() < enemySize)
+        if(enemies.size() < enemySize && frames > 30)
         {
             int x = (int)((random.nextFloat() * (Constants.SCREEN_WIDTH - Constants.ENEMY_SIZE)) + (Constants.ENEMY_SIZE / 2));
             int y = (int)((random.nextFloat() * (Constants.SCREEN_HEIGHT - Constants.ENEMY_SIZE) / 2) + (Constants.ENEMY_SIZE / 2));
             enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
             enemies.get(enemies.size() - 1).update(new Point(x, y));
+            frames = 0;
         }
         for(Enemy enemy: enemies)
         {
@@ -53,6 +55,12 @@ public class EnemyManager
                 enemies.remove(enemy);
             }
         }
+        frames ++;
+    }
+
+    public void reset()
+    {
+        enemies.clear();
     }
 
     public void draw(Canvas canvas)

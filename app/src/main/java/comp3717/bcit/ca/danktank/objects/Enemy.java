@@ -21,12 +21,14 @@ public class Enemy implements GameObject
     private int color;
     private Animation idleUp, idleDown, idleLeft, idleRight;
     private Animation walkLeft, walkRight, walkUp, walkDown;
-    private Animation explode;
+    private Animation explode, spawn;
     private AnimationManager animationManager;
     private int animationState;
     private  boolean startingState;
-    private boolean die = false;
+    private boolean die;
+    private boolean spawning;
     public int dieFrames;
+    public int spawnFrames;
 
     public Rect getRectangle()
     {
@@ -36,6 +38,9 @@ public class Enemy implements GameObject
     public Enemy(Rect rectangle, int color)
     {
         dieFrames = 0;
+        spawnFrames = 0;
+        spawning = true;
+        die = false;
         this.rectangle = rectangle;
         this.color = color;
         animationState = 0;
@@ -50,7 +55,12 @@ public class Enemy implements GameObject
         Bitmap explode1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode1);
         Bitmap explode2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode2);
         Bitmap explode3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode3);
+        Bitmap spawn1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.spawn1);
+        Bitmap spawn2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.spawn2);
+        Bitmap spawn3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.spawn3);
+        Bitmap spawn4 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.spawn4);
         explode = new Animation(new Bitmap[]{explode1, explode2, explode3},0.5f);
+        spawn = new Animation(new Bitmap[]{spawn1, spawn2, spawn3, spawn4},0.10f);
         idleUp = new Animation(new Bitmap[]{idleImg}, 5f);
         walkUp = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
 
@@ -79,7 +89,7 @@ public class Enemy implements GameObject
         walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
         idleDown  = new Animation(new Bitmap[]{idleImg}, 5);
         walkDown = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
-        animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight, explode});
+        animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight, explode, spawn});
     }
 
     @Override
@@ -104,6 +114,19 @@ public class Enemy implements GameObject
             animationState = 8;
             dieFrames++;
         }
+        else if (spawning)
+        {
+            animationState = 9;
+            spawnFrames++;
+            if(spawnFrames > 30)
+            {
+                spawning = false;
+            }
+        }
+        else
+        {
+            animationState = 1;
+        }
 
         animationManager.playAnimation(animationState);
         animationManager.update();
@@ -118,7 +141,7 @@ public class Enemy implements GameObject
 
     public boolean die()
     {
-        if (die)
+        if (die || spawning)
         {
             return false;
         }
@@ -141,7 +164,7 @@ public class Enemy implements GameObject
                         point.y + rectangle.height()/2);
         /*0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight,
           4 walkUP, 5 walkDown, 6 walking left, 7 walking right
-          8 explode/*
+          8 explode, 9 spawn/*
          */
         // > 5 for bigger movements before animating movements, else idle
         if (rectangle.left - oldleft > 5)
