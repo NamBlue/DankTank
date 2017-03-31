@@ -74,7 +74,7 @@ public class GameplayScene implements Scene
         moveDownButton = new Rect(Constants.SCREEN_WIDTH*3/30, Constants.SCREEN_HEIGHT*28/30, Constants.SCREEN_WIDTH*6/30, Constants.SCREEN_HEIGHT*30/30);
         fireButton = new Rect(Constants.SCREEN_WIDTH*49/60, Constants.SCREEN_HEIGHT*25/30, Constants.SCREEN_WIDTH*58/60, Constants.SCREEN_HEIGHT*28/30);
         moveDirection = Enums.MoveDirection.Up;
-        player.update(playerPoint);
+        player.update(playerPoint, moveDirection);
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
         enemyManager = new EnemyManager();
@@ -95,7 +95,7 @@ public class GameplayScene implements Scene
     {
         player.reset();
         playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
-        player.update(playerPoint);
+        player.update(playerPoint, moveDirection);
         bulletManager = new BulletManager(50, 150, Color.BLACK);
         movingPlayer = false;
         playerFiring = false;
@@ -173,6 +173,7 @@ public class GameplayScene implements Scene
                     playerPoint.x + Constants.PLAYER_SIZE /2,
                     playerPoint.y + Constants.PLAYER_SIZE /2);
 
+            //undo the movements if collided
             if (enemyManager.collided(temp))
             {
                 switch(moveDirection)
@@ -216,7 +217,7 @@ public class GameplayScene implements Scene
                 playerFiring = false;
             }
 
-            player.update(playerPoint);
+            player.update(playerPoint, moveDirection);
             bulletManager.update();
             if (bulletManager.collided(player.getRectangle()))
             {

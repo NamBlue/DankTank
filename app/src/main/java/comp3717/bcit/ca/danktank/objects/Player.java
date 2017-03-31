@@ -98,7 +98,7 @@ public class Player implements GameObject
         directionState = 0;
     }
 
-    public void update(Point point)
+    public void update(Point point, Enums.MoveDirection direction)
     {
         float oldleft = rectangle.left;
         float oldtop = rectangle.top;
@@ -125,21 +125,25 @@ public class Player implements GameObject
         {
             directionState = 4;
         }
-        else if (directionState == 7)
+        else
         {
-            directionState = 3;
-        }
-        else if (directionState == 6)
-        {
-            directionState = 2;
-        }
-        else if (directionState == 5)
-        {
-            directionState = 1;
-        }
-        else if (directionState == 4)
-        {
-            directionState = 0;
+            switch(direction)
+            {
+                case Left:
+                    directionState = 2;
+                    break;
+                case Right:
+                    directionState = 3;
+                    break;
+                case Up:
+                    directionState = 0;
+                    break;
+                case Down:
+                    directionState = 1;
+                    break;
+                default:
+                    break;
+            }
         }
         if (startingState)
         {

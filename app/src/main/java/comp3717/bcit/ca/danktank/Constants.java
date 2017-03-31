@@ -14,8 +14,8 @@ public class Constants
     public static int GAMEOVER_TIME = 2000;
     public static Context CURRENT_CONTEXT;
     public static long INIT_TIME;
-    public static final int PLAYER_SIZE = 110;
-    public static final int ENEMY_SIZE = 110;
+    public static final int PLAYER_SIZE = 100;
+    public static final int ENEMY_SIZE = 100;
     public static final int PLAYER_SPEED = 15; //For player movement speed
     public static final int BULLET_WIDTH = 15; //For bullet width
     public static final int BULLET_HEIGHT = 35; //For bullet height
