@@ -82,8 +82,15 @@ public class GameplayScene implements Scene
 
         enemies = enemyManager.getEnemies();
 
+<<<<<<< Updated upstream
+=======
         levelManager = new LevelManager(1);
 
+
+
+        orientationData = new OrientationData();
+        orientationData.register();
+>>>>>>> Stashed changes
         frameTime = System.currentTimeMillis();
         scorePaint = new Paint();
         scorePaint.setTextSize(100);
