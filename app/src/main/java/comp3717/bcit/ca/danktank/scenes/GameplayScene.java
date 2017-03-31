@@ -226,7 +226,7 @@ public class GameplayScene implements Scene
 
             for(Enemy enemy: enemies)
             {
-                if (bulletManager.collided(enemy.getRectangle()))
+                if (!enemy.die && bulletManager.collided(enemy.getRectangle()))
                 {
                     if(enemyManager.killEnemy(enemy))
                     {

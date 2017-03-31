@@ -25,8 +25,8 @@ public class Enemy implements GameObject
     private AnimationManager animationManager;
     private int animationState;
     private  boolean startingState;
-    private boolean die;
-    private boolean spawning;
+    public boolean die;
+    public boolean spawning;
     public int dieFrames;
     public int spawnFrames;
 
@@ -103,6 +103,10 @@ public class Enemy implements GameObject
 
     public boolean collided(Rect object)
     {
+        if(die)
+        {
+            return false;
+        }
         return Rect.intersects(rectangle, object);
     }
 
