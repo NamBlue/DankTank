@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import comp3717.bcit.ca.danktank.managers.BulletManager;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
-import comp3717.bcit.ca.danktank.OrientationData;
 import comp3717.bcit.ca.danktank.managers.EnemyManager;
 import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
@@ -39,7 +38,6 @@ public class GameplayScene implements Scene
     private boolean playerFiring = false;
     private boolean gameOver = false;
     private long gameOverTime;
-    private OrientationData orientationData;
     //speed to move the player faster as it is more tilted, tracks time elapsed between frames
     private long frameTime;
     //For storing current player direction
@@ -80,10 +78,6 @@ public class GameplayScene implements Scene
 
         enemies = enemyManager.getEnemies();
 
-
-
-        orientationData = new OrientationData();
-        orientationData.register();
         frameTime = System.currentTimeMillis();
         scorePaint = new Paint();
         scorePaint.setTextSize(100);
@@ -99,7 +93,6 @@ public class GameplayScene implements Scene
         bulletManager = new BulletManager(50, 150, Color.BLACK);
         movingPlayer = false;
         playerFiring = false;
-        orientationData.newGame();
         enemyManager.reset();
     }
 
@@ -129,24 +122,6 @@ public class GameplayScene implements Scene
 
             int elapsedTine = (int)(System.currentTimeMillis() - frameTime);
             frameTime = System.currentTimeMillis();
-
-            //For gyroscope
-            if (orientationData.getOrientation() != null && orientationData.getStartingOrientation() != null)
-            {
-                //index 1 of orientation is the pitch for Y axis movement
-                //pitch goes from PI to -PI
-                //roll goes from PI/2 to - PI/2 (Need to multiply by 2)
-                float pitchDelta = orientationData.getOrientation()[1] - orientationData.getStartingOrientation()[1];
-                float rollDelta = orientationData.getOrientation()[2] - orientationData.getStartingOrientation()[2];
-
-                //1000f means 2000msec to move across the screen when fully tilted
-                float xspeed = 2 * rollDelta * Constants.SCREEN_WIDTH/2000f;
-                float yspeed = pitchDelta * Constants.SCREEN_HEIGHT/2000f;
-
-                //5 is the pixel margin for error correction
-                playerPoint.x += Math.abs(xspeed * elapsedTine) > 5 ? xspeed*elapsedTine : 0;
-                playerPoint.y -= Math.abs(yspeed * elapsedTine) > 5 ? yspeed*elapsedTine : 0;
-            }
 
             //For directional key controls
             if(movingPlayer)
