@@ -32,9 +32,9 @@ public class EnemyManager
         int i = 0;
     }
 
-    public void killEnemy(Enemy enemy)
+    public boolean killEnemy(Enemy enemy)
     {
-        enemies.remove(enemy);
+        return enemy.die();
     }
 
     public void update()
@@ -45,6 +45,13 @@ public class EnemyManager
             int y = (int)((random.nextFloat() * (Constants.SCREEN_HEIGHT - Constants.ENEMY_SIZE) / 2) + (Constants.ENEMY_SIZE / 2));
             enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
             enemies.get(enemies.size() - 1).update(new Point(x, y));
+        }
+        for(Enemy enemy: enemies)
+        {
+            if(enemy.dieFrames > 30)
+            {
+                enemies.remove(enemy);
+            }
         }
     }
 

@@ -21,9 +21,12 @@ public class Enemy implements GameObject
     private int color;
     private Animation idleUp, idleDown, idleLeft, idleRight;
     private Animation walkLeft, walkRight, walkUp, walkDown;
+    private Animation explode;
     private AnimationManager animationManager;
-    private int directionState;
+    private int animationState;
     private  boolean startingState;
+    private boolean die = false;
+    public int dieFrames;
 
     public Rect getRectangle()
     {
@@ -32,9 +35,10 @@ public class Enemy implements GameObject
 
     public Enemy(Rect rectangle, int color)
     {
+        dieFrames = 0;
         this.rectangle = rectangle;
         this.color = color;
-        directionState = 0;
+        animationState = 0;
         startingState = true;
         //For Decoding, Producing, Modifying Bitmaps etc.
         BitmapFactory bitmapFactory = new BitmapFactory();
@@ -43,8 +47,11 @@ public class Enemy implements GameObject
         Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_move1);
         Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_move2);
         Bitmap walk3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_move3);
-
-        idleUp = new Animation(new Bitmap[]{idleImg}, 5);
+        Bitmap explode1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode1);
+        Bitmap explode2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode2);
+        Bitmap explode3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode3);
+        explode = new Animation(new Bitmap[]{explode1, explode2, explode3},0.5f);
+        idleUp = new Animation(new Bitmap[]{idleImg}, 5f);
         walkUp = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
 
         //walkleft requires to reflect the image on the vertical axis.
@@ -72,7 +79,7 @@ public class Enemy implements GameObject
         walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
         idleDown  = new Animation(new Bitmap[]{idleImg}, 5);
         walkDown = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
-        animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight});
+        animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight, explode});
     }
 
     @Override
@@ -87,6 +94,18 @@ public class Enemy implements GameObject
     @Override
     public void update()
     {
+        if (startingState)
+        {
+            animationState = 1;
+            startingState = false;
+        }
+        if (die)
+        {
+            animationState = 8;
+            dieFrames++;
+        }
+
+        animationManager.playAnimation(animationState);
         animationManager.update();
     }
 
@@ -94,8 +113,22 @@ public class Enemy implements GameObject
     public void reset()
     {
         startingState = true;
-        directionState = 0;
+        animationState = 0;
     }
+
+    public boolean die()
+    {
+        if (die)
+        {
+            return false;
+        }
+        else
+        {
+            die = true;
+            return die;
+        }
+    }
+
 
     public void update(Point point)
     {
@@ -106,48 +139,44 @@ public class Enemy implements GameObject
                         point.y - rectangle.height()/2,
                         point.x + rectangle.width()/2,
                         point.y + rectangle.height()/2);
-        //0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight, 4 walkUP, 5 walkDown, 6 walking left, 7 walking right animations;
+        /*0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight,
+          4 walkUP, 5 walkDown, 6 walking left, 7 walking right
+          8 explode/*
+         */
         // > 5 for bigger movements before animating movements, else idle
         if (rectangle.left - oldleft > 5)
         {
-            directionState = 7;
+            animationState = 7;
         }
         else if (rectangle.left - oldleft < -5)
         {
-            directionState = 6;
+            animationState = 6;
         }
         else if (rectangle.top - oldtop > 5)
         {
-            directionState = 5;
+            animationState = 5;
         }
         else if (rectangle.top - oldtop < - 5)
         {
-            directionState = 4;
+            animationState = 4;
         }
-        else if (directionState == 7)
+        else if (animationState == 7)
         {
-            directionState = 3;
+            animationState = 3;
         }
-        else if (directionState == 6)
+        else if (animationState == 6)
         {
-            directionState = 2;
+            animationState = 2;
         }
-        else if (directionState == 5)
+        else if (animationState == 5)
         {
-            directionState = 1;
+            animationState = 1;
         }
-        else if (directionState == 4)
+        else if (animationState == 4)
         {
-            directionState = 0;
-        }
-        if (startingState)
-        {
-            directionState = 1;
-            startingState = false;
+            animationState = 0;
         }
 
-        animationManager.playAnimation(directionState);
-        animationManager.update();
     }
 
 }

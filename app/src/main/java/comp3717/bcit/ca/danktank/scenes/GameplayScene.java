@@ -53,6 +53,8 @@ public class GameplayScene implements Scene
     private Bitmap pause_image;
     private Bitmap fire_image;
     private ArrayList<Enemy> enemies;
+    private int score = 0;
+    private Paint scorePaint, controlsPaint;
 
     public GameplayScene()
     {
@@ -85,6 +87,10 @@ public class GameplayScene implements Scene
         orientationData = new OrientationData();
         orientationData.register();
         frameTime = System.currentTimeMillis();
+        scorePaint = new Paint();
+        scorePaint.setTextSize(100);
+        scorePaint.setColor(Color.BLUE);
+        controlsPaint = new Paint();
 }
 
     public void reset()
@@ -216,7 +222,10 @@ public class GameplayScene implements Scene
             {
                 if (bulletManager.collided(enemy.getRectangle()))
                 {
-                    enemyManager.killEnemy(enemy);
+                    if(enemyManager.killEnemy(enemy))
+                    {
+                        score += 100;
+                    }
                 }
                 else
                 {
@@ -237,20 +246,18 @@ public class GameplayScene implements Scene
         bulletManager.draw(canvas);
         enemyManager.draw(canvas);
 
-        Paint paint = new Paint();
-        canvas.drawBitmap(up_image, null, moveUpButton, new Paint());
-        canvas.drawBitmap(down_image, null, moveDownButton, new Paint());
-        canvas.drawBitmap(left_image, null, moveLeftButton, new Paint());
-        canvas.drawBitmap(right_image, null, moveRightButton, new Paint());
-        canvas.drawBitmap(pause_image, null, pauseButton, new Paint());
-        canvas.drawBitmap(fire_image, null, fireButton, new Paint());
+        canvas.drawBitmap(up_image, null, moveUpButton, controlsPaint);
+        canvas.drawBitmap(down_image, null, moveDownButton, controlsPaint);
+        canvas.drawBitmap(left_image, null, moveLeftButton, controlsPaint);
+        canvas.drawBitmap(right_image, null, moveRightButton, controlsPaint);
+        canvas.drawBitmap(pause_image, null, pauseButton, controlsPaint);
+        canvas.drawBitmap(fire_image, null, fireButton, controlsPaint);
         if (gameOver)
         {
-            //Paint paint = new Paint();
-            paint.setTextSize(100);
-            //paint.setColor(Color.BLUE);
-            drawCentreText(canvas, paint, "Game Over");
+            drawCentreText(canvas, scorePaint, "Game Over");
         }
+
+        canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, scorePaint);
     }
 
     @Override

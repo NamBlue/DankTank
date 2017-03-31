@@ -27,7 +27,7 @@ public class BulletManager
     private long startTime;
     private long initTime;
 
-    private int score = 0;
+
 
     public BulletManager(int obstacleGap, int obstacleHeight, int color)
     {
@@ -53,7 +53,6 @@ public class BulletManager
             if(bullet.collided(object))
             {
                 bullets.remove(bullet);
-                score += 100;
                 return true;
             }
         }
@@ -91,9 +90,5 @@ public class BulletManager
         {
             bullet.draw(canvas);
         }
-        Paint paint = new Paint();
-        paint.setTextSize(100);
-        paint.setColor(Color.BLUE);
-        canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, paint);
     }
 }
