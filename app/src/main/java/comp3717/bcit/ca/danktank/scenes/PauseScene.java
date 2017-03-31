@@ -1,6 +1,8 @@
 package comp3717.bcit.ca.danktank.scenes;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,6 +10,7 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
 
 
@@ -21,6 +24,8 @@ public class PauseScene implements Scene {
     private Rect restartButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*9/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*11/20);
     private Rect levelSelectButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*12/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*14/20);
     private Rect QuitButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*15/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*17/20);
+
+
     @Override
     public void update() {
 
@@ -32,6 +37,7 @@ public class PauseScene implements Scene {
         Paint paint = new Paint();
         drawTitle(canvas, paint, "Paused");
         drawOptions(canvas, paint);
+
     }
 
     private void drawTitle(Canvas canvas, Paint paint, String text)
