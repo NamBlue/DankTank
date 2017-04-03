@@ -9,14 +9,12 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.R;
-import comp3717.bcit.ca.danktank.scenes.LevelSelectScene;
 import comp3717.bcit.ca.danktank.scenes.Scene;
-
-import static comp3717.bcit.ca.danktank.MainThread.canvas;
 
 /**
  * Created by steve on 2017-03-31.
@@ -28,10 +26,12 @@ public class LevelManager implements Scene {
     private Bitmap Brick_image;
     private Random r;
     private int level;
+    private ArrayList<Rect> spawnpoints;
 
     public LevelManager(int level){
         BitmapFactory bitmapFactory = new BitmapFactory();
         Brick_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.brick);
+        spawnpoints = new ArrayList<Rect>();
         r = new Random();
         map = new boolean[10][20];
         this.level = level;
@@ -54,6 +54,11 @@ public class LevelManager implements Scene {
 
 
     }
+
+    private ArrayList<Rect> getSpawnpoints(){
+        return spawnpoints;
+    }
+
     private void populateMap(int level)
     {
         switch(level) {
@@ -126,7 +131,21 @@ public class LevelManager implements Scene {
 
                 map[1][7] = true;
 
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
 
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
 
                 break;
             default : // Optional
@@ -144,7 +163,9 @@ public class LevelManager implements Scene {
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 20; j++){
                 if(map[i][j] == true) {
-                    canvas.drawBitmap(Brick_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10, Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10, Constants.SCREEN_HEIGHT * (j + 1) / 20), new Paint());
+                    canvas.drawBitmap(Brick_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
+                            Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
+                            Constants.SCREEN_HEIGHT * (j + 1) / 20), new Paint());
                 }
             }
         }
