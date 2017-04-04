@@ -27,6 +27,7 @@ public class LevelManager implements Scene {
     private Random r;
     private int level;
     private ArrayList<Rect> spawnpoints;
+    private Rect player_spawn;
 
     public LevelManager(int level){
         BitmapFactory bitmapFactory = new BitmapFactory();
@@ -57,6 +58,10 @@ public class LevelManager implements Scene {
 
     public ArrayList<Rect> getSpawnpoints(){
         return spawnpoints;
+    }
+
+    Rect getPlayerSpawn(){
+        return player_spawn;
     }
 
     private void populateMap(int level)
@@ -147,6 +152,9 @@ public class LevelManager implements Scene {
                         5 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (5 + 1) / 20));
 
+                player_spawn = new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
+                        19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (19 + 1) / 20);
                 break;
             default : // Optional
                 break;
