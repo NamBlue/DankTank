@@ -40,19 +40,7 @@ public class LevelManager implements Scene {
         this.level = level;
         populateMap(level);
 
-        //Brick layout for surrounding controls
-        for(int i = 0; i < 3; i++){
-            map[i][15] = true;
-        }
-        for(int j = 15; j < 20; j++){
-            map[3][j] = true;
-        }
-        for(int i = 7; i < 10; i++){
-            map[i][15] = true;
-        }
-        for(int j = 15; j < 20; j++){
-            map[7][j] = true;
-        }
+
 
 
 
@@ -75,6 +63,19 @@ public class LevelManager implements Scene {
         switch(level) {
             case 1 :
 
+                //Brick layout for surrounding controls
+                for(int i = 0; i < 3; i++){
+                    map[i][15] = true;
+                }
+                for(int j = 15; j < 20; j++){
+                    map[3][j] = true;
+                }
+                for(int i = 7; i < 10; i++){
+                    map[i][15] = true;
+                }
+                for(int j = 15; j < 20; j++){
+                    map[7][j] = true;
+                }
 
                 for(int i = 0; i < 4; i = i+2)
                     map[i][10] = true;
