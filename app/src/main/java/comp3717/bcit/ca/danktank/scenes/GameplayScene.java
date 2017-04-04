@@ -61,7 +61,7 @@ public class GameplayScene implements Scene
         Constants.PLAYER_SIZE = (int)(Constants.SCREEN_WIDTH * .08);
         Constants.ENEMY_SIZE = (int)(Constants.SCREEN_WIDTH * .08);
         Constants.PLAYER_SPEED = (int)(Constants.SCREEN_WIDTH * .010);
-        Constants.BULLET_SPEED = (Constants.SCREEN_WIDTH * .03f);
+        Constants.BULLET_SPEED = (Constants.SCREEN_WIDTH * .025f);
         Constants.BULLET_WIDTH = (int)(Constants.SCREEN_WIDTH * .015);
         Constants.BULLET_HEIGHT = (int)(Constants.SCREEN_WIDTH * .035);
         Constants.BULLET_GAP = (int)(Constants.SCREEN_WIDTH * .08);
