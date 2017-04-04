@@ -163,8 +163,8 @@ public class LevelManager implements Scene {
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (19 + 1) / 20);
 
-                for(int i = 0; i < 9; i++){
-                    for(int j = 0; j < 19; j++){
+                for(int i = 0; i < 10; i++){
+                    for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
                             brick_tiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
                                     Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
@@ -186,8 +186,8 @@ public class LevelManager implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 19; j++){
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 20; j++){
                 if(map[i][j] == true) {
                     canvas.drawBitmap(Brick_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
                             Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
