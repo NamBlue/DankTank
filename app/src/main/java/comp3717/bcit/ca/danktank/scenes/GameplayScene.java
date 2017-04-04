@@ -59,7 +59,6 @@ public class GameplayScene implements Scene
     public GameplayScene()
     {
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
-        playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
         pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
         BitmapFactory bitmapFactory = new BitmapFactory();
         up_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.up_button);
@@ -74,13 +73,15 @@ public class GameplayScene implements Scene
         moveDownButton = new Rect(Constants.SCREEN_WIDTH*3/30, Constants.SCREEN_HEIGHT*28/30, Constants.SCREEN_WIDTH*6/30, Constants.SCREEN_HEIGHT*30/30);
         fireButton = new Rect(Constants.SCREEN_WIDTH*49/60, Constants.SCREEN_HEIGHT*25/30, Constants.SCREEN_WIDTH*58/60, Constants.SCREEN_HEIGHT*28/30);
         moveDirection = Enums.MoveDirection.Up;
-        player.update(playerPoint, moveDirection);
+
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
 
         levelManager = new LevelManager(1);
         enemyManager = new EnemyManager(levelManager.getSpawnpoints());
         enemyManager.enemySize = 4;
+        playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
+        player.update(playerPoint, moveDirection);
 
         enemies = enemyManager.getEnemies();
 
@@ -94,7 +95,7 @@ public class GameplayScene implements Scene
     public void reset()
     {
         player.reset();
-        playerPoint = new Point(Constants.SCREEN_WIDTH/2, 3 * Constants.SCREEN_HEIGHT/4);
+        playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
         player.update(playerPoint, moveDirection);
         bulletManager = new BulletManager(50, 150, Color.BLACK);
         movingPlayer = false;

@@ -60,7 +60,7 @@ public class LevelManager implements Scene {
         return spawnpoints;
     }
 
-    Rect getPlayerSpawn(){
+    public Rect getPlayerSpawn(){
         return player_spawn;
     }
 
