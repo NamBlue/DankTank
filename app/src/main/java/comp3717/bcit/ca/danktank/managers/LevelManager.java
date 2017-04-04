@@ -70,6 +70,16 @@ public class LevelManager implements Scene {
         return player_spawn;
     }
 
+    public boolean collided(Rect object)
+    {
+        for(Rect rect: brick_tiles)
+        {
+            if(Rect.intersects(rect, object))
+                return true;
+        }
+        return false;
+    }
+
     private void populateMap(int level)
     {
         switch(level) {
