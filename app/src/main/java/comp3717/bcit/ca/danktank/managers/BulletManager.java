@@ -1,8 +1,6 @@
 package comp3717.bcit.ca.danktank.managers;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
@@ -10,7 +8,6 @@ import java.util.ArrayList;
 import comp3717.bcit.ca.danktank.objects.Bullet;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
-import comp3717.bcit.ca.danktank.objects.Player;
 
 /**
  * Created by NamBlue on 1/20/2017.
@@ -19,8 +16,8 @@ import comp3717.bcit.ca.danktank.objects.Player;
 public class BulletManager
 {
     //Higher index = lower on screen = higher y value
-    private ArrayList<Bullet> bullets;
-    //Gap between bullets
+    private ArrayList<Bullet> playerBullets;
+    //Gap between playerBullets
     private int obstacleGap;
     private int obstacleHeight;
     private int color;
@@ -37,23 +34,49 @@ public class BulletManager
 
         startTime = initTime = System.currentTimeMillis();
 
-        bullets = new ArrayList<>();
+        playerBullets = new ArrayList<>();
 
     }
 
-    public void addBullet(int xStart, int yStart, Enums.MoveDirection moveDirection)
+    public void addPlayerBullet(int xStart, int yStart, Enums.MoveDirection moveDirection)
     {
-        bullets.add(new Bullet(color, xStart, yStart, moveDirection));
+        if(playerBullets.size() == 0)
+            playerBullets.add(new Bullet(color, xStart, yStart, moveDirection));
+    }
+
+    public Rect getPlayerBullet()
+    {
+        if(playerBullets.size() > 0)
+        {
+            return playerBullets.get(0).getRectangle();
+        }
+        return null;
     }
 
     public boolean collided(Rect object)
     {
-        for(Bullet bullet : bullets)
+        for(Bullet bullet : playerBullets)
         {
             if(bullet.collided(object))
             {
-                bullets.remove(bullet);
+                playerBullets.remove(bullet);
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean collided(ArrayList<Rect> objects)
+    {
+        for(Bullet bullet : playerBullets)
+        {
+            for (Rect rect : objects)
+            {
+                if (bullet.collided(rect))
+                {
+                    playerBullets.remove(bullet);
+                    return true;
+                }
             }
         }
         return false;
@@ -61,9 +84,9 @@ public class BulletManager
 
     public void update()
     {
-        if(bullets.size() > 0)
+        if(playerBullets.size() > 0)
         {
-            for (Bullet bullet : bullets)
+            for (Bullet bullet : playerBullets)
             {
                 bullet.update();
             }
@@ -72,21 +95,21 @@ public class BulletManager
     }
 
     /**
-     * Remove bullets that are off-screen
+     * Remove playerBullets that are off-screen
      */
     private void clearBullet()
     {
-        int x = bullets.get(bullets.size() - 1).getRectangle().centerX(), y = bullets.get(bullets.size() - 1).getRectangle().centerY();
+        int x = playerBullets.get(playerBullets.size() - 1).getRectangle().centerX(), y = playerBullets.get(playerBullets.size() - 1).getRectangle().centerY();
         if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
         {
-            bullets.remove(0);
+            playerBullets.remove(0);
         }
     }
 
 
     public void draw(Canvas canvas)
     {
-        for(Bullet bullet : bullets)
+        for(Bullet bullet : playerBullets)
         {
             bullet.draw(canvas);
         }

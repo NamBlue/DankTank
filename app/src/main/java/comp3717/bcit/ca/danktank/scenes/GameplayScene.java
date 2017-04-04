@@ -10,14 +10,12 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import comp3717.bcit.ca.danktank.managers.BulletManager;
 import comp3717.bcit.ca.danktank.managers.LevelManager;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.managers.EnemyManager;
-import comp3717.bcit.ca.danktank.managers.LevelManager;
 import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
@@ -55,6 +53,7 @@ public class GameplayScene implements Scene
     private ArrayList<Enemy> enemies;
     private int score = 0;
     private Paint scorePaint, controlsPaint;
+    private ArrayList<Rect> walls;
 
     public GameplayScene()
     {
@@ -78,6 +77,7 @@ public class GameplayScene implements Scene
         bulletManager = new BulletManager(50, 150, Color.BLACK);
 
         levelManager = new LevelManager(1);
+        walls = levelManager.getBrickTiles();
         enemyManager = new EnemyManager(levelManager.getSpawnpoints());
         enemyManager.enemySize = 4;
         playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
@@ -206,16 +206,16 @@ public class GameplayScene implements Scene
                 switch(moveDirection)
                 {
                     case Left:
-                        bulletManager.addBullet(playerPoint.x - Constants.BULLET_GAP, playerPoint.y, moveDirection);
+                        bulletManager.addPlayerBullet(playerPoint.x - Constants.BULLET_GAP, playerPoint.y, moveDirection);
                         break;
                     case Right:
-                        bulletManager.addBullet(playerPoint.x + Constants.BULLET_GAP, playerPoint.y, moveDirection);
+                        bulletManager.addPlayerBullet(playerPoint.x + Constants.BULLET_GAP, playerPoint.y, moveDirection);
                         break;
                     case Up:
-                        bulletManager.addBullet(playerPoint.x, playerPoint.y - Constants.BULLET_GAP, moveDirection);
+                        bulletManager.addPlayerBullet(playerPoint.x, playerPoint.y - Constants.BULLET_GAP, moveDirection);
                         break;
                     case Down:
-                        bulletManager.addBullet(playerPoint.x, playerPoint.y + Constants.BULLET_GAP, moveDirection);
+                        bulletManager.addPlayerBullet(playerPoint.x, playerPoint.y + Constants.BULLET_GAP, moveDirection);
                         break;
                     default:
                         break;
@@ -246,6 +246,8 @@ public class GameplayScene implements Scene
                 }
             }
             enemyManager.update();
+
+            bulletManager.collided(walls);
         }
     }
 
