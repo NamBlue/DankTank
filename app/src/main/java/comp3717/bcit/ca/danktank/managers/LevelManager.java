@@ -55,7 +55,7 @@ public class LevelManager implements Scene {
 
     }
 
-    private ArrayList<Rect> getSpawnpoints(){
+    public ArrayList<Rect> getSpawnpoints(){
         return spawnpoints;
     }
 

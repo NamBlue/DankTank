@@ -24,13 +24,15 @@ public class EnemyManager
     private Random random;
     public int enemySize;
     private int frames;
+    private ArrayList<Rect> spawnPoints;
 
-    public EnemyManager()
+    public EnemyManager(ArrayList<Rect> spawnPoints)
     {
         random = new Random();
         enemies = new ArrayList<>();
         enemySize = 0;
         frames = 0;
+        this.spawnPoints = spawnPoints;
     }
 
     public boolean killEnemy(Enemy enemy)
@@ -40,20 +42,29 @@ public class EnemyManager
 
     public void update()
     {
+        Enemy dyingEnemy = null;
         if(enemies.size() < enemySize && frames > 30)
         {
-            int x = (int)((random.nextFloat() * (Constants.SCREEN_WIDTH - Constants.ENEMY_SIZE)) + (Constants.ENEMY_SIZE / 2));
-            int y = (int)((random.nextFloat() * (Constants.SCREEN_HEIGHT - Constants.ENEMY_SIZE) / 2) + (Constants.ENEMY_SIZE / 2));
-            enemies.add(new Enemy(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
-            enemies.get(enemies.size() - 1).update(new Point(x, y));
+            int z = random.nextInt(spawnPoints.size());
+            Rect temp = spawnPoints.get(z);
+            if (!collided(temp))
+            {
+                enemies.add(new Enemy(new Rect(0, 0, Constants.ENEMY_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
+                enemies.get(enemies.size() - 1).update(new Point(temp.centerX(), temp.centerY()));
+            }
             frames = 0;
         }
         for(Enemy enemy: enemies)
         {
             if(enemy.dieFrames > 30)
             {
-                enemies.remove(enemy);
+                dyingEnemy = enemy;
             }
+        }
+        if(dyingEnemy != null)
+        {
+            enemies.remove(dyingEnemy);
+            dyingEnemy = null;
         }
         frames ++;
     }
