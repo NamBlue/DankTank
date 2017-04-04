@@ -44,7 +44,7 @@ public class PauseScene implements Scene {
     {
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         paint.setTextAlign(Paint.Align.CENTER);
-        paint.setColor(Color.BLUE);
+        paint.setColor(Color.RED);
         canvas.drawText(text, Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/8 ,paint);
 
     }
