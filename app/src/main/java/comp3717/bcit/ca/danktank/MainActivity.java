@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
 {
     final String pubArtFile = "http://opendata.newwestcity.ca/downloads/public-art/PUBLIC_ART.json";
     final String artistFile = "http://opendata.newwestcity.ca/downloads/artists/ARTISTS.json";
+    private GamePanel gamePanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,9 +46,25 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         Constants.SCREEN_HEIGHT = displayMetrics.heightPixels;
         if(isNetworkPermissionGranted())
             new DownloadFileFromURL().execute(pubArtFile, artistFile);
-        //// // TODO: 1/24/2017 Create a framelayout to allow UI overlay
-        setContentView(new GamePanel(this));
+
+        gamePanel = new GamePanel(this);
+        setContentView(gamePanel);
     }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        gamePanel.pause();
+    }
+
+    @Override
+    protected  void onResume()
+    {
+        super.onResume();
+        gamePanel.resume();
+    }
+
 
     private boolean isNetworkPermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {

@@ -21,6 +21,17 @@ public class MusicManager {
         mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
         mPlayer.start();
     }
+
+    public void pause()
+    {
+        mPlayer.pause();
+    }
+
+    public void resume()
+    {
+        mPlayer.start();
+    }
+
     public void update()
     {
         if (sceneChanged) {

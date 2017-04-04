@@ -33,6 +33,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         setFocusable(true);
     }
 
+    public void pause()
+    {
+        musicManager.pause();
+    }
+
+    public void resume()
+    {
+        musicManager.resume();
+    }
+
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
     {
