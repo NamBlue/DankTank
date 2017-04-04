@@ -62,6 +62,7 @@ public class InstructionScene implements Scene {
     public void draw(Canvas canvas){
         canvas.drawColor(Color.WHITE);
         Paint paint = new Paint();
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         drawTitle(canvas, paint, "How to play");
         canvas.drawBitmap(back_image, null, backButton, paint);
         drawInstructions(canvas, paint);
