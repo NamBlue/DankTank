@@ -50,6 +50,7 @@ public class GameplayScene implements Scene
     private Bitmap left_image;
     private Bitmap pause_image;
     private Bitmap fire_image;
+    private Bitmap backGroundImage;
     private ArrayList<Enemy> enemies;
     private int score = 0;
     private Paint scorePaint, controlsPaint;
@@ -67,6 +68,7 @@ public class GameplayScene implements Scene
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
         BitmapFactory bitmapFactory = new BitmapFactory();
+        backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.desert);
         up_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.up_button);
         down_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.down_button);
         right_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.right_button);
@@ -261,7 +263,7 @@ public class GameplayScene implements Scene
     @Override
     public void draw(Canvas canvas)
     {
-        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(backGroundImage, null, new Rect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT) ,controlsPaint);
 
         player.draw(canvas);
 

@@ -43,7 +43,7 @@ public class EnemyManager
     public void update()
     {
         Enemy dyingEnemy = null;
-        if(enemies.size() < enemySize && frames > 30)
+        if(enemies.size() < enemySize && frames > 60)
         {
             int z = random.nextInt(spawnPoints.size());
             Rect temp = spawnPoints.get(z);
