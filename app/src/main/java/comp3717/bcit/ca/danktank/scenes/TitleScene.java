@@ -35,7 +35,7 @@ public class TitleScene implements Scene
         bitmapFactory = new BitmapFactory();
         title = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.titlebackground);
         titlePaint = new Paint();
-        titlePaint.setTextSize(100);
+        titlePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .08));
         titlePaint.setColor(Color.YELLOW);
         titlePaint.setTextAlign(Paint.Align.CENTER);
         alpha = 255;
@@ -85,7 +85,7 @@ public class TitleScene implements Scene
     {
         canvas.drawBitmap(title, null, screen, null);
         Paint paint = new Paint();
-        paint.setTextSize(100);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .10));
         paint.setColor(Color.YELLOW);
         paint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText("The Dank Tank", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*2/20 ,paint);

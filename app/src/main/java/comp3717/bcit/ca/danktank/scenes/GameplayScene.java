@@ -57,6 +57,13 @@ public class GameplayScene implements Scene
 
     public GameplayScene()
     {
+        Constants.PLAYER_SIZE = (int)(Constants.SCREEN_WIDTH * .08);
+        Constants.ENEMY_SIZE = (int)(Constants.SCREEN_WIDTH * .08);
+        Constants.PLAYER_SPEED = (int)(Constants.SCREEN_WIDTH * .010);
+        Constants.BULLET_SPEED = (Constants.SCREEN_WIDTH * .03f);
+        Constants.BULLET_WIDTH = (int)(Constants.SCREEN_WIDTH * .015);
+        Constants.BULLET_HEIGHT = (int)(Constants.SCREEN_WIDTH * .035);
+        Constants.BULLET_GAP = (int)(Constants.SCREEN_WIDTH * .08);
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
         BitmapFactory bitmapFactory = new BitmapFactory();
@@ -87,7 +94,7 @@ public class GameplayScene implements Scene
 
         frameTime = System.currentTimeMillis();
         scorePaint = new Paint();
-        scorePaint.setTextSize(100);
+        scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         scorePaint.setColor(Color.BLUE);
         controlsPaint = new Paint();
 }
@@ -175,9 +182,9 @@ public class GameplayScene implements Scene
                     playerPoint.y + (Constants.PLAYER_SIZE /2));
 
             Rect wallTemp = new Rect(playerPoint.x - (Constants.PLAYER_SIZE /2),
-                    playerPoint.y - (Constants.PLAYER_SIZE /2) + 10,
+                    playerPoint.y - (Constants.PLAYER_SIZE /2) + (int)(Constants.PLAYER_SIZE * .10),
                     playerPoint.x + (Constants.PLAYER_SIZE /2),
-                    playerPoint.y + (Constants.PLAYER_SIZE /2) - 10);
+                    playerPoint.y + (Constants.PLAYER_SIZE /2) - (int)(Constants.PLAYER_SIZE * .10));
 
             //undo the movements if collided
             if (enemyManager.collided(temp) || levelManager.collided(wallTemp))

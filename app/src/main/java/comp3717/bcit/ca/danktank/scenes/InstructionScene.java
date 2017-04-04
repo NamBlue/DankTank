@@ -33,7 +33,7 @@ public class InstructionScene implements Scene {
             moveUpButton, moveDownButton, fireButton, player, tank1;
 
     public InstructionScene(){
-        backButton= new Rect(0, 0, 150, 150);
+        backButton= new Rect(0, 0, (int)(Constants.SCREEN_WIDTH * .15), (int)(Constants.SCREEN_WIDTH * .15));
         BitmapFactory bitmapFactory = new BitmapFactory();
         back_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.back_button);
         pause_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pause_button);
@@ -69,7 +69,7 @@ public class InstructionScene implements Scene {
 
     private void drawTitle(Canvas canvas, Paint paint, String text)
     {
-        paint.setTextSize(100);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setColor(Color.BLUE);
         canvas.drawText(text, Constants.SCREEN_WIDTH/4, Constants.SCREEN_HEIGHT/10 ,paint);
@@ -79,9 +79,9 @@ public class InstructionScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setColor(Color.RED);
-        paint.setTextSize(75);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
         canvas.drawText("Objective", Constants.SCREEN_WIDTH/3, Constants.SCREEN_HEIGHT*3/20 ,paint);
-        paint.setTextSize(50);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         paint.setColor(Color.BLACK);
         canvas.drawText("-Shoot down as many enemy tanks as you can", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*4/20 ,paint);
         canvas.drawText("-Recover the paintings:", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*5/20 ,paint);

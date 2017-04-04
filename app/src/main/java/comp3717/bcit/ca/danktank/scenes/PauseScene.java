@@ -42,7 +42,7 @@ public class PauseScene implements Scene {
 
     private void drawTitle(Canvas canvas, Paint paint, String text)
     {
-        paint.setTextSize(100);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setColor(Color.BLUE);
         canvas.drawText(text, Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/8 ,paint);
@@ -51,14 +51,14 @@ public class PauseScene implements Scene {
 
     private void drawOptions(Canvas canvas, Paint paint)
     {
-        paint.setColor(Color.BLUE);
+        paint.setColor(Color.BLACK);
         canvas.drawRect(resumeButton, paint);
         canvas.drawRect(restartButton, paint);
         canvas.drawRect(levelSelectButton, paint);
         canvas.drawRect(QuitButton, paint);
 
-        paint.setColor(Color.RED);
-        paint.setTextSize(75);
+        paint.setColor(Color.YELLOW);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
         paint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText("Resume", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*7/20,paint);
         canvas.drawText("Restart", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*10/20 ,paint);
