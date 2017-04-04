@@ -44,6 +44,7 @@ public class MusicManager {
                             mPlayer = null;
                             mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
                             mPlayer.setLooping(true);
+                            mPlayer.setVolume(1f, 1f);
                             mPlayer.start();
                         }
                     } catch (Exception e) {
@@ -61,6 +62,7 @@ public class MusicManager {
                             mPlayer = null;
                             mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
                             mPlayer.setLooping(true);
+                            mPlayer.setVolume(.10f, .10f);
                             mPlayer.start();
                         }
                     } catch(Exception e){
@@ -76,6 +78,7 @@ public class MusicManager {
                             mPlayer = null;
                             mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
                             mPlayer.setLooping(true);
+                            mPlayer.setVolume(1f, 1f);
                             mPlayer.start();
                         }
                     } catch(Exception e){
