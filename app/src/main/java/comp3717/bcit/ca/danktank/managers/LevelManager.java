@@ -27,11 +27,13 @@ public class LevelManager implements Scene {
     private Random r;
     private int level;
     private ArrayList<Rect> spawnpoints;
+    private ArrayList<Rect> brick_tiles;
     private Rect player_spawn;
 
     public LevelManager(int level){
         BitmapFactory bitmapFactory = new BitmapFactory();
         Brick_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.brick);
+        brick_tiles = new ArrayList<Rect>();
         spawnpoints = new ArrayList<Rect>();
         r = new Random();
         map = new boolean[10][20];
@@ -58,6 +60,10 @@ public class LevelManager implements Scene {
 
     public ArrayList<Rect> getSpawnpoints(){
         return spawnpoints;
+    }
+
+    public ArrayList<Rect> getBrickTiles(){
+        return brick_tiles;
     }
 
     public Rect getPlayerSpawn(){
@@ -155,6 +161,18 @@ public class LevelManager implements Scene {
                 player_spawn = new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (19 + 1) / 20);
+
+                for(int i = 0; i < 9; i++){
+                    for(int j = 0; j < 19; j++){
+                        if(map[i][j] == true) {
+                            brick_tiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
+                                    Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
+                                    Constants.SCREEN_HEIGHT * (j + 1) / 20));
+                        }
+                    }
+                }
+
+
                 break;
             default : // Optional
                 break;
@@ -167,9 +185,8 @@ public class LevelManager implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 20; j++){
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 19; j++){
                 if(map[i][j] == true) {
                     canvas.drawBitmap(Brick_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
                             Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
