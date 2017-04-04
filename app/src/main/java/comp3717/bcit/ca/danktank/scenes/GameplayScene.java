@@ -169,13 +169,18 @@ public class GameplayScene implements Scene
                 }
             }
 
-            Rect temp = new Rect(playerPoint.x - Constants.PLAYER_SIZE /2,
-                    playerPoint.y - Constants.PLAYER_SIZE /2,
-                    playerPoint.x + Constants.PLAYER_SIZE /2,
-                    playerPoint.y + Constants.PLAYER_SIZE /2);
+            Rect temp = new Rect(playerPoint.x - (Constants.PLAYER_SIZE /2),
+                    playerPoint.y - (Constants.PLAYER_SIZE /2),
+                    playerPoint.x + (Constants.PLAYER_SIZE /2),
+                    playerPoint.y + (Constants.PLAYER_SIZE /2));
+
+            Rect wallTemp = new Rect(playerPoint.x - (Constants.PLAYER_SIZE /2),
+                    playerPoint.y - (Constants.PLAYER_SIZE /2) + 10,
+                    playerPoint.x + (Constants.PLAYER_SIZE /2),
+                    playerPoint.y + (Constants.PLAYER_SIZE /2) - 10);
 
             //undo the movements if collided
-            if (enemyManager.collided(temp))
+            if (enemyManager.collided(temp) || levelManager.collided(wallTemp))
             {
                 switch(moveDirection)
                 {

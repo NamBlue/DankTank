@@ -19,6 +19,7 @@ import comp3717.bcit.ca.danktank.managers.AnimationManager;
 public class Player implements GameObject
 {
     private Rect rectangle;
+    private Rect wallRect;
     private int color;
     private Animation idleUp, idleDown, idleLeft, idleRight;
     private Animation walkLeft, walkRight, walkUp, walkDown;
@@ -30,6 +31,8 @@ public class Player implements GameObject
     {
         return rectangle;
     }
+
+    public Rect getWallRect() {return wallRect;}
 
     public Player(Rect rectangle, int color)
     {
