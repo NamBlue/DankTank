@@ -21,5 +21,5 @@ public class Constants
     public static final int BULLET_HEIGHT = 35; //For bullet height
     public static final float BULLET_SPEED = 30; //For bullet movement speed
     public static final int BULLET_GAP = PLAYER_SIZE; //For the gap between then tank and bullet desired when spawining
-
+    public static final int TITLE_BLINK_SPEED = 5;
 }

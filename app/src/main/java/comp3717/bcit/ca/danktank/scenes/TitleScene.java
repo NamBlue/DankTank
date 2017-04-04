@@ -26,41 +26,58 @@ public class TitleScene implements Scene
     private Rect instructions_button = new Rect(0,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
     private BitmapFactory bitmapFactory;
     private Bitmap title;
-    int x;
-    int y;
+    private Paint titlePaint;
+    private int alpha;
+    private boolean decreasing;
 
     public TitleScene()
     {
         bitmapFactory = new BitmapFactory();
         title = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.titlebackground);
-
+        titlePaint = new Paint();
+        titlePaint.setTextSize(100);
+        titlePaint.setColor(Color.YELLOW);
+        titlePaint.setTextAlign(Paint.Align.CENTER);
+        alpha = 255;
+        decreasing = true;
     }
 
 
     @Override
     public void reset()
     {
-        //mySound.start();
+
     }
 
     @Override
     public void onExit()
     {
-        //mySound.pause();
-        //mySound.seekTo(0);
-    }
 
-    private void drawCentreStart(Canvas canvas, Paint paint, String text)
-    {
-        paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(text, Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 ,paint);
-        canvas.drawText("The Dank Tank", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*2/20 ,paint);
     }
 
     @Override
     public void update()
     {
-
+        if(decreasing)
+        {
+            alpha -= Constants.TITLE_BLINK_SPEED;
+            if(alpha < 0)
+            {
+                decreasing = false;
+                alpha = 0;
+            }
+            titlePaint.setAlpha(alpha);
+        }
+        else
+        {
+            alpha += Constants.TITLE_BLINK_SPEED;
+            if(alpha > 255)
+            {
+                decreasing  = true;
+                alpha = 255;
+            }
+            titlePaint.setAlpha(alpha);
+        }
     }
 
     @Override
@@ -69,15 +86,12 @@ public class TitleScene implements Scene
         canvas.drawBitmap(title, null, screen, null);
         Paint paint = new Paint();
         paint.setTextSize(100);
-        paint.setColor(Color.RED);
-        drawCentreStart(canvas, paint, "Click to Start!");
-        drawCentreInstruct(canvas, paint, "Instructions");
-    }
-
-    private void drawCentreInstruct(Canvas canvas, Paint paint, String instructions) {
-
+        paint.setColor(Color.YELLOW);
         paint.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(instructions, Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*19/20 ,paint);
+        canvas.drawText("The Dank Tank", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*2/20 ,paint);
+        canvas.drawText("Click to Start!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 ,titlePaint);
+        paint.setColor(Color.WHITE);
+        canvas.drawText("Instructions", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*19/20 ,paint);
     }
 
     @Override
