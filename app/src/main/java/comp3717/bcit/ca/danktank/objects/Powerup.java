@@ -16,27 +16,26 @@ import comp3717.bcit.ca.danktank.managers.AnimationManager;
 
 public class Powerup implements GameObject
 {
-    private String name, description, url;
+    private String Name, Descriptn, Address, city;
     private Rect rectangle;
     private int color;
     private Animation idle;
     private AnimationManager animationManager;
 
-    public Powerup(String name, String desc, String url, Rect dest)
+    public Powerup(String name, String desc, String address, String city)
     {
-        this.name = name;
-        this.description = desc;
-        this.url = url;
-        rectangle = dest;
+        this.Name = name;
+        this.Descriptn = desc;
+        this.Address = address;
+        this.city = city;
         BitmapFactory bitmapFactory = new BitmapFactory();
-        Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.powerup);
+        Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.flag);
         idle = new Animation(new Bitmap[]{idleImg}, 5f);
         animationManager = new AnimationManager(new Animation[]{idle});
     }
 
-    public Rect getRectangle()
-    {
-        return rectangle;
+    public void setRectangle(Rect rect){
+        this.rectangle = rect;
     }
 
     public boolean collided(Rect object)
@@ -61,5 +60,21 @@ public class Powerup implements GameObject
     public void reset()
     {
 
+    }
+
+    public String getName(){
+        return this.Name;
+    }
+
+    public String getAddress(){
+        return this.Address;
+    }
+
+    public String getDescriptn() {
+        return this.Descriptn;
+    }
+
+    public String getCity(){
+        return this.city;
     }
 }
