@@ -92,7 +92,7 @@ public class GameplayScene implements Scene
 
         levelManager = new LevelManager(1);
         walls = levelManager.getBrickTiles();
-        enemyManager = new EnemyManager(levelManager.getSpawnpoints());
+        enemyManager = new EnemyManager(levelManager.getSpawnpoints(), levelManager.getBrickTiles());
         enemyManager.enemySize = 4;
         playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
         player.update(playerPoint, moveDirection);
@@ -253,10 +253,6 @@ public class GameplayScene implements Scene
                     {
                         score += 100;
                     }
-                }
-                else
-                {
-                    enemy.update();
                 }
             }
             Rect tempRect = enemyManager.popDiePoint();

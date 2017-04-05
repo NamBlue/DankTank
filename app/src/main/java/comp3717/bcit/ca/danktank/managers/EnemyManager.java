@@ -20,13 +20,12 @@ import comp3717.bcit.ca.danktank.objects.Enemy;
 public class EnemyManager
 {
     private ArrayList<Enemy> enemies;
-    private BulletManager bulletManager;
     private Random random;
     public int enemySize;
     private int frames;
-    private ArrayList<Rect> spawnPoints, diePoints;
+    private ArrayList<Rect> spawnPoints, diePoints, walls;
 
-    public EnemyManager(ArrayList<Rect> spawnPoints)
+    public EnemyManager(ArrayList<Rect> spawnPoints, ArrayList<Rect> walls)
     {
         random = new Random();
         enemies = new ArrayList<>();
@@ -34,6 +33,8 @@ public class EnemyManager
         frames = 0;
         this.spawnPoints = spawnPoints;
         diePoints = new ArrayList<>();
+        this.walls = walls;
+        Enemy.setWalls(walls);
     }
 
     public boolean killEnemy(Enemy enemy)
@@ -61,6 +62,7 @@ public class EnemyManager
             {
                 dyingEnemy = enemy;
             }
+            enemy.update();
         }
         if(dyingEnemy != null)
         {

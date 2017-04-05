@@ -7,7 +7,10 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 
+import java.util.ArrayList;
+
 import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.AnimationManager;
 
@@ -25,6 +28,7 @@ public class Enemy implements GameObject
     private AnimationManager animationManager;
     private int animationState;
     private  boolean startingState;
+    private static ArrayList<Rect> walls;
     public boolean die;
     public boolean spawning;
     public int dieFrames;
@@ -92,6 +96,11 @@ public class Enemy implements GameObject
         animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight, explode, spawn});
     }
 
+    public static void setWalls(ArrayList<Rect> wall)
+    {
+        walls = wall;
+    }
+
     @Override
     public void draw(Canvas canvas)
     {
@@ -134,7 +143,7 @@ public class Enemy implements GameObject
         }
         else
         {
-            animationState = 1;
+            move();
         }
 
         animationManager.playAnimation(animationState);
@@ -161,6 +170,24 @@ public class Enemy implements GameObject
         }
     }
 
+    private void move()
+    {
+        Enums.MoveDirection direction = Enums.MoveDirection.Up;
+        switch (direction)
+        {
+            case Up:
+                Point temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.PLAYER_SPEED);
+                for(Rect rect : walls)
+                {
+                    if(rect.contains(temp.x,temp.y) || (temp.y < 0))
+                    {
+                        temp.y += Constants.PLAYER_SPEED;
+                    }
+                }
+                update(temp);
+                break;
+        }
+    }
 
     public void update(Point point)
     {
@@ -208,7 +235,6 @@ public class Enemy implements GameObject
         {
             animationState = 0;
         }
-
     }
 
 }
