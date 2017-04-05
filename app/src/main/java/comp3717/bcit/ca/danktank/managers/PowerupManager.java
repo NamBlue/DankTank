@@ -22,13 +22,13 @@ import comp3717.bcit.ca.danktank.objects.Powerup;
 
 public class PowerupManager
 {
-    private ArrayList<Powerup> powerups, collectedPowerups, allPowerUps;
+    private ArrayList<Powerup> powerups, allPowerUps;
+    private static ArrayList<Powerup> collectedPowerups = new ArrayList<>();
 
     public PowerupManager()
     {
         powerups = new ArrayList<>();
         allPowerUps = new ArrayList<>();
-        collectedPowerups = new ArrayList<>();
         this.readJsonFromFile();
     }
 
@@ -46,15 +46,14 @@ public class PowerupManager
         return false;
     }
 
-    public ArrayList<Powerup> getCollectedPowerups(){
-        return this.collectedPowerups;
+    public static ArrayList<Powerup> getCollectedPowerups(){
+        return collectedPowerups;
     }
 
     public void spawnPowerup(Rect rect)
     {
         int p_index = (int)Math.floor(Math.random() * allPowerUps.size());
         Powerup p = allPowerUps.get(p_index);
-        Log.d("Power:", p.toString());
         p.setRectangle(rect);
         powerups.add(p);
     }
