@@ -12,6 +12,7 @@ public class Enums
         Right,
         Up,
         Down,
+        Idle,
     }
 }
 

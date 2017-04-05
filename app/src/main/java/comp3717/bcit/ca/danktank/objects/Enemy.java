@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
@@ -29,6 +30,8 @@ public class Enemy implements GameObject
     private int animationState;
     private  boolean startingState;
     private static ArrayList<Rect> walls;
+    private Enums.MoveDirection moveDirection;
+    private int frames;
     public boolean die;
     public boolean spawning;
     public int dieFrames;
@@ -43,12 +46,14 @@ public class Enemy implements GameObject
     {
         dieFrames = 0;
         spawnFrames = 0;
+        frames = 0;
         spawning = true;
         die = false;
         this.rectangle = rectangle;
         this.color = color;
         animationState = 0;
         startingState = true;
+        moveDirection = Enums.MoveDirection.Idle;
         //For Decoding, Producing, Modifying Bitmaps etc.
         BitmapFactory bitmapFactory = new BitmapFactory();
         //Make sure image names are all lowercase or will cause errors!
@@ -144,6 +149,7 @@ public class Enemy implements GameObject
         else
         {
             move();
+            frames++;
         }
 
         animationManager.playAnimation(animationState);
@@ -172,19 +178,78 @@ public class Enemy implements GameObject
 
     private void move()
     {
-        Enums.MoveDirection direction = Enums.MoveDirection.Up;
-        switch (direction)
+        if(frames > 30)
+        {
+            frames = 0;
+            Random ran = new Random();
+            int action = ran.nextInt(8);
+            switch (action)
+            {
+                case 0:
+                    moveDirection  = Enums.MoveDirection.Up;
+                    break;
+                case 1:
+                    moveDirection = Enums.MoveDirection.Down;
+                    break;
+                case 2:
+                    moveDirection = Enums.MoveDirection.Left;
+                    break;
+                case 3:
+                    moveDirection = Enums.MoveDirection.Right;
+                    break;
+                default:
+                    moveDirection = Enums.MoveDirection.Idle;
+                    break;
+            }
+        }
+        Point temp;
+        switch (moveDirection)
         {
             case Up:
-                Point temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.PLAYER_SPEED);
+                 temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.PLAYER_SPEED);
                 for(Rect rect : walls)
                 {
-                    if(rect.contains(temp.x,temp.y) || (temp.y < 0))
+                    if(rect.contains(temp.x,temp.y - (Constants.ENEMY_SIZE/2)) || ((temp.y - (Constants.ENEMY_SIZE/2)) < 0))
                     {
                         temp.y += Constants.PLAYER_SPEED;
                     }
                 }
                 update(temp);
+                break;
+            case Down:
+                temp = new Point(rectangle.centerX(), rectangle.centerY() + Constants.PLAYER_SPEED);
+                for(Rect rect : walls)
+                {
+                    if(rect.contains(temp.x,temp.y + (Constants.ENEMY_SIZE/2)) || ((temp.y + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_HEIGHT))
+                    {
+                        temp.y -= Constants.PLAYER_SPEED;
+                    }
+                }
+                update(temp);
+                break;
+            case Left:
+                temp = new Point(rectangle.centerX() - Constants.PLAYER_SPEED, rectangle.centerY());
+                for(Rect rect : walls)
+                {
+                    if(rect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y) || ((temp.x - (Constants.ENEMY_SIZE/2)) < 0))
+                    {
+                        temp.x += Constants.PLAYER_SPEED;
+                    }
+                }
+                update(temp);
+                break;
+            case Right:
+                temp = new Point(rectangle.centerX() + Constants.PLAYER_SPEED, rectangle.centerY());
+                for(Rect rect : walls)
+                {
+                    if(rect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y) || ((temp.x + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_WIDTH))
+                    {
+                        temp.x -= Constants.PLAYER_SPEED;
+                    }
+                }
+                update(temp);
+                break;
+            default:
                 break;
         }
     }
