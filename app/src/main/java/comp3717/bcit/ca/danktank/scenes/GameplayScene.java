@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import comp3717.bcit.ca.danktank.managers.BulletManager;
@@ -21,6 +22,7 @@ import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
+import comp3717.bcit.ca.danktank.objects.Powerup;
 
 /**
  * Created by NamBlue on 1/20/2017.

@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.managers.PowerupManager;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
 import comp3717.bcit.ca.danktank.objects.Powerup;
 
@@ -19,9 +20,11 @@ import comp3717.bcit.ca.danktank.objects.Powerup;
 public class ScoreScene implements Scene {
     private Rect levelselect_button = new Rect(Constants.SCREEN_WIDTH*2/20,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH*18/20,Constants.SCREEN_HEIGHT);
 
+
     public void update(){
 
     }
+
 
     public void draw(Canvas canvas){
         canvas.drawColor(Color.WHITE);
@@ -32,9 +35,13 @@ public class ScoreScene implements Scene {
         canvas.drawText("Score", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/20 ,paint);
         paint.setColor(Color.BLUE);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
-        canvas.drawText("Item name", Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
-        canvas.drawText("Quantity", Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
-        canvas.drawText("Description", Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*6/20 ,paint);
+        //TODO: Format output
+        for(int i = 0; i < PowerupManager.getCollectedPowerups().size(); i++){
+            Powerup p = PowerupManager.getCollectedPowerups().get(i);
+            canvas.drawText(p.getName(), Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
+            canvas.drawText(p.getDescriptn(), Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
+            canvas.drawText(p.getAddress(), Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*6/20 ,paint);
+        }
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
         paint.setColor(Color.BLACK);
         canvas.drawRect(levelselect_button, paint);
