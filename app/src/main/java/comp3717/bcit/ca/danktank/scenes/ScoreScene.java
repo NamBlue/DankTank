@@ -6,8 +6,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
+import java.util.ArrayList;
+
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
+import comp3717.bcit.ca.danktank.objects.Powerup;
 
 /**
  * Created by steve on 2017-03-30.
@@ -19,6 +22,7 @@ public class ScoreScene implements Scene {
     public void update(){
 
     }
+
     public void draw(Canvas canvas){
         canvas.drawColor(Color.WHITE);
         Paint paint = new Paint();

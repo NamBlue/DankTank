@@ -21,7 +21,6 @@ import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
-import comp3717.bcit.ca.danktank.objects.Powerup;
 
 /**
  * Created by NamBlue on 1/20/2017.
@@ -92,7 +91,6 @@ public class GameplayScene implements Scene
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
         powerupManager = new PowerupManager();
-
         levelManager = new LevelManager(1);
         walls = levelManager.getBrickTiles();
         enemyManager = new EnemyManager(levelManager.getSpawnpoints(), levelManager.getBrickTiles());
@@ -107,7 +105,7 @@ public class GameplayScene implements Scene
         scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         scorePaint.setColor(Color.BLUE);
         controlsPaint = new Paint();
-}
+    }
 
     public void reset()
     {
@@ -258,8 +256,9 @@ public class GameplayScene implements Scene
                     }
                 }
             }
+            double spawnPercentage = Math.random();
             Rect tempRect = enemyManager.popDiePoint();
-            if(tempRect != null)
+            if(tempRect != null && (spawnPercentage >= 0.5))
             {
                 powerupManager.spawnPowerup(tempRect);
             }
