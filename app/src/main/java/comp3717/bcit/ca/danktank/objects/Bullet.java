@@ -45,7 +45,7 @@ public class Bullet implements GameObject
             case Up:
                 left = startX  - (Constants.BULLET_WIDTH / 2);
                 right = startX + (Constants.BULLET_WIDTH / 2);
-                top = startY + Constants.BULLET_HEIGHT;
+                top = startY - Constants.BULLET_HEIGHT;
                 bottom = startY;
                 break;
             case Down:

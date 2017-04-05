@@ -63,7 +63,7 @@ public class Animation
         }
         scaleRect(destination);
         //null for src rect if want to draw entire image
-        canvas.drawBitmap(frames[frameIndex], null, destination, new Paint());
+        canvas.drawBitmap(frames[frameIndex], null, destination, null);
     }
 
     //Scale image but keep aspect ratio
