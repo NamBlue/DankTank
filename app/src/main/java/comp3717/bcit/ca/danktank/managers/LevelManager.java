@@ -29,6 +29,8 @@ public class LevelManager implements Scene {
     private ArrayList<Rect> spawnpoints;
     private ArrayList<Rect> brick_tiles;
     private Rect player_spawn;
+    private int totalEnemiesForThisLevel;
+    private int maxEnemySize;
 
     public LevelManager(int level){
         BitmapFactory bitmapFactory = new BitmapFactory();
@@ -68,11 +70,22 @@ public class LevelManager implements Scene {
         return false;
     }
 
+    public int getTotalEnemiesForThisLevel()
+    {
+        return totalEnemiesForThisLevel;
+    }
+
+    public int getMaxEnemySize()
+    {
+        return maxEnemySize;
+    }
+
     private void populateMap(int level)
     {
         switch(level) {
             case 1 :
-
+                totalEnemiesForThisLevel = 2;
+                maxEnemySize = 4;
                 //Brick layout for surrounding controls
                 for(int i = 0; i < 3; i++){
                     map[i][15] = true;

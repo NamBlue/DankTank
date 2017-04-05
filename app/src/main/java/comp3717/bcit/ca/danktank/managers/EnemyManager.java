@@ -21,16 +21,20 @@ public class EnemyManager
 {
     private ArrayList<Enemy> enemies;
     private Random random;
-    public int enemySize;
+    private int enemySize;
+    private int totalEnemies;
     private int frames;
     private ArrayList<Rect> spawnPoints, diePoints, walls;
+    private int enemiesDied;
 
-    public EnemyManager(ArrayList<Rect> spawnPoints, ArrayList<Rect> walls)
+    public EnemyManager(ArrayList<Rect> spawnPoints, ArrayList<Rect> walls, int totalEnemies, int enemySize)
     {
         random = new Random();
         enemies = new ArrayList<>();
-        enemySize = 0;
+        this.enemySize = enemySize;
+        this.totalEnemies = totalEnemies;
         frames = 0;
+        enemiesDied = 0;
         this.spawnPoints = spawnPoints;
         diePoints = new ArrayList<>();
         this.walls = walls;
@@ -45,7 +49,7 @@ public class EnemyManager
     public void update()
     {
         Enemy dyingEnemy = null;
-        if(enemies.size() < enemySize && frames > 60)
+        if(enemies.size() < enemySize && frames > 60 && enemies.size() + enemiesDied < totalEnemies)
         {
             int z = random.nextInt(spawnPoints.size());
             Rect temp = spawnPoints.get(z);
@@ -68,6 +72,7 @@ public class EnemyManager
         {
             diePoints.add(dyingEnemy.getRectangle());
             enemies.remove(dyingEnemy);
+            enemiesDied++;
         }
         frames ++;
     }
@@ -97,6 +102,7 @@ public class EnemyManager
 
     public void reset()
     {
+        enemiesDied = 0;
         enemies.clear();
     }
 
@@ -111,5 +117,10 @@ public class EnemyManager
     public ArrayList<Enemy> getEnemies()
     {
         return enemies;
+    }
+
+    public int getEnemiesDied()
+    {
+        return enemiesDied;
     }
 }

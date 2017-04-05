@@ -144,6 +144,8 @@ public class Enemy implements GameObject
             if(spawnFrames > 30)
             {
                 spawning = false;
+                animationState = 0;
+                spawnFrames = 0;
             }
         }
         else

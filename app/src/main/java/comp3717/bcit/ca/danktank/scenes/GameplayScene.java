@@ -96,8 +96,10 @@ public class GameplayScene implements Scene
         powerupManager = new PowerupManager();
         levelManager = new LevelManager(1);
         walls = levelManager.getBrickTiles();
-        enemyManager = new EnemyManager(levelManager.getSpawnpoints(), levelManager.getBrickTiles());
-        enemyManager.enemySize = 4;
+        enemyManager = new EnemyManager(levelManager.getSpawnpoints(),
+                levelManager.getBrickTiles(),
+                levelManager.getTotalEnemiesForThisLevel(),
+                levelManager.getMaxEnemySize());
         playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
         player.update(playerPoint, moveDirection);
 
@@ -277,7 +279,7 @@ public class GameplayScene implements Scene
             enemyManager.update();
 
             bulletManager.collided(walls);
-            if(score >= 200)
+            if(enemyManager.getEnemiesDied() == levelManager.getTotalEnemiesForThisLevel())
             {
                 win = true;
                 gameOverTime = System.currentTimeMillis();
@@ -376,9 +378,9 @@ public class GameplayScene implements Scene
                 }
                 else if(win && x >= Constants.GAMEOVER_TIME)
                 {
+                    reset();
                     MusicManager.getInstance().pause();
                     SceneManager.ACTIVE_SCENE = 6;
-                    reset();
                 }
 
                 break;
