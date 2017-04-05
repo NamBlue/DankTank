@@ -16,10 +16,12 @@ import comp3717.bcit.ca.danktank.managers.LevelManager;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.managers.EnemyManager;
+import comp3717.bcit.ca.danktank.managers.PowerupManager;
 import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
+import comp3717.bcit.ca.danktank.objects.Powerup;
 
 /**
  * Created by NamBlue on 1/20/2017.
@@ -36,6 +38,7 @@ public class GameplayScene implements Scene
     private BulletManager bulletManager;
     private LevelManager levelManager;
     private EnemyManager enemyManager;
+    private PowerupManager powerupManager;
     private boolean movingPlayer = false;
     private boolean playerFiring = false;
     private boolean gameOver = false;
@@ -65,6 +68,7 @@ public class GameplayScene implements Scene
         Constants.BULLET_WIDTH = (int)(Constants.SCREEN_WIDTH * .015);
         Constants.BULLET_HEIGHT = (int)(Constants.SCREEN_WIDTH * .035);
         Constants.BULLET_GAP = (int)(Constants.SCREEN_WIDTH * .08);
+        Constants.POWERUP_SIZE = (int)(Constants.SCREEN_WIDTH * .08);
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
         BitmapFactory bitmapFactory = new BitmapFactory();
@@ -84,6 +88,7 @@ public class GameplayScene implements Scene
 
 
         bulletManager = new BulletManager(50, 150, Color.BLACK);
+        powerupManager = new PowerupManager();
 
         levelManager = new LevelManager(1);
         walls = levelManager.getBrickTiles();
@@ -254,6 +259,16 @@ public class GameplayScene implements Scene
                     enemy.update();
                 }
             }
+            Rect tempRect = enemyManager.popDiePoint();
+            if(tempRect != null)
+            {
+                powerupManager.spawnPowerup(tempRect);
+            }
+            if(powerupManager.collided(player.getRectangle()))
+            {
+                score += 100;
+            }
+            powerupManager.update();
             enemyManager.update();
 
             bulletManager.collided(walls);
@@ -269,6 +284,7 @@ public class GameplayScene implements Scene
 
         bulletManager.draw(canvas);
         levelManager.draw(canvas);
+        powerupManager.draw(canvas);
         enemyManager.draw(canvas);
 
         canvas.drawBitmap(up_image, null, moveUpButton, controlsPaint);

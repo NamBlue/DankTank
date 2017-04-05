@@ -24,7 +24,7 @@ public class EnemyManager
     private Random random;
     public int enemySize;
     private int frames;
-    private ArrayList<Rect> spawnPoints;
+    private ArrayList<Rect> spawnPoints, diePoints;
 
     public EnemyManager(ArrayList<Rect> spawnPoints)
     {
@@ -33,6 +33,7 @@ public class EnemyManager
         enemySize = 0;
         frames = 0;
         this.spawnPoints = spawnPoints;
+        diePoints = new ArrayList<>();
     }
 
     public boolean killEnemy(Enemy enemy)
@@ -63,10 +64,21 @@ public class EnemyManager
         }
         if(dyingEnemy != null)
         {
+            diePoints.add(dyingEnemy.getRectangle());
             enemies.remove(dyingEnemy);
-            dyingEnemy = null;
         }
         frames ++;
+    }
+
+    public Rect popDiePoint()
+    {
+        Rect temp = null;
+        if(diePoints.size() > 0)
+        {
+            temp =  diePoints.get(diePoints.size() - 1);
+            diePoints.remove(diePoints.size() - 1);
+        }
+        return temp;
     }
 
     public boolean collided(Rect object)
