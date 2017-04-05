@@ -23,6 +23,7 @@ public class LevelSelectScene implements Scene {
     private Rect level3Button;
     private Rect level4Button;
     private Bitmap back_image;
+    private Bitmap Level1_image;
     private Bitmap Lock2_image;
     private Bitmap Lock3_image;
     private Bitmap Lock4_image;
@@ -36,6 +37,7 @@ public class LevelSelectScene implements Scene {
         level4Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*12/20, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*18/20);
         BitmapFactory bitmapFactory = new BitmapFactory();
         back_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.back_button);
+        Level1_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.level1);
         Lock2_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock2);
         Lock3_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock3);
         Lock4_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock4);
@@ -65,13 +67,9 @@ public class LevelSelectScene implements Scene {
     }
 
     private void drawLevelButtons(Canvas canvas, Paint paint){
-        paint.setColor(Color.RED);
-        canvas.drawRect(level1Button, paint);
-        paint.setColor(Color.GREEN);
+        canvas.drawBitmap(Level1_image,null, level1Button, new Paint());
         canvas.drawBitmap(Lock2_image, null, level2Button, new Paint());
-        paint.setColor(Color.YELLOW);
         canvas.drawBitmap(Lock3_image, null, level3Button, new Paint());
-        paint.setColor(Color.GRAY);
         canvas.drawBitmap(Lock4_image, null, level4Button, new Paint());
     }
 
@@ -79,7 +77,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.GREEN);
         canvas.drawText(text, Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*3/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
         canvas.drawText("Play", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
@@ -89,7 +87,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         canvas.drawText(text, Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*3/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
         canvas.drawText("Locked", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
@@ -99,7 +97,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         canvas.drawText(text, Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*12/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
         canvas.drawText("Locked", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
@@ -109,7 +107,7 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         canvas.drawText(text, Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*12/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
         canvas.drawText("Locked", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
