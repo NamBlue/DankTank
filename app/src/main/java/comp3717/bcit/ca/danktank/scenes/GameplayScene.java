@@ -69,6 +69,8 @@ public class GameplayScene implements Scene
         Constants.BULLET_HEIGHT = (int)(Constants.SCREEN_WIDTH * .035);
         Constants.BULLET_GAP = (int)(Constants.SCREEN_WIDTH * .08);
         Constants.POWERUP_SIZE = (int)(Constants.SCREEN_WIDTH * .08);
+        Constants.ENEMY_SPEED = (int)(Constants.SCREEN_WIDTH * .008);
+
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
         BitmapFactory bitmapFactory = new BitmapFactory();

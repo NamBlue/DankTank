@@ -206,45 +206,45 @@ public class Enemy implements GameObject
         switch (moveDirection)
         {
             case Up:
-                 temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.PLAYER_SPEED);
+                 temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.ENEMY_SPEED);
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x,temp.y - (Constants.ENEMY_SIZE/2)) || ((temp.y - (Constants.ENEMY_SIZE/2)) < 0))
                     {
-                        temp.y += Constants.PLAYER_SPEED;
+                        temp.y += Constants.ENEMY_SPEED;
                     }
                 }
                 update(temp);
                 break;
             case Down:
-                temp = new Point(rectangle.centerX(), rectangle.centerY() + Constants.PLAYER_SPEED);
+                temp = new Point(rectangle.centerX(), rectangle.centerY() + Constants.ENEMY_SPEED);
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x,temp.y + (Constants.ENEMY_SIZE/2)) || ((temp.y + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_HEIGHT))
                     {
-                        temp.y -= Constants.PLAYER_SPEED;
+                        temp.y -= Constants.ENEMY_SPEED;
                     }
                 }
                 update(temp);
                 break;
             case Left:
-                temp = new Point(rectangle.centerX() - Constants.PLAYER_SPEED, rectangle.centerY());
+                temp = new Point(rectangle.centerX() - Constants.ENEMY_SPEED, rectangle.centerY());
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y) || ((temp.x - (Constants.ENEMY_SIZE/2)) < 0))
                     {
-                        temp.x += Constants.PLAYER_SPEED;
+                        temp.x += Constants.ENEMY_SPEED;
                     }
                 }
                 update(temp);
                 break;
             case Right:
-                temp = new Point(rectangle.centerX() + Constants.PLAYER_SPEED, rectangle.centerY());
+                temp = new Point(rectangle.centerX() + Constants.ENEMY_SPEED, rectangle.centerY());
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y) || ((temp.x + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_WIDTH))
                     {
-                        temp.x -= Constants.PLAYER_SPEED;
+                        temp.x -= Constants.ENEMY_SPEED;
                     }
                 }
                 update(temp);
