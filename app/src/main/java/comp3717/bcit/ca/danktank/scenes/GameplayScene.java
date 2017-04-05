@@ -17,6 +17,7 @@ import comp3717.bcit.ca.danktank.managers.LevelManager;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.managers.EnemyManager;
+import comp3717.bcit.ca.danktank.managers.MusicManager;
 import comp3717.bcit.ca.danktank.managers.PowerupManager;
 import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
@@ -118,6 +119,10 @@ public class GameplayScene implements Scene
         movingPlayer = false;
         playerFiring = false;
         enemyManager.reset();
+        win = false;
+        gameOver = false;
+        score = 0;
+        powerupManager.reset();
     }
 
 
@@ -136,7 +141,7 @@ public class GameplayScene implements Scene
     @Override
     public void update()
     {
-        if (!gameOver)
+        if (!gameOver && !win)
         {
             //Keeps the time elapsed to the right time when game is resumed
             if(frameTime < Constants.INIT_TIME)
@@ -258,9 +263,9 @@ public class GameplayScene implements Scene
                     }
                 }
             }
-            double spawnPercentage = Math.random();
+
             Rect tempRect = enemyManager.popDiePoint();
-            if(tempRect != null && (spawnPercentage >= 0.5))
+            if(tempRect != null)
             {
                 powerupManager.spawnPowerup(tempRect);
             }
@@ -272,9 +277,10 @@ public class GameplayScene implements Scene
             enemyManager.update();
 
             bulletManager.collided(walls);
-
-            if(score ==  200){
+            if(score >= 200)
+            {
                 win = true;
+                gameOverTime = System.currentTimeMillis();
             }
         }
     }
@@ -317,10 +323,11 @@ public class GameplayScene implements Scene
     @Override
     public void receiveTouch(MotionEvent event)
     {
+        long x = System.currentTimeMillis() - gameOverTime;
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                if(!gameOver)
+                if(!gameOver && !win)
                 {
                     /* Decprecated - for drag controls
                     if (player.getRectangle().contains((int) event.getX(), (int) event.getY()))
@@ -362,15 +369,16 @@ public class GameplayScene implements Scene
                     {
                         SceneManager.ACTIVE_SCENE = 3;
                     }
-                    if(win)
-                    {
-                        SceneManager.ACTIVE_SCENE = 6;
-                    }
                 }
                 else if (gameOver && System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
                 {
                     reset();
-                    gameOver = false;
+                }
+                else if(win && x >= Constants.GAMEOVER_TIME)
+                {
+                    MusicManager.getInstance().pause();
+                    SceneManager.ACTIVE_SCENE = 6;
+                    reset();
                 }
 
                 break;

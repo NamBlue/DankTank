@@ -22,6 +22,8 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import comp3717.bcit.ca.danktank.managers.MusicManager;
+
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback
@@ -55,14 +57,14 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
     protected void onPause()
     {
         super.onPause();
-        gamePanel.pause();
+        MusicManager.getInstance().pause();
     }
 
     @Override
     protected  void onResume()
     {
         super.onResume();
-        gamePanel.resume();
+        MusicManager.getInstance().resume();
     }
 
 

@@ -15,11 +15,21 @@ import static comp3717.bcit.ca.danktank.managers.SceneManager.sceneChanged;
 
 public class MusicManager {
 
-    MediaPlayer mPlayer;
+    private MediaPlayer mPlayer;
+    private static MusicManager manager;
 
-    public MusicManager(){
+    private MusicManager(){
         mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
         mPlayer.start();
+    }
+
+    public static MusicManager getInstance()
+    {
+        if (manager == null)
+        {
+            manager = new MusicManager();
+        }
+        return manager;
     }
 
     public void pause()

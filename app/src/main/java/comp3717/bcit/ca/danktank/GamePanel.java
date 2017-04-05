@@ -29,18 +29,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         Constants.CURRENT_CONTEXT = context;
         thread = new MainThread(getHolder(), this);
         sceneManager = new SceneManager();
-        musicManager = new MusicManager();
+        musicManager = MusicManager.getInstance();
         setFocusable(true);
-    }
-
-    public void pause()
-    {
-        musicManager.pause();
-    }
-
-    public void resume()
-    {
-        musicManager.resume();
     }
 
     @Override

@@ -22,20 +22,17 @@ public class Powerup implements GameObject
     private Animation idle;
     private AnimationManager animationManager;
 
-    public Powerup(String name, String desc, String address, String city)
+    public Powerup(String name, String desc, String address, String city, Rect rect)
     {
         this.Name = name;
         this.Descriptn = desc;
         this.Address = address;
         this.city = city;
+        this.rectangle = rect;
         BitmapFactory bitmapFactory = new BitmapFactory();
         Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.flag);
         idle = new Animation(new Bitmap[]{idleImg}, 5f);
         animationManager = new AnimationManager(new Animation[]{idle});
-    }
-
-    public void setRectangle(Rect rect){
-        this.rectangle = rect;
     }
 
     public boolean collided(Rect object)
