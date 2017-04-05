@@ -22,17 +22,21 @@ public class ScoreScene implements Scene {
     public void draw(Canvas canvas){
         canvas.drawColor(Color.WHITE);
         Paint paint = new Paint();
-        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.RED);
+        paint.setColor(Color.BLUE);
         paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
         canvas.drawText("Score", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/20 ,paint);
-        paint.setColor(Color.RED);
+        paint.setColor(Color.BLUE);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         canvas.drawText("Item name", Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
-        canvas.drawText("Quantity", Constants.SCREEN_WIDTH*2/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
-        canvas.drawText("Description", Constants.SCREEN_WIDTH*3/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
-        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        canvas.drawText("Back to Level Select", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*18/20 ,paint);
+        canvas.drawText("Quantity", Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
+        canvas.drawText("Description", Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*6/20 ,paint);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
+        paint.setColor(Color.BLACK);
+        canvas.drawRect(levelselect_button, paint);
+        paint.setColor(Color.YELLOW);
+        canvas.drawText("Back to Level Select", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*19/20 ,paint);
+
     }
     public void receiveTouch(MotionEvent event){
 

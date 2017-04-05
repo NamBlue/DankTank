@@ -42,6 +42,7 @@ public class GameplayScene implements Scene
     private boolean movingPlayer = false;
     private boolean playerFiring = false;
     private boolean gameOver = false;
+    private boolean win = false;
     private long gameOverTime;
     //speed to move the player faster as it is more tilted, tracks time elapsed between frames
     private long frameTime;
@@ -270,6 +271,10 @@ public class GameplayScene implements Scene
             enemyManager.update();
 
             bulletManager.collided(walls);
+
+            if(score ==  200){
+                win = true;
+            }
         }
     }
 
@@ -294,6 +299,9 @@ public class GameplayScene implements Scene
         if (gameOver)
         {
             drawCentreText(canvas, scorePaint, "Game Over");
+        }
+        if(win){
+            drawCentreText(canvas, scorePaint, "You win!");
         }
 
         canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, scorePaint);
@@ -353,13 +361,17 @@ public class GameplayScene implements Scene
                     {
                         SceneManager.ACTIVE_SCENE = 3;
                     }
-
+                    if(win)
+                    {
+                        SceneManager.ACTIVE_SCENE = 6;
+                    }
                 }
                 else if (gameOver && System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
                 {
                     reset();
                     gameOver = false;
                 }
+
                 break;
             /* Deprecated - for drag controls
             case MotionEvent.ACTION_MOVE:
