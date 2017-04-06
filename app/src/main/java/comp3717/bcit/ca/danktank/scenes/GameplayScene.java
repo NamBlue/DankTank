@@ -264,6 +264,7 @@ public class GameplayScene implements Scene
                         score += 100;
                     }
                 }
+
             }
 
             Rect tempRect = enemyManager.popDiePoint();

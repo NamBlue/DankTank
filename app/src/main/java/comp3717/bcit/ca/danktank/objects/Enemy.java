@@ -32,6 +32,7 @@ public class Enemy implements GameObject
     private static ArrayList<Rect> walls;
     private Enums.MoveDirection moveDirection;
     private int frames;
+    private boolean readyToFire;
     public boolean die;
     public boolean spawning;
     public int dieFrames;
@@ -44,6 +45,7 @@ public class Enemy implements GameObject
 
     public Enemy(Rect rectangle, int color)
     {
+        readyToFire = false;
         dieFrames = 0;
         spawnFrames = 0;
         frames = 0;
@@ -122,6 +124,33 @@ public class Enemy implements GameObject
             return false;
         }
         return Rect.intersects(rectangle, object);
+    }
+
+    public boolean hasLockon(Rect object)
+    {
+        if(readyToFire)
+        {
+        /*0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight,
+          4 walkUP, 5 walkDown, 6 walking left, 7 walking right
+          8 explode, 9 spawn*/
+            if (animationState == 0 || animationState == 1 || animationState == 4 || animationState == 5)
+            {
+                if (rectangle.centerX() <= object.right && rectangle.centerX() >= object.left)
+                {
+                    readyToFire = false;
+                    return true;
+                }
+            }
+            else if (animationState == 2 || animationState == 3 || animationState == 6 || animationState == 7)
+            {
+                if (rectangle.centerY() <= object.bottom && rectangle.centerY() >= object.top)
+                {
+                    readyToFire = false;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -203,6 +232,7 @@ public class Enemy implements GameObject
                     moveDirection = Enums.MoveDirection.Idle;
                     break;
             }
+            readyToFire = true;
         }
         Point temp;
         switch (moveDirection)
@@ -267,7 +297,7 @@ public class Enemy implements GameObject
                         point.y + rectangle.height()/2);
         /*0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight,
           4 walkUP, 5 walkDown, 6 walking left, 7 walking right
-          8 explode, 9 spawn/*
+          8 explode, 9 spawn
          */
         // > 5 for bigger movements before animating movements, else idle
         if (rectangle.left - oldleft > 5)
