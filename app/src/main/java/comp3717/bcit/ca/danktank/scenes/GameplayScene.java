@@ -317,6 +317,7 @@ public class GameplayScene implements Scene
             if(enemyManager.getEnemiesDied() == levelManager.getTotalEnemiesForThisLevel())
             {
                 win = true;
+                powerupManager.collectDroppedPowerups();
                 gameOverTime = System.currentTimeMillis();
             }
         }
@@ -420,7 +421,6 @@ public class GameplayScene implements Scene
                 else if(win && x >= Constants.GAMEOVER_TIME)
                 {
                     pause = false;
-                    reset();
                     MusicManager.getInstance().pause();
                     SceneManager.ACTIVE_SCENE = 6;
                 }

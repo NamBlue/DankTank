@@ -24,7 +24,7 @@ public class EnemyManager
     private int enemySize;
     private int totalEnemies;
     private int frames;
-    private ArrayList<Rect> spawnPoints, diePoints, walls;
+    private ArrayList<Rect> spawnPoints, diePoints;
     private int enemiesDied;
 
     public EnemyManager(ArrayList<Rect> spawnPoints, ArrayList<Rect> walls, int totalEnemies, int enemySize)
@@ -37,7 +37,6 @@ public class EnemyManager
         enemiesDied = 0;
         this.spawnPoints = spawnPoints;
         diePoints = new ArrayList<>();
-        this.walls = walls;
         Enemy.setWalls(walls);
     }
 
@@ -104,6 +103,7 @@ public class EnemyManager
     {
         enemiesDied = 0;
         enemies.clear();
+        diePoints.clear();
     }
 
     public void draw(Canvas canvas)

@@ -19,9 +19,29 @@ import comp3717.bcit.ca.danktank.objects.Powerup;
 
 public class ScoreScene implements Scene {
     private Rect levelselect_button = new Rect(Constants.SCREEN_WIDTH*2/20,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH*18/20,Constants.SCREEN_HEIGHT);
-
+    private String name, desc, address;
+    private int index = 0, oldIndex = -1;
+    private boolean start = true;
+    private ArrayList<Powerup> powerups = new ArrayList<>();
+    private int powerUpsLeft = 0;
 
     public void update(){
+        if(start)
+        {
+            start = false;
+            powerups = PowerupManager.getCollectedPowerups();
+        }
+        if(index != oldIndex)
+        {
+            oldIndex = index;
+            if(index < powerups.size())
+            {
+                name = powerups.get(index).getName();
+                desc = powerups.get(index).getDescriptn();
+                address = powerups.get(index).getAddress();
+            }
+            powerUpsLeft = powerups.size() - (index + 1);
+        }
 
     }
 
@@ -36,12 +56,11 @@ public class ScoreScene implements Scene {
         paint.setColor(Color.BLUE);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         //TODO: Format output
-        for(int i = 0; i < PowerupManager.getCollectedPowerups().size(); i++){
-            Powerup p = PowerupManager.getCollectedPowerups().get(i);
-            canvas.drawText(p.getName(), Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
-            canvas.drawText(p.getDescriptn(), Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
-            canvas.drawText(p.getAddress(), Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*6/20 ,paint);
-        }
+
+        canvas.drawText(name, Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
+        canvas.drawText(desc, Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
+        canvas.drawText(address, Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*6/20 ,paint);
+        canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *4/6, Constants.SCREEN_HEIGHT*2/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
         paint.setColor(Color.BLACK);
         canvas.drawRect(levelselect_button, paint);
@@ -57,7 +76,12 @@ public class ScoreScene implements Scene {
                 if (levelselect_button.contains((int) event.getX(), (int) event.getY()))
                 {
                     SceneManager.ACTIVE_SCENE = 2;
+                    GameplayScene.pause = false;
                     break;
+                }
+                else if(index < powerups.size() -1)
+                {
+                    ++index;
                 }
         }
     }
@@ -65,7 +89,9 @@ public class ScoreScene implements Scene {
      * Invoked on re-entering of a scene, used to restart the scene to initial state
      */
     public void reset(){
-
+        start = true;
+        powerUpsLeft = 0;
+        powerups.clear();
     }
     /**
      * Invoked on exit of a scene, used to clean up resources

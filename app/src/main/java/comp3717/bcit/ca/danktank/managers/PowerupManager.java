@@ -48,6 +48,18 @@ public class PowerupManager
         return false;
     }
 
+    public void collectDroppedPowerups()
+    {
+        for(Powerup pu: powerups)
+        {
+            collectedPowerups.add(pu);
+        }
+        int p_index = (int) Math.floor(Math.random() * artsList.size());
+        Art temp = artsList.get(p_index);
+        collectedPowerups.add(new Powerup(temp.Name, temp.Description, temp.Address, temp.city, new Rect()));
+        powerups.clear();
+    }
+
     public static ArrayList<Powerup> getCollectedPowerups(){
         return collectedPowerups;
     }
@@ -55,7 +67,7 @@ public class PowerupManager
     public void spawnPowerup(Rect rect)
     {
         double spawnPercentage = Math.random();
-        if ((spawnPercentage >= 0.5))
+        if ((spawnPercentage >= 0))
         {
             int p_index = (int) Math.floor(Math.random() * artsList.size());
             Art temp = artsList.get(p_index);
@@ -83,6 +95,7 @@ public class PowerupManager
     public void reset()
     {
         powerups.clear();
+        collectedPowerups.clear();
     }
 
     private void readJsonFromFile()

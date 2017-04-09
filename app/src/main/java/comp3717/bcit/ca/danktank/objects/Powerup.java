@@ -18,12 +18,27 @@ public class Powerup implements GameObject
 {
     private String Name, Descriptn, Address, city;
     private Rect rectangle;
-    private int color;
     private Animation idle;
     private AnimationManager animationManager;
 
     public Powerup(String name, String desc, String address, String city, Rect rect)
     {
+        if(name == null)
+        {
+            name = "No Name";
+        }
+        if(desc == null)
+        {
+            desc = "No Description Exists";
+        }
+        if(address == null)
+        {
+            address = "No Address Exists";
+        }
+        if (city == null )
+        {
+            city = "No City Exists";
+        }
         this.Name = name;
         this.Descriptn = desc;
         this.Address = address;
