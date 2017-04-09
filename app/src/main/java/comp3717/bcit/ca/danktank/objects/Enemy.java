@@ -126,6 +126,11 @@ public class Enemy implements GameObject
         return Rect.intersects(rectangle, object);
     }
 
+    public int getAnimationState()
+    {
+        return animationState;
+    }
+
     public boolean hasLockon(Rect object)
     {
         if(readyToFire)
@@ -232,7 +237,8 @@ public class Enemy implements GameObject
                     moveDirection = Enums.MoveDirection.Idle;
                     break;
             }
-            readyToFire = true;
+            if(ran.nextFloat() < .25f)
+                readyToFire = true;
         }
         Point temp;
         switch (moveDirection)

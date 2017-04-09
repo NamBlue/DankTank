@@ -272,6 +272,30 @@ public class GameplayScene implements Scene
                         score += 100;
                     }
                 }
+                else if(enemy.hasLockon(player.getRectangle()))
+                {
+                    switch(enemy.getAnimationState())
+                    {
+                        case 2:
+                        case 6:
+                            bulletManager.addEnemyBullet(enemy.getRectangle().centerX() - Constants.BULLET_GAP, enemy.getRectangle().centerY(), Enums.MoveDirection.Left);
+                            break;
+                        case 3:
+                        case 7:
+                            bulletManager.addEnemyBullet(enemy.getRectangle().centerX() + Constants.BULLET_GAP, enemy.getRectangle().centerY(), Enums.MoveDirection.Right);
+                            break;
+                        case 0:
+                        case 4:
+                            bulletManager.addEnemyBullet(enemy.getRectangle().centerX(), enemy.getRectangle().centerY() - Constants.BULLET_GAP, Enums.MoveDirection.Up);
+                            break;
+                        case 1:
+                        case 5:
+                            bulletManager.addEnemyBullet(enemy.getRectangle().centerX(), enemy.getRectangle().centerY() + Constants.BULLET_GAP, Enums.MoveDirection.Down);
+                            break;
+                        default:
+                            break;
+                    }
+                }
 
             }
 

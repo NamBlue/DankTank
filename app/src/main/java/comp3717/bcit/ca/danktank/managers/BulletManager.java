@@ -17,6 +17,7 @@ public class BulletManager
 {
     //Higher index = lower on screen = higher y value
     private ArrayList<Bullet> playerBullets;
+    private ArrayList<Bullet> enemyBullets;
     //Gap between playerBullets
     private int obstacleGap;
     private int obstacleHeight;
@@ -35,13 +36,18 @@ public class BulletManager
         startTime = initTime = System.currentTimeMillis();
 
         playerBullets = new ArrayList<>();
-
+        enemyBullets = new ArrayList<>();
     }
 
     public void addPlayerBullet(int xStart, int yStart, Enums.MoveDirection moveDirection)
     {
         if(playerBullets.size() == 0)
             playerBullets.add(new Bullet(color, xStart, yStart, moveDirection));
+    }
+
+    public void addEnemyBullet(int xStart, int yStart, Enums.MoveDirection moveDirection)
+    {
+        enemyBullets.add(new Bullet(color, xStart, yStart, moveDirection));
     }
 
     public Rect getPlayerBullet()
@@ -63,6 +69,14 @@ public class BulletManager
                 return true;
             }
         }
+        for(Bullet ebullet : enemyBullets)
+        {
+            if(ebullet.collided(object))
+            {
+                enemyBullets.remove(ebullet);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -75,6 +89,17 @@ public class BulletManager
                 if (bullet.collided(rect))
                 {
                     playerBullets.remove(bullet);
+                    return true;
+                }
+            }
+        }
+        for(Bullet ebullet : enemyBullets)
+        {
+            for (Rect rect : objects)
+            {
+                if (ebullet.collided(rect))
+                {
+                    enemyBullets.remove(ebullet);
                     return true;
                 }
             }
@@ -92,6 +117,14 @@ public class BulletManager
             }
             clearBullet();
         }
+        if (enemyBullets.size() > 0)
+        {
+            for (Bullet bullet : enemyBullets)
+            {
+                bullet.update();
+            }
+            clearBullet();
+        }
     }
 
     /**
@@ -99,10 +132,21 @@ public class BulletManager
      */
     private void clearBullet()
     {
-        int x = playerBullets.get(playerBullets.size() - 1).getRectangle().centerX(), y = playerBullets.get(playerBullets.size() - 1).getRectangle().centerY();
-        if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+        if(playerBullets.size() > 0)
         {
-            playerBullets.remove(0);
+            int x = playerBullets.get(playerBullets.size() - 1).getRectangle().centerX(), y = playerBullets.get(playerBullets.size() - 1).getRectangle().centerY();
+            if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+            {
+                playerBullets.remove(0);
+            }
+        }
+        if(enemyBullets.size() > 0)
+        {
+            int x = enemyBullets.get(enemyBullets.size() - 1).getRectangle().centerX(), y = enemyBullets.get(enemyBullets.size() - 1).getRectangle().centerY();
+            if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+            {
+                enemyBullets.remove(0);
+            }
         }
     }
 
@@ -110,6 +154,10 @@ public class BulletManager
     public void draw(Canvas canvas)
     {
         for(Bullet bullet : playerBullets)
+        {
+            bullet.draw(canvas);
+        }
+        for(Bullet bullet : enemyBullets)
         {
             bullet.draw(canvas);
         }
