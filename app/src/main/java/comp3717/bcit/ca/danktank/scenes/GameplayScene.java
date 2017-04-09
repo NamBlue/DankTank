@@ -93,7 +93,7 @@ public class GameplayScene implements Scene
         moveDirection = Enums.MoveDirection.Up;
 
 
-        bulletManager = new BulletManager(50, 150, Color.BLACK);
+        bulletManager = new BulletManager();
         powerupManager = new PowerupManager();
         levelManager = new LevelManager(1);
         walls = levelManager.getBrickTiles();
@@ -120,7 +120,7 @@ public class GameplayScene implements Scene
             player.reset();
             playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
             player.update(playerPoint, moveDirection);
-            bulletManager = new BulletManager(50, 150, Color.BLACK);
+            bulletManager = new BulletManager();
             movingPlayer = false;
             playerFiring = false;
             enemyManager.reset();

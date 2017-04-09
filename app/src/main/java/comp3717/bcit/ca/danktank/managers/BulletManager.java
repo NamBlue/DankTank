@@ -1,6 +1,7 @@
 package comp3717.bcit.ca.danktank.managers;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
@@ -19,21 +20,11 @@ public class BulletManager
     private ArrayList<Bullet> playerBullets;
     private ArrayList<Bullet> enemyBullets;
     //Gap between playerBullets
-    private int obstacleGap;
-    private int obstacleHeight;
     private int color;
-    private long startTime;
-    private long initTime;
 
-
-
-    public BulletManager(int obstacleGap, int obstacleHeight, int color)
+    public BulletManager()
     {
-        this.obstacleGap = obstacleGap;
-        this.obstacleHeight = obstacleHeight;
-        this.color = color;
-
-        startTime = initTime = System.currentTimeMillis();
+        this.color = Color.BLACK;
 
         playerBullets = new ArrayList<>();
         enemyBullets = new ArrayList<>();

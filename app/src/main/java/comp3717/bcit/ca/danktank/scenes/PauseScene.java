@@ -84,11 +84,13 @@ public class PauseScene implements Scene {
                 }
                 if (levelSelectButton.contains((int) event.getX(), (int) event.getY()))
                 {
+                    GameplayScene.pause = false;
                     SceneManager.ACTIVE_SCENE = 2;
                     break;
                 }
                 if (QuitButton.contains((int) event.getX(), (int) event.getY()))
                 {
+                    GameplayScene.pause = false;
                     SceneManager.ACTIVE_SCENE = 0;
                     break;
                 }
