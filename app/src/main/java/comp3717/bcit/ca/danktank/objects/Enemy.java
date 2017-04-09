@@ -237,7 +237,7 @@ public class Enemy implements GameObject
                     moveDirection = Enums.MoveDirection.Idle;
                     break;
             }
-            if(ran.nextFloat() < .25f)
+            if(ran.nextFloat() < .5f)
                 readyToFire = true;
         }
         Point temp;

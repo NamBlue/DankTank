@@ -60,6 +60,11 @@ public class BulletManager
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean enemyCollided(Rect object)
+    {
         for(Bullet ebullet : enemyBullets)
         {
             if(ebullet.collided(object))

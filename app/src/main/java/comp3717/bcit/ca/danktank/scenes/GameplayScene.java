@@ -119,6 +119,7 @@ public class GameplayScene implements Scene
         {
             player.reset();
             playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
+            moveDirection = Enums.MoveDirection.Up;
             player.update(playerPoint, moveDirection);
             bulletManager = new BulletManager();
             movingPlayer = false;
@@ -257,8 +258,9 @@ public class GameplayScene implements Scene
 
             player.update(playerPoint, moveDirection);
             bulletManager.update();
-            if (bulletManager.collided(player.getRectangle()))
+            if (bulletManager.enemyCollided(player.getRectangle()))
             {
+                player.dying = true;
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
             }
@@ -318,6 +320,10 @@ public class GameplayScene implements Scene
                 gameOverTime = System.currentTimeMillis();
             }
         }
+        else if (gameOver)
+        {
+            player.update(playerPoint, moveDirection);
+        }
     }
 
     @Override
@@ -362,7 +368,7 @@ public class GameplayScene implements Scene
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                if(!gameOver && !win)
+                if(!gameOver && !win && !player.startingState)
                 {
                     /* Decprecated - for drag controls
                     if (player.getRectangle().contains((int) event.getX(), (int) event.getY()))

@@ -23,9 +23,11 @@ public class Player implements GameObject
     private int color;
     private Animation idleUp, idleDown, idleLeft, idleRight;
     private Animation walkLeft, walkRight, walkUp, walkDown;
+    private Animation spawn, explode;
     private AnimationManager animationManager;
-    private int directionState;
-    private  boolean startingState;
+    private int animationState;
+    public boolean startingState, dying;
+    private int spawnFrames, dieFrames;
 
     public Rect getRectangle()
     {
@@ -36,17 +38,30 @@ public class Player implements GameObject
 
     public Player(Rect rectangle, int color)
     {
+        dieFrames = 0;
         this.rectangle = rectangle;
         this.color = color;
-        directionState = 0;
+        animationState = 0;
+        spawnFrames = 0;
+        dying = false;
         startingState = true;
         //For Decoding, Producing, Modifying Bitmaps etc.
         BitmapFactory bitmapFactory = new BitmapFactory();
+        Bitmap spawn1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pspawn1);
+        Bitmap spawn2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pspawn2);
+        Bitmap spawn3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pspawn3);
+        Bitmap spawn4 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pspawn4);
+        spawn = new Animation(new Bitmap[]{spawn1, spawn2, spawn3, spawn4},0.10f);
         //Make sure image names are all lowercase or will cause errors!
         Bitmap idleImg = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_idle);
         Bitmap walk1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move1);
         Bitmap walk2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move2);
         Bitmap walk3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.p_move3);
+
+        Bitmap explode1 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode1);
+        Bitmap explode2 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode2);
+        Bitmap explode3 = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.explode3);
+        explode = new Animation(new Bitmap[]{explode1, explode2, explode3},0.5f);
 
         idleUp = new Animation(new Bitmap[]{idleImg}, 5);
         walkUp = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
@@ -76,7 +91,7 @@ public class Player implements GameObject
         walk3 = Bitmap.createBitmap(walk3, 0, 0, walk3.getWidth(), walk3.getHeight(), matrix, false);
         idleDown  = new Animation(new Bitmap[]{idleImg}, 5);
         walkDown = new Animation(new Bitmap[]{walk1, walk2, walk3, idleImg}, 0.5f);
-        animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight});
+        animationManager = new AnimationManager(new Animation[]{idleUp, idleDown, idleLeft, idleRight, walkUp, walkDown, walkLeft, walkRight, spawn, explode});
     }
 
     @Override
@@ -85,7 +100,8 @@ public class Player implements GameObject
         //Paint paint = new Paint();
         //paint.setColor(color);
         //canvas.drawRect(rectangle, paint);
-        animationManager.draw(canvas, rectangle);
+        if(dieFrames < 45)
+            animationManager.draw(canvas, rectangle);
     }
 
     @Override
@@ -98,7 +114,10 @@ public class Player implements GameObject
     public void reset()
     {
         startingState = true;
-        directionState = 0;
+        animationState = 0;
+        spawnFrames = 0;
+        dying = false;
+        dieFrames = 0;
     }
 
     public void update(Point point, Enums.MoveDirection direction)
@@ -110,51 +129,66 @@ public class Player implements GameObject
                         point.y - rectangle.height()/2,
                         point.x + rectangle.width()/2,
                         point.y + rectangle.height()/2);
-        //0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight, 4 walkUP, 5 walkDown, 6 walking left, 7 walking right animations;
-        // > 5 for bigger movements before animating movements, else idle
-        if (rectangle.left - oldleft > 5)
+        if (startingState)
         {
-            directionState = 7;
+            animationState = 8;
+            spawnFrames++;
+            if(spawnFrames > 45)
+            {
+                spawnFrames = 0;
+                startingState = false;
+                animationState = 0;
+            }
         }
-        else if (rectangle.left - oldleft < -5)
+        else if (dying)
         {
-            directionState = 6;
-        }
-        else if (rectangle.top - oldtop > 5)
-        {
-            directionState = 5;
-        }
-        else if (rectangle.top - oldtop < - 5)
-        {
-            directionState = 4;
+            dieFrames++;
+            animationState = 9;
         }
         else
         {
-            switch(direction)
+            //0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight, 4 walkUP, 5 walkDown, 6 walking left, 7 walking right animations;
+            // > 5 for bigger movements before animating movements, else idle
+            if (rectangle.left - oldleft > 5)
             {
-                case Left:
-                    directionState = 2;
-                    break;
-                case Right:
-                    directionState = 3;
-                    break;
-                case Up:
-                    directionState = 0;
-                    break;
-                case Down:
-                    directionState = 1;
-                    break;
-                default:
-                    break;
+                animationState = 7;
+            }
+            else if (rectangle.left - oldleft < -5)
+            {
+                animationState = 6;
+            }
+            else if (rectangle.top - oldtop > 5)
+            {
+                animationState = 5;
+            }
+            else if (rectangle.top - oldtop < -5)
+            {
+                animationState = 4;
+            }
+            else
+            {
+                switch (direction)
+                {
+                    case Left:
+                        animationState = 2;
+                        break;
+                    case Right:
+                        animationState = 3;
+                        break;
+                    case Up:
+                        animationState = 0;
+                        break;
+                    case Down:
+                        animationState = 1;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-        if (startingState)
-        {
-            directionState = 0;
-            startingState = false;
-        }
 
-        animationManager.playAnimation(directionState);
+
+        animationManager.playAnimation(animationState);
         animationManager.update();
     }
 
