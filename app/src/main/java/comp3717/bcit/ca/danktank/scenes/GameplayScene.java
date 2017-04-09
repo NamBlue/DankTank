@@ -45,6 +45,7 @@ public class GameplayScene implements Scene
     private boolean playerFiring = false;
     private boolean gameOver = false;
     private boolean win = false;
+    public static boolean pause = false;
     private long gameOverTime;
     //speed to move the player faster as it is more tilted, tracks time elapsed between frames
     private long frameTime;
@@ -114,17 +115,24 @@ public class GameplayScene implements Scene
 
     public void reset()
     {
-        player.reset();
-        playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
-        player.update(playerPoint, moveDirection);
-        bulletManager = new BulletManager(50, 150, Color.BLACK);
-        movingPlayer = false;
-        playerFiring = false;
-        enemyManager.reset();
-        win = false;
-        gameOver = false;
-        score = 0;
-        powerupManager.reset();
+        if(!pause)
+        {
+            player.reset();
+            playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
+            player.update(playerPoint, moveDirection);
+            bulletManager = new BulletManager(50, 150, Color.BLACK);
+            movingPlayer = false;
+            playerFiring = false;
+            enemyManager.reset();
+            win = false;
+            gameOver = false;
+            score = 0;
+            powerupManager.reset();
+        }
+        else
+        {
+            pause = false;
+        }
     }
 
 
@@ -143,7 +151,7 @@ public class GameplayScene implements Scene
     @Override
     public void update()
     {
-        if (!gameOver && !win)
+        if (!gameOver && !win && !pause)
         {
             //Keeps the time elapsed to the right time when game is resumed
             if(frameTime < Constants.INIT_TIME)
@@ -370,15 +378,18 @@ public class GameplayScene implements Scene
                     //Added by harman to test the pause button
                     if (pauseButton.contains((int) event.getX(), (int) event.getY()))
                     {
+                        pause = true;
                         SceneManager.ACTIVE_SCENE = 3;
                     }
                 }
                 else if (gameOver && System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
                 {
+                    pause = false;
                     reset();
                 }
                 else if(win && x >= Constants.GAMEOVER_TIME)
                 {
+                    pause = false;
                     reset();
                     MusicManager.getInstance().pause();
                     SceneManager.ACTIVE_SCENE = 6;

@@ -78,6 +78,7 @@ public class PauseScene implements Scene {
                 }
                 if (restartButton.contains((int) event.getX(), (int) event.getY()))
                 {
+                    GameplayScene.pause = false;
                     SceneManager.ACTIVE_SCENE = 1;
                     break;
                 }
