@@ -19,6 +19,7 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
  */
 
 public class PauseScene implements Scene {
+    public static boolean resume = false;
     private Rect screen = new Rect();
     private Rect resumeButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*6/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*8/20);
     private Rect restartButton = new Rect(Constants.SCREEN_WIDTH/8, Constants.SCREEN_HEIGHT*9/20, Constants.SCREEN_WIDTH*7/8, Constants.SCREEN_HEIGHT*11/20);
@@ -73,6 +74,7 @@ public class PauseScene implements Scene {
             case MotionEvent.ACTION_DOWN:
                 if (resumeButton.contains((int) event.getX(), (int) event.getY()))
                 {
+                    resume = true;
                     SceneManager.ACTIVE_SCENE = 1;
                     break;
                 }

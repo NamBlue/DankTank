@@ -4,6 +4,8 @@ import android.media.MediaPlayer;
 
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.R;
+import comp3717.bcit.ca.danktank.scenes.GameplayScene;
+import comp3717.bcit.ca.danktank.scenes.PauseScene;
 
 import static comp3717.bcit.ca.danktank.managers.SceneManager.ACTIVE_SCENE;
 import static comp3717.bcit.ca.danktank.managers.SceneManager.sceneChanged;
@@ -64,9 +66,13 @@ public class MusicManager {
                     break;
                 case 1:
                     try {
-                        if (!mPlayer.isPlaying()) {
+                        if (!mPlayer.isPlaying() && PauseScene.resume)
+                        {
                             mPlayer.start();
-                        } else if (mPlayer != null) {
+                            PauseScene.resume = false;
+                        }
+                        else if (mPlayer != null)
+                        {
                             mPlayer.stop();
                             mPlayer.release();
                             mPlayer = null;
