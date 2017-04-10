@@ -29,7 +29,7 @@ public class LevelManager implements Scene {
     private ArrayList<Rect> spawnpoints;
     private ArrayList<Rect> brick_tiles;
     private Rect player_spawn;
-    private int totalEnemiesForThisLevel;
+    private static int totalEnemiesForThisLevel;
     private int maxEnemySize;
 
     public LevelManager(int level){
@@ -47,6 +47,8 @@ public class LevelManager implements Scene {
 
 
     }
+
+    public static int gettotalEnemiesForThisLevel(){return totalEnemiesForThisLevel;}
 
     public ArrayList<Rect> getSpawnpoints(){
         return spawnpoints;

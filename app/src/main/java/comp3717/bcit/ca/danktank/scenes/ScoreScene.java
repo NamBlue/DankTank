@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.managers.PowerupManager;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
+import comp3717.bcit.ca.danktank.managers.LevelManager;
 import comp3717.bcit.ca.danktank.objects.Powerup;
 
 /**
@@ -19,11 +20,13 @@ import comp3717.bcit.ca.danktank.objects.Powerup;
 
 public class ScoreScene implements Scene {
     private Rect levelselect_button = new Rect(Constants.SCREEN_WIDTH*2/20,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH*18/20,Constants.SCREEN_HEIGHT);
-    private String name, desc, address;
+    private String name, desc, address, line;
     private int index = 0, oldIndex = -1;
     private boolean start = true;
     private ArrayList<Powerup> powerups = new ArrayList<>();
     private int powerUpsLeft = 0;
+    private int maxLineSize = 35;
+    private int lineSize, row, score;
 
     public void update(){
         if(start)
@@ -36,9 +39,9 @@ public class ScoreScene implements Scene {
             oldIndex = index;
             if(index < powerups.size())
             {
-                name = powerups.get(index).getName();
-                desc = powerups.get(index).getDescriptn();
-                address = powerups.get(index).getAddress();
+                name = "Name: " + powerups.get(index).getName();
+                desc = "Description: " + powerups.get(index).getDescriptn();
+                address = "Address: " + powerups.get(index).getAddress();
             }
             powerUpsLeft = powerups.size() - (index + 1);
         }
@@ -50,23 +53,83 @@ public class ScoreScene implements Scene {
         canvas.drawColor(Color.WHITE);
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
+
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
         canvas.drawText("Score", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/20 ,paint);
-        paint.setColor(Color.BLUE);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
-        //TODO: Format output
-
-        canvas.drawText(name, Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*4/20 ,paint);
-        canvas.drawText(desc, Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
-        canvas.drawText(address, Constants.SCREEN_WIDTH/6, Constants.SCREEN_HEIGHT*6/20 ,paint);
         canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *4/6, Constants.SCREEN_HEIGHT*2/20 ,paint);
+
+        paint.setTextAlign(Paint.Align.LEFT);
+
+        row = 4;
+
+        //Display Name
+        lineSize = name.length();
+        line = "";
+        while(lineSize > maxLineSize){
+            for(int i = 0; i < lineSize; i++) {
+                line = line + name.charAt(i);
+                if (line.length() == maxLineSize) {
+                    canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+                    row++;
+                    line = "";
+                }
+            }
+            lineSize = lineSize - maxLineSize;
+        }
+        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+        row++;
+
+        //Display Description
+        lineSize = desc.length();
+        line = "";
+        while(lineSize > maxLineSize){
+            for(int i = 0; i < lineSize; i++) {
+                line = line + desc.charAt(i);
+                if (line.length() == maxLineSize) {
+                    canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+                    row++;
+                    line = "";
+                }
+            }
+            lineSize = lineSize - maxLineSize;
+        }
+        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+        row++;
+
+        //Display Address
+        lineSize = address.length();
+        line = "";
+        while(lineSize > maxLineSize){
+            for(int i = 0; i < lineSize; i++) {
+                line = line + address.charAt(i);
+                if (line.length() == maxLineSize) {
+                    canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+                    row++;
+                    line = "";
+                }
+            }
+            lineSize = lineSize - maxLineSize;
+        }
+        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+        row++;
+
+        //Depreciated way of displaying item score
+        //canvas.drawText(name, Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*4/20 ,paint);
+        //canvas.drawText(desc, Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*5/20 ,paint);
+        //canvas.drawText(address, Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*6/20 ,paint);
+
+        score = (LevelManager.gettotalEnemiesForThisLevel() + powerups.size() - 1) * 100;
+        String scoreasdf = "Score: " + score;
+        canvas.drawText(scoreasdf, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+
+        paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
         paint.setColor(Color.BLACK);
         canvas.drawRect(levelselect_button, paint);
         paint.setColor(Color.YELLOW);
         canvas.drawText("Back to Level Select", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*19/20 ,paint);
-
     }
     public void receiveTouch(MotionEvent event){
 
