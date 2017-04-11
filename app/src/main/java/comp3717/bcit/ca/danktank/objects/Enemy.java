@@ -249,7 +249,9 @@ public class Enemy implements GameObject
                  temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.ENEMY_SPEED);
                 for(Rect rect : walls)
                 {
-                    if(rect.contains(temp.x,temp.y - (Constants.ENEMY_SIZE/2)) || ((temp.y - (Constants.ENEMY_SIZE/2)) < 0))
+                    if(rect.contains(temp.x - (Constants.ENEMY_SIZE/2),temp.y - (Constants.ENEMY_SIZE/2))
+                            || rect.contains(temp.x + (Constants.ENEMY_SIZE/2),temp.y - (Constants.ENEMY_SIZE/2))
+                            || ((temp.y - (Constants.ENEMY_SIZE/2)) < 0))
                     {
                         temp.y += Constants.ENEMY_SPEED;
                     }
@@ -260,7 +262,9 @@ public class Enemy implements GameObject
                 temp = new Point(rectangle.centerX(), rectangle.centerY() + Constants.ENEMY_SPEED);
                 for(Rect rect : walls)
                 {
-                    if(rect.contains(temp.x,temp.y + (Constants.ENEMY_SIZE/2)) || ((temp.y + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_HEIGHT))
+                    if(rect.contains(temp.x - (Constants.ENEMY_SIZE/2),temp.y + (Constants.ENEMY_SIZE/2))
+                            || rect.contains(temp.x + (Constants.ENEMY_SIZE/2),temp.y + (Constants.ENEMY_SIZE/2))
+                            ||((temp.y + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_HEIGHT))
                     {
                         temp.y -= Constants.ENEMY_SPEED;
                     }
@@ -271,7 +275,9 @@ public class Enemy implements GameObject
                 temp = new Point(rectangle.centerX() - Constants.ENEMY_SPEED, rectangle.centerY());
                 for(Rect rect : walls)
                 {
-                    if(rect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y) || ((temp.x - (Constants.ENEMY_SIZE/2)) < 0))
+                    if(rect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y + (Constants.ENEMY_SIZE/2))
+                            || rect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y - (Constants.ENEMY_SIZE/2))
+                            || ((temp.x - (Constants.ENEMY_SIZE/2)) < 0))
                     {
                         temp.x += Constants.ENEMY_SPEED;
                     }
@@ -282,7 +288,9 @@ public class Enemy implements GameObject
                 temp = new Point(rectangle.centerX() + Constants.ENEMY_SPEED, rectangle.centerY());
                 for(Rect rect : walls)
                 {
-                    if(rect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y) || ((temp.x + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_WIDTH))
+                    if(rect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y + (Constants.ENEMY_SIZE/2))
+                            || rect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y - (Constants.ENEMY_SIZE/2))
+                            || ((temp.x + (Constants.ENEMY_SIZE/2)) > Constants.SCREEN_WIDTH))
                     {
                         temp.x -= Constants.ENEMY_SPEED;
                     }
