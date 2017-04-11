@@ -24,6 +24,7 @@ public class LevelManager implements Scene {
     private Rect testrect = new Rect();
     private boolean [][] map;
     private Bitmap Brick_image;
+    private Bitmap Ice_image;
     private Random r;
     private int level;
     private ArrayList<Rect> spawnpoints;
@@ -35,6 +36,7 @@ public class LevelManager implements Scene {
     public LevelManager(int level){
         BitmapFactory bitmapFactory = new BitmapFactory();
         Brick_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.brick);
+        Ice_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.ice);
         brick_tiles = new ArrayList<Rect>();
         spawnpoints = new ArrayList<Rect>();
         r = new Random();
@@ -102,6 +104,7 @@ public class LevelManager implements Scene {
                     map[7][j] = true;
                 }
 
+                //Rest map tiles
                 for(int i = 0; i < 4; i = i+2)
                     map[i][10] = true;
                 for(int i = 6; i < 9; i = i+2)
@@ -197,8 +200,54 @@ public class LevelManager implements Scene {
                         }
                     }
                 }
+                break;
+            case 2 :
+                totalEnemiesForThisLevel = 1;
+                maxEnemySize = 4;
+                //Brick layout for surrounding controls
+                for(int i = 0; i < 3; i++){
+                    map[i][15] = true;
+                }
+                for(int j = 15; j < 20; j++){
+                    map[3][j] = true;
+                }
+                for(int i = 7; i < 10; i++){
+                    map[i][15] = true;
+                }
+                for(int j = 15; j < 20; j++){
+                    map[7][j] = true;
+                }
 
 
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 3 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (3 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
+                        7 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (7 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
+
+                player_spawn = new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
+                        19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (19 + 1) / 20);
+
+                for(int i = 0; i < 10; i++){
+                    for(int j = 0; j < 20; j++){
+                        if(map[i][j] == true) {
+                            brick_tiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
+                                    Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
+                                    Constants.SCREEN_HEIGHT * (j + 1) / 20));
+                        }
+                    }
+                }
                 break;
             default : // Optional
                 break;
@@ -211,12 +260,24 @@ public class LevelManager implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 20; j++){
-                if(map[i][j] == true) {
-                    canvas.drawBitmap(Brick_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
-                            Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
-                            Constants.SCREEN_HEIGHT * (j + 1) / 20), new Paint());
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 20; j++) {
+                if (map[i][j] == true) {
+                    switch(level) {
+                        case 1 :
+                        canvas.drawBitmap(Brick_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
+                                Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH *
+                                (i + 1) / 10, Constants.SCREEN_HEIGHT * (j + 1) / 20), new Paint());
+                            break;
+                        case 2 :
+                        canvas.drawBitmap(Ice_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
+                                Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH *
+                                (i + 1) / 10, Constants.SCREEN_HEIGHT * (j + 1) / 20), new Paint());
+                            break;
+                        default :
+                            break;
+                    }
                 }
             }
         }
