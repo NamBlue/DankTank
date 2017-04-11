@@ -37,6 +37,7 @@ public class Enemy implements GameObject
     public boolean spawning;
     public int dieFrames;
     public int spawnFrames;
+    private Point oldPoint;
 
     public Rect getRectangle()
     {
@@ -243,6 +244,7 @@ public class Enemy implements GameObject
                 readyToFire = true;
         }
         Point temp;
+        oldPoint = new Point(rectangle.centerX(), rectangle.centerY());
         switch (moveDirection)
         {
             case Up:
@@ -301,6 +303,15 @@ public class Enemy implements GameObject
                 break;
         }
     }
+
+    public void undoMove()
+    {
+        if(oldPoint != null)
+        {
+            update(oldPoint);
+        }
+    }
+
 
     public void update(Point point)
     {

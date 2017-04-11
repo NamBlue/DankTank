@@ -59,13 +59,23 @@ public class EnemyManager
             }
             frames = 0;
         }
-        for(Enemy enemy: enemies)
+        for(int i = 0; i < enemies.size(); ++i)
         {
-            if(enemy.dieFrames > 30)
+            if(enemies.get(i).dieFrames > 30)
             {
-                dyingEnemy = enemy;
+                dyingEnemy = enemies.get(i);
             }
-            enemy.update();
+            enemies.get(i).update();
+            for(int j = 0; j < enemies.size(); ++j)
+            {
+                if (i != j)
+                {
+                    if(enemies.get(i).collided(enemies.get(j).getRectangle()))
+                    {
+                        enemies.get(i).undoMove();
+                    }
+                }
+            }
         }
         if(dyingEnemy != null)
         {
