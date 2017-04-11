@@ -27,6 +27,9 @@ public class ScoreScene implements Scene {
     private int powerUpsLeft = 0;
     private int maxLineSize = 35;
     private int lineSize, row, score;
+    private boolean decreasing = false;
+    private int alpha = 255;
+    private Paint artUnlockedPaint = new Paint();
 
     public void update(){
         if(start)
@@ -45,7 +48,25 @@ public class ScoreScene implements Scene {
             }
             powerUpsLeft = powerups.size() - (index + 1);
         }
-
+        if(decreasing)
+        {
+            alpha -= Constants.TITLE_BLINK_SPEED;
+            if(alpha < 0)
+            {
+                decreasing = false;
+                alpha = 0;
+            }
+        }
+        else
+        {
+            alpha += Constants.TITLE_BLINK_SPEED;
+            if(alpha > 255)
+            {
+                decreasing  = true;
+                alpha = 255;
+            }
+        }
+        artUnlockedPaint.setAlpha(alpha);
     }
 
 
@@ -65,9 +86,10 @@ public class ScoreScene implements Scene {
         canvas.drawText(totalScore, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * 2 / 20, paint);
         canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *12/20, Constants.SCREEN_HEIGHT*2/20 ,paint);
 
-        paint.setTextAlign(Paint.Align.CENTER);
-        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .065));
-        canvas.drawText("Art Unlocked!!!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
+        artUnlockedPaint.setColor(Color.YELLOW);
+        artUnlockedPaint.setTextAlign(Paint.Align.CENTER);
+        artUnlockedPaint.setTextSize((int)(Constants.SCREEN_WIDTH * .065));
+        canvas.drawText("Art Unlocked!!!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
 
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         paint.setTextAlign(Paint.Align.LEFT);
