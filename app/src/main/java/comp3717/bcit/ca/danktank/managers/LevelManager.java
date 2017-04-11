@@ -86,7 +86,7 @@ public class LevelManager implements Scene {
     {
         switch(level) {
             case 1 :
-                totalEnemiesForThisLevel = 4;
+                totalEnemiesForThisLevel = 1;
                 maxEnemySize = 4;
                 //Brick layout for surrounding controls
                 for(int i = 0; i < 3; i++){

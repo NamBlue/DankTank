@@ -57,62 +57,83 @@ public class ScoreScene implements Scene {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
         canvas.drawText("Score", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/20 ,paint);
-        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
-        canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *4/6, Constants.SCREEN_HEIGHT*2/20 ,paint);
 
         paint.setTextAlign(Paint.Align.LEFT);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
+        score = (LevelManager.gettotalEnemiesForThisLevel() + powerups.size() - 1) * 100;
+        String totalScore = "Total Score: " + score;
+        canvas.drawText(totalScore, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * 2 / 20, paint);
+        canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *12/20, Constants.SCREEN_HEIGHT*2/20 ,paint);
 
-        row = 4;
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .065));
+        canvas.drawText("Art Unlocked!!!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,paint);
+
+        paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
+        paint.setTextAlign(Paint.Align.LEFT);
+        row = 7;
 
         //Display Name
         lineSize = name.length();
         line = "";
-        while(lineSize > maxLineSize){
-            for(int i = 0; i < lineSize; i++) {
-                line = line + name.charAt(i);
-                if (line.length() == maxLineSize) {
-                    canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
-                    row++;
-                    line = "";
+        if(lineSize > maxLineSize) {
+            while (lineSize > maxLineSize) {
+                for (int i = 0; i < lineSize; i++) {
+                    line = line + name.charAt(i);
+                    if (line.length() == maxLineSize) {
+                        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+                        row++;
+                        line = "";
+                    }
                 }
+                lineSize = lineSize - maxLineSize;
             }
-            lineSize = lineSize - maxLineSize;
+            canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+        }else{
+            canvas.drawText(name, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
         }
-        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
         row++;
 
         //Display Description
         lineSize = desc.length();
         line = "";
-        while(lineSize > maxLineSize){
-            for(int i = 0; i < lineSize; i++) {
-                line = line + desc.charAt(i);
-                if (line.length() == maxLineSize) {
-                    canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
-                    row++;
-                    line = "";
+        if(lineSize > maxLineSize) {
+            while (lineSize > maxLineSize) {
+                for (int i = 0; i < lineSize; i++) {
+                    line = line + desc.charAt(i);
+                    if (line.length() == maxLineSize) {
+                        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+                        row++;
+                        line = "";
+                    }
                 }
+                lineSize = lineSize - maxLineSize;
             }
-            lineSize = lineSize - maxLineSize;
+            canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+        }else{
+            canvas.drawText(desc, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
         }
-        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
         row++;
 
         //Display Address
         lineSize = address.length();
         line = "";
-        while(lineSize > maxLineSize){
-            for(int i = 0; i < lineSize; i++) {
-                line = line + address.charAt(i);
-                if (line.length() == maxLineSize) {
-                    canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
-                    row++;
-                    line = "";
+        if(lineSize > maxLineSize) {
+            while (lineSize > maxLineSize) {
+                for (int i = 0; i < lineSize; i++) {
+                    line = line + address.charAt(i);
+                    if (line.length() == maxLineSize) {
+                        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+                        row++;
+                        line = "";
+                    }
                 }
+                lineSize = lineSize - maxLineSize;
             }
-            lineSize = lineSize - maxLineSize;
+            canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+        }else {
+            canvas.drawText(address, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
         }
-        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
         row++;
 
         //Depreciated way of displaying item score
@@ -120,9 +141,7 @@ public class ScoreScene implements Scene {
         //canvas.drawText(desc, Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*5/20 ,paint);
         //canvas.drawText(address, Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*6/20 ,paint);
 
-        score = (LevelManager.gettotalEnemiesForThisLevel() + powerups.size() - 1) * 100;
-        String scoreasdf = "Score: " + score;
-        canvas.drawText(scoreasdf, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+
 
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .07));
