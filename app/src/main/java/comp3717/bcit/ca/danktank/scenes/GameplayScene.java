@@ -62,6 +62,7 @@ public class GameplayScene implements Scene
     private int score = 0;
     private Paint scorePaint, controlsPaint;
     private ArrayList<Rect> walls;
+    public static int level = 1;
 
     public GameplayScene()
     {
@@ -95,7 +96,7 @@ public class GameplayScene implements Scene
 
         bulletManager = new BulletManager();
         powerupManager = new PowerupManager();
-        levelManager = new LevelManager(1);
+        levelManager = new LevelManager(level);
         walls = levelManager.getBrickTiles();
         enemyManager = new EnemyManager(levelManager.getSpawnpoints(),
                 levelManager.getBrickTiles(),
@@ -117,6 +118,7 @@ public class GameplayScene implements Scene
     {
         if(!pause)
         {
+            levelManager = new LevelManager(level);
             player.reset();
             playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
             moveDirection = Enums.MoveDirection.Up;

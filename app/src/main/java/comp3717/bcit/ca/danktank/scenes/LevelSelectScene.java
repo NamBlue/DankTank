@@ -121,10 +121,22 @@ public class LevelSelectScene implements Scene {
                 if(backButton.contains((int)event.getX(), (int)event.getY())){
                     SceneManager.ACTIVE_SCENE = 0;
                 }
-                if(level1Button.contains((int)event.getX(), (int)event.getY())){
+                else if(level1Button.contains((int)event.getX(), (int)event.getY())){
+                    GameplayScene.level = 1;
                     SceneManager.ACTIVE_SCENE = 1;
                 }
-
+                else if(level2Button.contains((int)event.getX(), (int)event.getY())){
+                    GameplayScene.level = 2;
+                    SceneManager.ACTIVE_SCENE = 1;
+                }
+                else if(level3Button.contains((int)event.getX(), (int)event.getY())){
+                    GameplayScene.level = 3;
+                    SceneManager.ACTIVE_SCENE = 1;
+                }
+                else if(level4Button.contains((int)event.getX(), (int)event.getY())){
+                    GameplayScene.level = 4;
+                    SceneManager.ACTIVE_SCENE = 1;
+                }
                 break;
         }
     }
