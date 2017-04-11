@@ -52,12 +52,25 @@ public class BulletManager
 
     public boolean collided(Rect object)
     {
+        Bullet temp;
         for(Bullet bullet : playerBullets)
         {
             if(bullet.collided(object))
             {
                 playerBullets.remove(bullet);
                 return true;
+            }
+            else
+            {
+                for(int i = 0; i < enemyBullets.size(); ++i)
+                {
+                    if (bullet.collided(enemyBullets.get(i).getRectangle()))
+                    {
+                        playerBullets.remove(bullet);
+                        enemyBullets.remove(i);
+                        return false;
+                    }
+                }
             }
         }
         return false;
