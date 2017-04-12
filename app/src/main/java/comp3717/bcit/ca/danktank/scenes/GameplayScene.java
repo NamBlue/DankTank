@@ -366,9 +366,9 @@ public class GameplayScene implements Scene
             scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
             canvas.drawText("You win!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, scorePaint);
             scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .06));
-            canvas.drawText("New West is safe!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 12 / 20, scorePaint);
-            canvas.drawText("    but for how long...", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 13 / 20, scorePaint);
-            canvas.drawText("Press anywhere to continue", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 14 / 20, scorePaint);
+            canvas.drawText("New West Minister is safe!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 12 / 20, scorePaint);
+            canvas.drawText("but for how long...", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 13 / 20, scorePaint);
+            canvas.drawText("Press anywhere to continue", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 15 / 20, scorePaint);
             scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         }
         canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, scorePaint);
