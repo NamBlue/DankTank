@@ -12,6 +12,7 @@ import java.util.Random;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.objects.Bullet;
 import comp3717.bcit.ca.danktank.objects.Enemy;
+import comp3717.bcit.ca.danktank.objects.Player;
 
 /**
  * Created by namblue on 3/24/2017.
@@ -52,7 +53,7 @@ public class EnemyManager
         {
             int z = random.nextInt(spawnPoints.size());
             Rect temp = spawnPoints.get(z);
-            if (!collided(temp))
+            if (!collided(temp) && !Player.getRectangle().intersect(temp))
             {
                 enemies.add(new Enemy(new Rect(0, 0, Constants.ENEMY_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
                 enemies.get(enemies.size() - 1).update(new Point(temp.centerX(), temp.centerY()));

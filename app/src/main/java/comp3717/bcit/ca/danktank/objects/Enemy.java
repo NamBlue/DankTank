@@ -237,10 +237,20 @@ public class Enemy implements GameObject
         }
         Point temp;
         oldPoint = new Point(rectangle.centerX(), rectangle.centerY());
+        Rect playRect = Player.getRectangle();
         switch (moveDirection)
         {
             case Up:
-                 temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.ENEMY_SPEED);
+                temp = new Point(rectangle.centerX(), rectangle.centerY() - Constants.ENEMY_SPEED);
+                //For enemy - player collision
+                if(playRect.contains(temp.x - (Constants.ENEMY_SIZE/2),temp.y - (Constants.ENEMY_SIZE/2))
+                        || playRect.contains(temp.x + (Constants.ENEMY_SIZE/2),temp.y - (Constants.ENEMY_SIZE/2)))
+                {
+                    temp.y += Constants.ENEMY_SPEED;
+                    update(temp);
+                    break;
+                }
+                //For Enemy - enemy collision
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x - (Constants.ENEMY_SIZE/2),temp.y - (Constants.ENEMY_SIZE/2))
@@ -254,6 +264,13 @@ public class Enemy implements GameObject
                 break;
             case Down:
                 temp = new Point(rectangle.centerX(), rectangle.centerY() + Constants.ENEMY_SPEED);
+                if(playRect.contains(temp.x - (Constants.ENEMY_SIZE/2),temp.y + (Constants.ENEMY_SIZE/2))
+                        || playRect.contains(temp.x + (Constants.ENEMY_SIZE/2),temp.y + (Constants.ENEMY_SIZE/2)))
+                {
+                    temp.y -= Constants.ENEMY_SPEED;
+                    update(temp);
+                    break;
+                }
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x - (Constants.ENEMY_SIZE/2),temp.y + (Constants.ENEMY_SIZE/2))
@@ -267,6 +284,13 @@ public class Enemy implements GameObject
                 break;
             case Left:
                 temp = new Point(rectangle.centerX() - Constants.ENEMY_SPEED, rectangle.centerY());
+                if(playRect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y + (Constants.ENEMY_SIZE/2))
+                        || playRect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y - (Constants.ENEMY_SIZE/2)))
+                {
+                    temp.x += Constants.ENEMY_SPEED;
+                    update(temp);
+                    break;
+                }
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x  - (Constants.ENEMY_SIZE/2), temp.y + (Constants.ENEMY_SIZE/2))
@@ -280,6 +304,13 @@ public class Enemy implements GameObject
                 break;
             case Right:
                 temp = new Point(rectangle.centerX() + Constants.ENEMY_SPEED, rectangle.centerY());
+                if(playRect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y + (Constants.ENEMY_SIZE/2))
+                        || playRect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y - (Constants.ENEMY_SIZE/2)))
+                {
+                    temp.x -= Constants.ENEMY_SPEED;
+                    update(temp);
+                    break;
+                }
                 for(Rect rect : walls)
                 {
                     if(rect.contains(temp.x  + (Constants.ENEMY_SIZE/2), temp.y + (Constants.ENEMY_SIZE/2))

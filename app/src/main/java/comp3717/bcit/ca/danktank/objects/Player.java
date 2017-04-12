@@ -18,7 +18,7 @@ import comp3717.bcit.ca.danktank.managers.AnimationManager;
 
 public class Player implements GameObject
 {
-    private Rect rectangle;
+    private static Rect rectangle;
     private Rect wallRect;
     private int color;
     private Animation idleUp, idleDown, idleLeft, idleRight;
@@ -29,7 +29,7 @@ public class Player implements GameObject
     public boolean startingState, dying;
     private int spawnFrames, dieFrames;
 
-    public Rect getRectangle()
+    public static Rect getRectangle()
     {
         return rectangle;
     }
