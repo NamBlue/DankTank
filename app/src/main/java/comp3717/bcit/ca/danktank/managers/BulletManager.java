@@ -159,20 +159,28 @@ public class BulletManager
     {
         if(playerBullets.size() > 0)
         {
-            int x = playerBullets.get(playerBullets.size() - 1).getRectangle().centerX(), y = playerBullets.get(playerBullets.size() - 1).getRectangle().centerY();
-            if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+            for(int i = 0; i < playerBullets.size(); ++i)
             {
-                playerBullets.remove(0);
-                SFX_Manager.impact();
+                int x = playerBullets.get(i).getRectangle().centerX(), y = playerBullets.get(i).getRectangle().centerY();
+                if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+                {
+                    playerBullets.remove(i);
+                    --i;
+                    SFX_Manager.impact();
+                }
             }
         }
         if(enemyBullets.size() > 0)
         {
-            int x = enemyBullets.get(enemyBullets.size() - 1).getRectangle().centerX(), y = enemyBullets.get(enemyBullets.size() - 1).getRectangle().centerY();
-            if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+            for(int i = 0; i < enemyBullets.size(); ++i)
             {
-                enemyBullets.remove(0);
-                SFX_Manager.impact();
+                int x = enemyBullets.get(i).getRectangle().centerX(), y = enemyBullets.get(i).getRectangle().centerY();
+                if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
+                {
+                    enemyBullets.remove(i);
+                    --i;
+                    SFX_Manager.impact();
+                }
             }
         }
     }

@@ -37,6 +37,9 @@ public class ScoreScene implements Scene {
         artUnlockedPaint.setColor(Color.BLUE);
         artUnlockedPaint.setTextAlign(Paint.Align.CENTER);
         artUnlockedPaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
+        name = "";
+        desc = "";
+        address = "";
     }
 
     public void update(){
@@ -55,6 +58,10 @@ public class ScoreScene implements Scene {
                 address = "Address: " + powerups.get(index).getAddress();
             }
             powerUpsLeft = powerups.size() - (index + 1);
+            if(powerups.size() == 0)
+            {
+                powerUpsLeft = 0;
+            }
         }
         if(decreasing)
         {
@@ -94,8 +101,8 @@ public class ScoreScene implements Scene {
         String totalScore = "Total Score: " + score;
         canvas.drawText(totalScore, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * 3 / 20, paint);
         canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *12/20, Constants.SCREEN_HEIGHT*3/20 ,paint);
-
-        canvas.drawText("Art Unlocked!!!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
+        if(powerups.size() > 0)
+            canvas.drawText("Art Unlocked!!!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
 
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         paint.setTextAlign(Paint.Align.LEFT);
@@ -187,7 +194,7 @@ public class ScoreScene implements Scene {
                 {
                     ++index;
                 }
-        }
+    }
     }
     /**
      * Invoked on re-entering of a scene, used to restart the scene to initial state

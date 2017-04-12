@@ -62,6 +62,7 @@ public class GameplayScene implements Scene
     public static int score = 0;
     private Paint scorePaint, winLosePaint, controlsPaint;
     private ArrayList<Rect> walls;
+    private int gameoverFrames, winFrames;
     public static int level = 1;
 
     public GameplayScene()
@@ -93,7 +94,8 @@ public class GameplayScene implements Scene
         moveDownButton = new Rect(Constants.SCREEN_WIDTH*3/30, Constants.SCREEN_HEIGHT*28/30, Constants.SCREEN_WIDTH*6/30, Constants.SCREEN_HEIGHT*30/30);
         fireButton = new Rect(Constants.SCREEN_WIDTH*49/60, Constants.SCREEN_HEIGHT*25/30, Constants.SCREEN_WIDTH*58/60, Constants.SCREEN_HEIGHT*28/30);
         moveDirection = Enums.MoveDirection.Up;
-
+        gameoverFrames = 0;
+        winFrames = 0;
 
         bulletManager = new BulletManager();
         powerupManager = new PowerupManager();
@@ -124,6 +126,8 @@ public class GameplayScene implements Scene
     {
         if(!pause)
         {
+            winFrames = 0;
+            gameoverFrames = 0;
             levelManager = new LevelManager(level);
             walls = levelManager.getWallTiles();
             enemyManager = new EnemyManager(levelManager.getSpawnpoints(),
@@ -338,6 +342,11 @@ public class GameplayScene implements Scene
             {
                 gameOverTextPos -= .07f;
             }
+            ++gameoverFrames;
+        }
+        else if(win)
+        {
+            ++winFrames;
         }
     }
 
@@ -385,7 +394,6 @@ public class GameplayScene implements Scene
     @Override
     public void receiveTouch(MotionEvent event)
     {
-        long x = System.currentTimeMillis() - gameOverTime;
         int maskedAction = event.getActionMasked();
         switch (maskedAction)
         {
@@ -434,13 +442,13 @@ public class GameplayScene implements Scene
                         SceneManager.ACTIVE_SCENE = 3;
                     }
                 }
-                else if (gameOver && System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
+                else if (gameOver && gameoverFrames >= Constants.GAMEOVER_TIME)
                 {
                     pause = false;
                     SceneManager.ACTIVE_SCENE = 2;
                     MusicManager.getInstance().playTitle();
                 }
-                else if(win && x >= Constants.GAMEOVER_TIME)
+                else if(win && winFrames >= Constants.GAMEOVER_TIME)
                 {
                     pause = false;
                     SceneManager.ACTIVE_SCENE = 6;
