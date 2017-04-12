@@ -52,7 +52,6 @@ public class BulletManager
 
     public boolean collided(Rect object)
     {
-        Bullet temp;
         for(Bullet bullet : playerBullets)
         {
             if(bullet.collided(object))
@@ -68,6 +67,7 @@ public class BulletManager
                     {
                         playerBullets.remove(bullet);
                         enemyBullets.remove(i);
+                        SFX_Manager.impact();
                         return false;
                     }
                 }

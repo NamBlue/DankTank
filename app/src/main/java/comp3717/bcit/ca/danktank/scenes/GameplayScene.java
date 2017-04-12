@@ -111,6 +111,7 @@ public class GameplayScene implements Scene
         scorePaint = new Paint();
         scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         scorePaint.setColor(Color.BLUE);
+        scorePaint.setTextAlign(Paint.Align.CENTER);
         controlsPaint = new Paint();
     }
 
@@ -143,19 +144,6 @@ public class GameplayScene implements Scene
         {
             pause = false;
         }
-    }
-
-
-    private void drawCentreText(Canvas canvas, Paint paint, String text)
-    {
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.getClipBounds(rectBound);
-        int cHeight = rectBound.height();
-        int cWidth = rectBound.width();
-        paint.getTextBounds(text, 0, text.length(), rectBound);
-        float x = cWidth / 2f - rectBound.width() / 2f - rectBound.left;
-        float y = cHeight / 2f - rectBound.height() / 2f - rectBound.bottom;
-        canvas.drawText(text, x ,y ,paint);
     }
 
     @Override
@@ -362,12 +350,12 @@ public class GameplayScene implements Scene
         canvas.drawBitmap(fire_image, null, fireButton, controlsPaint);
         if (gameOver)
         {
-            drawCentreText(canvas, scorePaint, "Game Over");
+            canvas.drawText("Game Over", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, scorePaint);
         }
-        if(win){
-            drawCentreText(canvas, scorePaint, "You win!");
+        if (win)
+        {
+            canvas.drawText("You win!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, scorePaint);
         }
-
         canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, scorePaint);
     }
 
