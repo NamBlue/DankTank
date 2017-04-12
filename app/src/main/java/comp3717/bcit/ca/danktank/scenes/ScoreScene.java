@@ -90,7 +90,7 @@ public class ScoreScene implements Scene {
 
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .05));
-        score = (LevelManager.gettotalEnemiesForThisLevel() + powerups.size() - 1) * 100;
+        score = GameplayScene.score;
         String totalScore = "Total Score: " + score;
         canvas.drawText(totalScore, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * 3 / 20, paint);
         canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *12/20, Constants.SCREEN_HEIGHT*3/20 ,paint);

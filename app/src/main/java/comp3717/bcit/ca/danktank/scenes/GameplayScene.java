@@ -59,7 +59,7 @@ public class GameplayScene implements Scene
     private float gameOverTextPos;
 
     private ArrayList<Enemy> enemies;
-    private int score = 0;
+    public static int score = 0;
     private Paint scorePaint, winLosePaint, controlsPaint;
     private ArrayList<Rect> walls;
     public static int level = 1;
