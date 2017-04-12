@@ -131,13 +131,14 @@ public class MusicManager {
                             {
                                 case 1:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
+                                    mPlayer.setVolume(.20f, .20f);
                                     break;
                                 case 2:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage2);
+                                    mPlayer.setVolume(.25f, .25f);
                                     break;
                             }
                             mPlayer.setLooping(true);
-                            mPlayer.setVolume(.25f, .25f);
                             mPlayer.start();
                         }
                     } catch(Exception e){
