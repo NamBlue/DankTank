@@ -358,11 +358,17 @@ public class GameplayScene implements Scene
         canvas.drawBitmap(fire_image, null, fireButton, controlsPaint);
         if (gameOver)
         {
+            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .01));
             canvas.drawText("Game Over", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * gameOverTextPos / 20, scorePaint);
         }
         if (win)
         {
+            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
             canvas.drawText("You win!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, scorePaint);
+            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
+            canvas.drawText("New West is safe, but for how long...", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 13 / 20, scorePaint);
+            canvas.drawText("Press anywhere to continue", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 14 / 20, scorePaint);
+            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         }
         canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, scorePaint);
     }
