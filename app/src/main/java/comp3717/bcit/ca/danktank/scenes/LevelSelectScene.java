@@ -50,7 +50,7 @@ public class LevelSelectScene implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawColor(Color.WHITE);
+        canvas.drawColor(Color.LTGRAY);
         Paint paint = new Paint();
 
         drawBackButton(canvas, paint);
