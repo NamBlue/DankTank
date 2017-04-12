@@ -36,6 +36,9 @@ public class SFX_Manager
             if(warp.size() == 0)
             {
                 warp.add(MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp));
+                warp.get(0).seekTo(0);
+                warp.get(0).setVolume(.5f, .5f);
+                warp.get(0).start();
             }
             else
             {

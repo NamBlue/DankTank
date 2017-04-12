@@ -386,7 +386,8 @@ public class GameplayScene implements Scene
     public void receiveTouch(MotionEvent event)
     {
         long x = System.currentTimeMillis() - gameOverTime;
-        switch (event.getAction())
+        int maskedAction = event.getActionMasked();
+        switch (maskedAction)
         {
             case MotionEvent.ACTION_DOWN:
                 if(!gameOver && !win && !player.startingState)
@@ -444,16 +445,32 @@ public class GameplayScene implements Scene
                     pause = false;
                     SceneManager.ACTIVE_SCENE = 6;
                 }
-
-                break;
-            /* Deprecated - for drag controls
-            case MotionEvent.ACTION_MOVE:
+                /* Deprecated - for drag controls
+                case MotionEvent.ACTION_MOVE:
                 if (!gameOver && movingPlayer)
                 {
                     playerPoint.set((int) event.getX(), (int) event.getY());
                 }
                 break;
-            */
+                */
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                if(!gameOver && !win && !player.startingState)
+                {
+                    /* Decprecated - for drag controls
+                    if (player.getRectangle().contains((int) event.getX(), (int) event.getY()))
+                    {
+                        movingPlayer = true;
+                    }
+                    */
+                    int pointerIndex = event.getActionIndex();
+                    if (fireButton.contains((int) event.getX(pointerIndex), (int) event.getY(pointerIndex)))
+                    {
+                        playerFiring = true;
+                    }
+                }
+                break;
+
             case MotionEvent.ACTION_UP:
                 movingPlayer = false;
                 break;
