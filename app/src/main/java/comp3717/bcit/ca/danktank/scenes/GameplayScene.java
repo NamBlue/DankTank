@@ -358,7 +358,7 @@ public class GameplayScene implements Scene
         canvas.drawBitmap(fire_image, null, fireButton, controlsPaint);
         if (gameOver)
         {
-            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .01));
+            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
             canvas.drawText("Game Over", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * gameOverTextPos / 20, scorePaint);
         }
         if (win)
