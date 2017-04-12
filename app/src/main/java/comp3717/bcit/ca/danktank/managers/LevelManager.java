@@ -115,88 +115,116 @@ public class LevelManager implements Scene {
                 }
 
                 //Terrain map tiles
-                for(int i = 0; i < 4; i = i+2)
-                    map[i][10] = true;
-                for(int i = 6; i < 9; i = i+2)
-                    map[i][10] = true;
-
-                for(int j = 9; j > 7; j--)
-                    map[3][j] = true;
-
-                for(int j = 8; j > 5; j--)
-                    map[7][j] = true;
-
-                for(int j = 8; j > 5; j--)
-                    map[9][j] = true;
-
-                for(int i = 0; i < 10; i = i+3)
-                    map[i][8] = true;
-
-                map[6][5] = true;
-                map[6][6] = true;
-
-                map[3][7] = true;
-                map[5][13] = true;
-                map[4][8] = true;
-                map[4][18] = true;
-                map[4][9] = true;
-                map[5][1] = true;
-                map[6][1] = true;
-                map[0][12] = true;
-                map[0][13] = true;
                 map[1][12] = true;
-                map[1][13] = true;
-                map[3][12] = true;
+                map[1][11] = true;
+                map[1][10] = true;
 
-                map[6][15] = true;
-                map[5][15] = true;
-                map[6][16] = true;
-                map[7][12] = true;
-                map[8][12] = true;
-
-
-                map[8][11] = true;
-                map[8][13] = true;
-                map[9][13] = true;
-
-                map[0][3] = true;
-                map[1][3] = true;
-
-                map[4][3] = true;
-                map[5][3] = true;
-                map[6][3] = true;
-                map[8][3] = true;
-                map[8][4] = true;
-
-                map[3][1] = true;
-                map[2][1] = true;
-                map[8][1] = true;
-
-                map[4][13] = true;
-                map[4][12] = true;
-                map[4][11] = true;
-
-                for(int i = 0; i < 8; i = i+2)
-                    map[i][5] = true;
-
+                map[1][8] = true;
                 map[1][7] = true;
+                map[1][6] = true;
+
+                map[1][4] = true;
+                map[1][3] = true;
+                map[1][2] = true;
+
+                map[3][12] = true;
+                map[3][11] = true;
+                map[3][10] = true;
+
+                map[3][8] = true;
+                map[3][7] = true;
+                map[3][6] = true;
+
+                map[3][4] = true;
+                map[3][3] = true;
+                map[3][2] = true;
+
+                map[5][12] = true;
+                map[5][11] = true;
+                map[5][10] = true;
+
+                map[5][8] = true;
+                map[5][7] = true;
+                map[5][6] = true;
+
+                map[5][4] = true;
+                map[5][3] = true;
+                map[5][2] = true;
+
+                map[7][12] = true;
+                map[7][11] = true;
+                map[7][10] = true;
+
+                map[7][8] = true;
+                map[7][7] = true;
+                map[7][6] = true;
+
+                map[7][4] = true;
+                map[7][3] = true;
+                map[7][2] = true;
+
+
+                map[9][12] = true;
+                map[9][11] = true;
+                map[9][10] = true;
+
+                map[9][8] = true;
+                map[9][7] = true;
+                map[9][6] = true;
+
+                map[9][4] = true;
+                map[9][3] = true;
+                map[9][2] = true;
 
                 //Spawnpoints
                 spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
                         0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (0 + 1) / 20));
 
-                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 3 / 10, Constants.SCREEN_HEIGHT *
-                        5 / 20, Constants.SCREEN_WIDTH * (3 + 1) / 10, Constants.SCREEN_HEIGHT *
-                        (5 + 1) / 20));
-
-                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
-                        7 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
-                        (7 + 1) / 20));
-
                 spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
-                        5 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 8 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (8 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (5 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 6 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (6 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 4 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (4 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 2 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (2 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 8 / 10, Constants.SCREEN_HEIGHT *
+                        9 / 20, Constants.SCREEN_WIDTH * (8 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (9 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 6 / 10, Constants.SCREEN_HEIGHT *
+                        9 / 20, Constants.SCREEN_WIDTH * (6 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (9 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 4 / 10, Constants.SCREEN_HEIGHT *
+                        9 / 20, Constants.SCREEN_WIDTH * (4 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (9 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 2 / 10, Constants.SCREEN_HEIGHT *
+                        9 / 20, Constants.SCREEN_WIDTH * (2 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (9 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        9 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (9 + 1) / 20));
+
 
                 player_spawn = new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
