@@ -58,6 +58,7 @@ public class GameplayScene implements Scene
     private Bitmap left_image;
     private Bitmap pause_image;
     private Bitmap fire_image;
+    private float gameOverTextPos;
 
     private ArrayList<Enemy> enemies;
     private int score = 0;
@@ -76,6 +77,8 @@ public class GameplayScene implements Scene
         Constants.BULLET_GAP = (int)(Constants.SCREEN_WIDTH * .03);
         Constants.POWERUP_SIZE = (int)(Constants.SCREEN_WIDTH * .08);
         Constants.ENEMY_SPEED = (int)(Constants.SCREEN_WIDTH * .008);
+
+        gameOverTextPos = 22;
 
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
@@ -260,6 +263,7 @@ public class GameplayScene implements Scene
             {
                 player.dying = true;
                 gameOver = true;
+                gameOverTextPos = 22;
                 MusicManager.getInstance().playGameOver();
                 gameOverTime = System.currentTimeMillis();
                 SFX_Manager.explode();
@@ -328,6 +332,10 @@ public class GameplayScene implements Scene
         else if (gameOver)
         {
             player.update(playerPoint, moveDirection);
+            if (gameOverTextPos >  10)
+            {
+                gameOverTextPos -= .07f;
+            }
         }
     }
 
@@ -350,7 +358,7 @@ public class GameplayScene implements Scene
         canvas.drawBitmap(fire_image, null, fireButton, controlsPaint);
         if (gameOver)
         {
-            canvas.drawText("Game Over", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, scorePaint);
+            canvas.drawText("Game Over", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * gameOverTextPos / 20, scorePaint);
         }
         if (win)
         {
