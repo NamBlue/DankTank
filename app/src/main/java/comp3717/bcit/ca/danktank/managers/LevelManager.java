@@ -16,6 +16,8 @@ import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.scenes.Scene;
 
+import static comp3717.bcit.ca.danktank.MainThread.canvas;
+
 /**
  * Created by steve on 2017-03-31.
  */
@@ -32,6 +34,7 @@ public class LevelManager implements Scene {
     private Rect player_spawn;
     private static int totalEnemiesForThisLevel;
     private int maxEnemySize;
+    private Bitmap backGroundImage;
 
     public LevelManager(int level){
         BitmapFactory bitmapFactory = new BitmapFactory();
@@ -43,7 +46,11 @@ public class LevelManager implements Scene {
         map = new boolean[10][20];
         this.level = level;
         populateMap(level);
-
+        if(level == 1) {
+            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.desert);
+        }else if(level == 2){
+            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.snow);
+        }
 
 
 
@@ -104,7 +111,7 @@ public class LevelManager implements Scene {
                     map[7][j] = true;
                 }
 
-                //Rest map tiles
+                //Terrain map tiles
                 for(int i = 0; i < 4; i = i+2)
                     map[i][10] = true;
                 for(int i = 6; i < 9; i = i+2)
@@ -171,6 +178,7 @@ public class LevelManager implements Scene {
 
                 map[1][7] = true;
 
+                //Spawnpoints
                 spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
                         0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (0 + 1) / 20));
@@ -202,7 +210,7 @@ public class LevelManager implements Scene {
                 }
                 break;
             case 2 :
-                totalEnemiesForThisLevel = 1;
+                totalEnemiesForThisLevel = 4;
                 maxEnemySize = 4;
                 //Brick layout for surrounding controls
                 for(int i = 0; i < 3; i++){
@@ -218,22 +226,58 @@ public class LevelManager implements Scene {
                     map[7][j] = true;
                 }
 
+                //Terrain map tiles
+                map[1][13] = true;
+                map[2][12] = true;
+                map[3][11] = true;
 
+                map[8][13] = true;
+                map[7][12] = true;
+                map[6][11] = true;
+
+                map[4][13] = true;
+                map[5][13] = true;
+
+                map[0][9] = true;
+                map[2][9] = true;
+                map[7][9] = true;
+                map[9][9] = true;
+
+                map[5][9] = true;
+                map[4][9] = true;
+                map[5][8] = true;
+                map[4][8] = true;
+                map[5][9] = true;
+                map[4][9] = true;
+
+                map[3][6] = true;
+                map[2][5] = true;
+                map[1][4] = true;
+
+                map[8][4] = true;
+                map[7][5] = true;
+                map[6][6] = true;
+
+                map[4][4] = true;
+                map[5][4] = true;
+
+                map[1][2] = true;
+                map[2][2] = true;
+
+                map[8][2] = true;
+                map[7][2] = true;
+
+                map[4][0] = true;
+                map[5][0] = true;
+
+                map[4][1] = true;
+                map[5][1] = true;
+
+                //Spawnpoints
                 spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
                         0 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (0 + 1) / 20));
 
-                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 3 / 10, Constants.SCREEN_HEIGHT *
-                        5 / 20, Constants.SCREEN_WIDTH * (3 + 1) / 10, Constants.SCREEN_HEIGHT *
-                        (5 + 1) / 20));
-
-                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
-                        7 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
-                        (7 + 1) / 20));
-
-                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
-                        5 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
-                        (5 + 1) / 20));
 
                 player_spawn = new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
@@ -260,7 +304,7 @@ public class LevelManager implements Scene {
 
     @Override
     public void draw(Canvas canvas) {
-
+        canvas.drawBitmap(backGroundImage, null, new Rect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT),null);
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 20; j++) {
                 if (map[i][j] == true) {
