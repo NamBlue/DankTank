@@ -92,7 +92,7 @@ public class InstructionScene implements Scene {
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         paint.setColor(Color.BLACK);
         canvas.drawText("-Shoot down as many enemy tanks as you can", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*4/20 ,paint);
-        canvas.drawText("-Recover the paintings to unlock art:", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*5/20 ,paint);
+        canvas.drawText("-Recover the flags to unlock art & earn points:", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*5/20 ,paint);
         canvas.drawBitmap(art_image, null, art, paint);
         canvas.drawText("1. Press the", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*8/20 ,paint);
         canvas.drawText("  buttons to move your tank", Constants.SCREEN_WIDTH*9/20, Constants.SCREEN_HEIGHT*8/20 ,paint);
