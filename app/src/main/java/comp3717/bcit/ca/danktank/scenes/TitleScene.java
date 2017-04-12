@@ -23,7 +23,7 @@ public class TitleScene implements Scene
 {
     //Used to set the bounds for the gameover text box
     private Rect screen = new Rect(0,0,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
-    private Rect instructions_button = new Rect(0,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
+    private Rect instructions_button = new Rect(0,Constants.SCREEN_HEIGHT*17/20,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
     private BitmapFactory bitmapFactory;
     private Bitmap title;
     private Paint titlePaint;
