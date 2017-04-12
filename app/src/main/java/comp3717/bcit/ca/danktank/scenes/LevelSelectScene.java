@@ -77,40 +77,46 @@ public class LevelSelectScene implements Scene {
     {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.GREEN);
+        paint.setColor(Color.BLACK);
         canvas.drawText(text, Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*3/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
-        canvas.drawText("Play", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
+        paint.setColor(Color.YELLOW);
+        canvas.drawText("Desert", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
     }
 
     private void drawLevel2Text(Canvas canvas, Paint paint, String text)
     {
         paint.setTextAlign(Paint.Align.CENTER);
+        paint.setColor(Color.BLACK);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.RED);
         canvas.drawText(text, Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*3/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
-        canvas.drawText("Locked", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
+        paint.setColor(Color.BLUE);
+        canvas.drawText("Snow", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*10/20 ,paint);
     }
 
     private void drawLevel3Text(Canvas canvas, Paint paint, String text)
     {
+        paint.setColor(Color.BLACK);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.RED);
+
         canvas.drawText(text, Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*12/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
-        canvas.drawText("Locked", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
+        paint.setColor(Color.GREEN);
+        canvas.drawText("Forest", Constants.SCREEN_WIDTH*5/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
     }
 
     private void drawLevel4Text(Canvas canvas, Paint paint, String text)
     {
+        paint.setColor(Color.BLACK);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-        paint.setColor(Color.RED);
+
         canvas.drawText(text, Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*12/20 ,paint);
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .075));
-        canvas.drawText("Locked", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
+        paint.setColor(Color.RED);
+        canvas.drawText("Volcano", Constants.SCREEN_WIDTH*15/20 ,Constants.SCREEN_HEIGHT*19/20 ,paint);
     }
 
     @Override
