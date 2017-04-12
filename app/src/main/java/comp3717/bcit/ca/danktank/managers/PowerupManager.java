@@ -36,7 +36,7 @@ public class PowerupManager
 
     public boolean collided(Rect object)
     {
-        for(int i = 0; i < powerups.size(); i++)
+        for(int i = 0; i < powerups.size(); ++i)
         {
             if(powerups.get(i).collided(object))
             {

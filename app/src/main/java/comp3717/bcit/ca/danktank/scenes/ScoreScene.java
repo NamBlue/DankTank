@@ -106,7 +106,7 @@ public class ScoreScene implements Scene {
         line = "";
         if(lineSize > maxLineSize) {
             while (lineSize > maxLineSize) {
-                for (int i = 0; i < lineSize; i++) {
+                for (int i = 0; i < lineSize; ++i) {
                     line = line + name.charAt(i);
                     if (line.length() == maxLineSize) {
                         canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
@@ -127,7 +127,7 @@ public class ScoreScene implements Scene {
         line = "";
         if(lineSize > maxLineSize) {
             while (lineSize > maxLineSize) {
-                for (int i = 0; i < lineSize; i++) {
+                for (int i = 0; i < lineSize; ++i) {
                     line = line + desc.charAt(i);
                     if (line.length() == maxLineSize) {
                         canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
@@ -148,7 +148,7 @@ public class ScoreScene implements Scene {
         line = "";
         if(lineSize > maxLineSize) {
             while (lineSize > maxLineSize) {
-                for (int i = 0; i < lineSize; i++) {
+                for (int i = 0; i < lineSize; ++i) {
                     line = line + address.charAt(i);
                     if (line.length() == maxLineSize) {
                         canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);

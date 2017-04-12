@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         @Override
         protected String doInBackground(String... f_url) {
             int count;
-            for(int i = 0; i < f_url.length; i++){
+            for(int i = 0; i < f_url.length; ++i){
                 try {
                     String root = Environment.getExternalStorageDirectory().toString();
 

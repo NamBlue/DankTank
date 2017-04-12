@@ -21,7 +21,7 @@ public class AnimationManager
 
     public void playAnimation(int index)
     {
-        for(int i = 0; i < animations.length; i++)
+        for(int i = 0; i < animations.length; ++i)
         {
             if(i == index)
             {

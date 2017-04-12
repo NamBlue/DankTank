@@ -124,13 +124,13 @@ public class LevelManager implements Scene {
         switch(level) {
             case 1 :
                 //Brick layout for surrounding controls
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 3; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
                     map[3][j] = true;
                 }
-                for(int i = 7; i < 10; i++){
+                for(int i = 7; i < 10; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
@@ -253,7 +253,7 @@ public class LevelManager implements Scene {
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (19 + 1) / 20);
 
-                for(int i = 0; i < 10; i++){
+                for(int i = 0; i < 10; ++i){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
                             wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
@@ -265,13 +265,13 @@ public class LevelManager implements Scene {
                 break;
             case 2 :
                 //Brick layout for surrounding controls
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 3; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
                     map[3][j] = true;
                 }
-                for(int i = 7; i < 10; i++){
+                for(int i = 7; i < 10; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
@@ -355,7 +355,7 @@ public class LevelManager implements Scene {
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (19 + 1) / 20);
 
-                for(int i = 0; i < 10; i++){
+                for(int i = 0; i < 10; ++i){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
                             wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
@@ -367,13 +367,13 @@ public class LevelManager implements Scene {
                 break;
             case 3 :
                 //Brick layout for surrounding controls
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 3; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
                     map[3][j] = true;
                 }
-                for(int i = 7; i < 10; i++){
+                for(int i = 7; i < 10; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
@@ -477,7 +477,7 @@ public class LevelManager implements Scene {
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (19 + 1) / 20);
 
-                for(int i = 0; i < 10; i++){
+                for(int i = 0; i < 10; ++i){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
                             wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
@@ -489,13 +489,13 @@ public class LevelManager implements Scene {
                 break;
             case 4 :
                 //Brick layout for surrounding controls
-                for(int i = 0; i < 3; i++){
+                for(int i = 0; i < 3; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
                     map[3][j] = true;
                 }
-                for(int i = 7; i < 10; i++){
+                for(int i = 7; i < 10; ++i){
                     map[i][15] = true;
                 }
                 for(int j = 15; j < 20; j++){
@@ -582,7 +582,7 @@ public class LevelManager implements Scene {
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (19 + 1) / 20);
 
-                for(int i = 0; i < 10; i++){
+                for(int i = 0; i < 10; ++i){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
                             wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
@@ -604,7 +604,7 @@ public class LevelManager implements Scene {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(backGroundImage, null, new Rect(0, 0, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT),null);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; ++i) {
             for (int j = 0; j < 20; j++) {
                 if (map[i][j] == true) {
                     switch(level) {

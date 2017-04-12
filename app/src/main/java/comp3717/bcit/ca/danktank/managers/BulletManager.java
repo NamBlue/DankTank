@@ -55,20 +55,20 @@ public class BulletManager
 
     public boolean collided(Rect object)
     {
-        for(Bullet bullet : playerBullets)
+        for(int j = 0; j < playerBullets.size(); ++j)
         {
-            if(bullet.collided(object))
+            if(playerBullets.get(j).collided(object))
             {
-                playerBullets.remove(bullet);
+                playerBullets.remove(j);
                 return true;
             }
-            else
+            else //For bullet - bullet collision
             {
                 for(int i = 0; i < enemyBullets.size(); ++i)
                 {
-                    if (bullet.collided(enemyBullets.get(i).getRectangle()))
+                    if (playerBullets.get(j).collided(enemyBullets.get(i).getRectangle()))
                     {
-                        playerBullets.remove(bullet);
+                        playerBullets.remove(j);
                         enemyBullets.remove(i);
                         SFX_Manager.impact();
                         return false;
@@ -81,44 +81,55 @@ public class BulletManager
 
     public boolean enemyCollided(Rect object)
     {
-        for(Bullet ebullet : enemyBullets)
+        for(int i = 0; i < enemyBullets.size(); ++i)
         {
-            if(ebullet.collided(object))
+            if(enemyBullets.get(i).collided(object))
             {
-                enemyBullets.remove(ebullet);
+                enemyBullets.remove(i);
                 return true;
             }
         }
         return false;
     }
 
-    public boolean collided(ArrayList<Rect> objects)
+    public void collided(ArrayList<Rect> objects)
     {
-        for(Bullet bullet : playerBullets)
+        for(int i = 0; i < playerBullets.size(); ++i)
         {
+            boolean collided = false;
             for (Rect rect : objects)
             {
-                if (bullet.collided(rect))
+                if (playerBullets.get(i).collided(rect))
                 {
-                    playerBullets.remove(bullet);
+                    playerBullets.remove(i);
                     SFX_Manager.impact();
-                    return true;
+                    collided = true;
+                    break;
                 }
             }
-        }
-        for(Bullet ebullet : enemyBullets)
-        {
-            for (Rect rect : objects)
+            if(collided)
             {
-                if (ebullet.collided(rect))
-                {
-                    enemyBullets.remove(ebullet);
-                    SFX_Manager.impact();
-                    return true;
-                }
+                --i;
             }
         }
-        return false;
+        for(int i = 0; i < enemyBullets.size(); ++i)
+        {
+            boolean collided = false;
+            for (Rect wall : objects)
+            {
+                if (enemyBullets.get(i).collided(wall))
+                {
+                    enemyBullets.remove(i);
+                    SFX_Manager.impact();
+                    collided = true;
+                    break;
+                }
+            }
+            if(collided)
+            {
+                --i;
+            }
+        }
     }
 
     public void update()
