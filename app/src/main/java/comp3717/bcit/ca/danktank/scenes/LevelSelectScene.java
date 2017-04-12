@@ -25,7 +25,7 @@ public class LevelSelectScene implements Scene {
     private Bitmap back_image;
     private Bitmap Level1_image;
     private Bitmap Level2_image;
-    private Bitmap Lock3_image;
+    private Bitmap Level3_image;
     private Bitmap Lock4_image;
 
 
@@ -39,7 +39,7 @@ public class LevelSelectScene implements Scene {
         back_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.back_button);
         Level1_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.level1);
         Level2_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.level2);
-        Lock3_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock3);
+        Level3_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.level3);
         Lock4_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lock4);
     }
 
@@ -69,7 +69,7 @@ public class LevelSelectScene implements Scene {
     private void drawLevelButtons(Canvas canvas, Paint paint){
         canvas.drawBitmap(Level1_image,null, level1Button, new Paint());
         canvas.drawBitmap(Level2_image, null, level2Button, new Paint());
-        canvas.drawBitmap(Lock3_image, null, level3Button, new Paint());
+        canvas.drawBitmap(Level3_image, null, level3Button, new Paint());
         canvas.drawBitmap(Lock4_image, null, level4Button, new Paint());
     }
 
