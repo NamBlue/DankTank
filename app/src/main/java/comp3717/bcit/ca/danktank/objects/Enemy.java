@@ -28,7 +28,6 @@ public class Enemy implements GameObject
     private Animation explode, spawn;
     private AnimationManager animationManager;
     private int animationState;
-    private  boolean startingState;
     private static ArrayList<Rect> walls;
     private Enums.MoveDirection moveDirection;
     private int frames;
@@ -54,8 +53,7 @@ public class Enemy implements GameObject
         die = false;
         this.rectangle = rectangle;
         this.color = color;
-        animationState = 0;
-        startingState = true;
+        animationState = 1;
         moveDirection = Enums.MoveDirection.Idle;
         //For Decoding, Producing, Modifying Bitmaps etc.
         BitmapFactory bitmapFactory = new BitmapFactory();
@@ -164,11 +162,6 @@ public class Enemy implements GameObject
     @Override
     public void update()
     {
-        if (startingState)
-        {
-            animationState = 1;
-            startingState = false;
-        }
         if (die)
         {
             animationState = 8;
@@ -181,7 +174,7 @@ public class Enemy implements GameObject
             if(spawnFrames > 30)
             {
                 spawning = false;
-                animationState = 0;
+                animationState = 1;
                 spawnFrames = 0;
             }
         }
@@ -198,8 +191,7 @@ public class Enemy implements GameObject
     @Override
     public void reset()
     {
-        startingState = true;
-        animationState = 0;
+        animationState = 1;
     }
 
     public boolean die()
@@ -217,7 +209,7 @@ public class Enemy implements GameObject
 
     private void move()
     {
-        if(frames > 30)
+        if(frames > (30 * Constants.ENEMY_ACTIVENESS))
         {
             frames = 0;
             Random ran = new Random();

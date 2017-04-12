@@ -50,15 +50,37 @@ public class LevelManager implements Scene {
         map = new boolean[10][20];
         level = lvl;
         populateMap(level);
-        if(level == 1) {
+        if(level == 1)
+        {
+            Constants.ENEMY_FIRE_CHANCE = .4f;
+            totalEnemiesForThisLevel = 4;
+            maxEnemySize = 2;
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.desert);
-        }else if(level == 2) {
-            backGroundImage = bitmapFactory.decodeResource(Constants.
-                    CURRENT_CONTEXT.getResources(), R.drawable.snow);
-        }else if(level == 3){
+            Constants.ENEMY_ACTIVENESS = 1;
+        }
+        else if(level == 2)
+        {
+            Constants.ENEMY_FIRE_CHANCE = .5f;
+            totalEnemiesForThisLevel = 6;
+            maxEnemySize = 4;
+            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.snow);
+            Constants.ENEMY_ACTIVENESS = .8f;
+        }
+        else if(level == 3)
+        {
+            Constants.ENEMY_FIRE_CHANCE = .6f;
+            totalEnemiesForThisLevel = 8;
+            maxEnemySize = 5;
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.forest);
-        }else if(level == 4){
+            Constants.ENEMY_ACTIVENESS = .6f;
+        }
+        else if(level == 4)
+        {
+            Constants.ENEMY_FIRE_CHANCE = .7f;
+            totalEnemiesForThisLevel = 10;
+            maxEnemySize = 8;
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lava);
+            Constants.ENEMY_ACTIVENESS = .4f;
         }
 
     }
@@ -101,8 +123,6 @@ public class LevelManager implements Scene {
     {
         switch(level) {
             case 1 :
-                totalEnemiesForThisLevel = 4;
-                maxEnemySize = 4;
                 //Brick layout for surrounding controls
                 for(int i = 0; i < 3; i++){
                     map[i][15] = true;
@@ -244,8 +264,6 @@ public class LevelManager implements Scene {
                 }
                 break;
             case 2 :
-                totalEnemiesForThisLevel = 4;
-                maxEnemySize = 4;
                 //Brick layout for surrounding controls
                 for(int i = 0; i < 3; i++){
                     map[i][15] = true;
@@ -348,8 +366,6 @@ public class LevelManager implements Scene {
                 }
                 break;
             case 3 :
-                totalEnemiesForThisLevel = 4;
-                maxEnemySize = 4;
                 //Brick layout for surrounding controls
                 for(int i = 0; i < 3; i++){
                     map[i][15] = true;
@@ -472,8 +488,6 @@ public class LevelManager implements Scene {
                 }
                 break;
             case 4 :
-                totalEnemiesForThisLevel = 4;
-                maxEnemySize = 4;
                 //Brick layout for surrounding controls
                 for(int i = 0; i < 3; i++){
                     map[i][15] = true;
