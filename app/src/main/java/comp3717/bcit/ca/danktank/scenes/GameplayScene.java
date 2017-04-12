@@ -19,6 +19,7 @@ import comp3717.bcit.ca.danktank.Enums;
 import comp3717.bcit.ca.danktank.managers.EnemyManager;
 import comp3717.bcit.ca.danktank.managers.MusicManager;
 import comp3717.bcit.ca.danktank.managers.PowerupManager;
+import comp3717.bcit.ca.danktank.managers.SFX_Manager;
 import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
@@ -261,6 +262,7 @@ public class GameplayScene implements Scene
                     default:
                         break;
                 }
+                SFX_Manager.fire();
                 playerFiring = false;
             }
 
@@ -272,6 +274,7 @@ public class GameplayScene implements Scene
                 gameOver = true;
                 MusicManager.getInstance().playGameOver();
                 gameOverTime = System.currentTimeMillis();
+                SFX_Manager.explode();
             }
 
             for(Enemy enemy: enemies)
@@ -281,6 +284,7 @@ public class GameplayScene implements Scene
                     if(enemyManager.killEnemy(enemy))
                     {
                         score += 100;
+                        SFX_Manager.explode();
                     }
                 }
                 else if(enemy.hasLockon(player.getRectangle()))
@@ -306,6 +310,7 @@ public class GameplayScene implements Scene
                         default:
                             break;
                     }
+                    SFX_Manager.fire();
                 }
 
             }
