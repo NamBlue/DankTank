@@ -362,6 +362,55 @@ public class LevelManager implements Scene {
                 }
 
                 //Terrain map tiles
+                map[2][12] = true;
+                map[2][11] = true;
+                map[1][11] = true;
+
+                map[7][12] = true;
+                map[7][11] = true;
+                map[8][11] = true;
+
+                map[2][4] = true;
+                map[2][3] = true;
+                map[1][4] = true;
+
+                map[7][4] = true;
+                map[7][3] = true;
+                map[8][4] = true;
+
+                map[4][13] = true;
+                map[4][12] = true;
+                map[4][11] = true;
+                map[4][10] = true;
+
+                map[5][13] = true;
+                map[5][12] = true;
+                map[5][11] = true;
+                map[5][10] = true;
+
+                map[4][5] = true;
+                map[4][4] = true;
+                map[4][3] = true;
+                map[4][2] = true;
+
+                map[5][5] = true;
+                map[5][4] = true;
+                map[5][3] = true;
+                map[5][2] = true;
+
+                map[0][8] = true;
+                map[1][8] = true;
+                map[2][8] = true;
+                map[0][7] = true;
+                map[1][7] = true;
+                map[2][7] = true;
+
+                map[9][8] = true;
+                map[8][8] = true;
+                map[7][8] = true;
+                map[9][7] = true;
+                map[8][7] = true;
+                map[7][7] = true;
 
 
                 //Spawnpoints
@@ -371,6 +420,38 @@ public class LevelManager implements Scene {
 
                 spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
                         0 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 4 / 10, Constants.SCREEN_HEIGHT *
+                        7 / 20, Constants.SCREEN_WIDTH * (4 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (7 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
+                        7 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (7 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        6 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (6 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
+                        6 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (6 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        9 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (9 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
+                        9 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (9 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 3 / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (3 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (0 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 3 / 10, Constants.SCREEN_HEIGHT *
+                        0 / 20, Constants.SCREEN_WIDTH * (3 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (0 + 1) / 20));
 
                 player_spawn = new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
@@ -405,6 +486,54 @@ public class LevelManager implements Scene {
                 }
 
                 //Terrain map tiles
+                map[0][11] = true;
+                map[0][10] = true;
+                map[1][10] = true;
+
+                map[3][13] = true;
+                map[3][12] = true;
+                map[4][13] = true;
+
+                map[6][11] = true;
+                map[5][11] = true;
+                map[6][10] = true;
+
+                map[3][9] = true;
+                map[3][8] = true;
+                map[2][8] = true;
+
+                map[8][13] = true;
+                map[8][12] = true;
+                map[9][13] = true;
+
+                map[9][9] = true;
+                map[9][8] = true;
+                map[8][8] = true;
+
+                map[2][5] = true;
+                map[2][4] = true;
+                map[3][4] = true;
+
+                map[6][3] = true;
+                map[5][2] = true;
+                map[6][2] = true;
+
+
+                map[5][6] = true;
+                map[6][7] = true;
+                map[5][7] = true;
+
+                map[9][5] = true;
+                map[9][4] = true;
+                map[8][4] = true;
+
+                map[0][1] = true;
+                map[0][2] = true;
+                map[1][1] = true;
+
+                map[0][6] = true;
+                map[0][7] = true;
+                map[0][9] = true;
 
 
                 //Spawnpoints
@@ -415,6 +544,22 @@ public class LevelManager implements Scene {
                 spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
                         0 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
                         (0 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 0 / 10, Constants.SCREEN_HEIGHT *
+                        8 / 20, Constants.SCREEN_WIDTH * (0 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (8 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 9 / 10, Constants.SCREEN_HEIGHT *
+                        7 / 20, Constants.SCREEN_WIDTH * (9 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (7 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 4 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (4 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
+
+                spawnpoints.add(new Rect(Constants.SCREEN_WIDTH * 7 / 10, Constants.SCREEN_HEIGHT *
+                        5 / 20, Constants.SCREEN_WIDTH * (7 + 1) / 10, Constants.SCREEN_HEIGHT *
+                        (5 + 1) / 20));
 
                 player_spawn = new Rect(Constants.SCREEN_WIDTH * 5 / 10, Constants.SCREEN_HEIGHT *
                         19 / 20, Constants.SCREEN_WIDTH * (5 + 1) / 10, Constants.SCREEN_HEIGHT *
