@@ -123,6 +123,7 @@ public class GameplayScene implements Scene
                     levelManager.getBrickTiles(),
                     levelManager.getTotalEnemiesForThisLevel(),
                     levelManager.getMaxEnemySize());
+            enemies = enemyManager.getEnemies();
             player.reset();
             playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
             moveDirection = Enums.MoveDirection.Up;
