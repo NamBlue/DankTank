@@ -253,7 +253,6 @@ public class GameplayScene implements Scene
                     default:
                         break;
                 }
-                SFX_Manager.fire();
                 playerFiring = false;
             }
 

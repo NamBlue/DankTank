@@ -33,7 +33,10 @@ public class BulletManager
     public void addPlayerBullet(int xStart, int yStart, Enums.MoveDirection moveDirection)
     {
         if(playerBullets.size() == 0)
+        {
+            SFX_Manager.fire();
             playerBullets.add(new Bullet(color, xStart, yStart, moveDirection));
+        }
     }
 
     public void addEnemyBullet(int xStart, int yStart, Enums.MoveDirection moveDirection)
