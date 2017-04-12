@@ -44,6 +44,40 @@ public class MusicManager {
         mPlayer.start();
     }
 
+    public void playVictory()
+    {
+        try {
+            if (mPlayer != null && (mPlayer.isPlaying())) {
+                mPlayer.stop();
+                mPlayer.release();
+                mPlayer = null;
+                mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.victory);
+                mPlayer.setLooping(true);
+                mPlayer.setVolume(.25f, .25f);
+                mPlayer.start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playTitle()
+    {
+        try {
+            if (mPlayer != null && (mPlayer.isPlaying())) {
+                mPlayer.stop();
+                mPlayer.release();
+                mPlayer = null;
+                mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
+                mPlayer.setLooping(true);
+                mPlayer.setVolume(.25f, .25f);
+                mPlayer.start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void update()
     {
         if (sceneChanged) {
@@ -78,7 +112,7 @@ public class MusicManager {
                             mPlayer = null;
                             mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
                             mPlayer.setLooping(true);
-                            mPlayer.setVolume(.10f, .10f);
+                            mPlayer.setVolume(.25f, .25f);
                             mPlayer.start();
                         }
                     } catch(Exception e){

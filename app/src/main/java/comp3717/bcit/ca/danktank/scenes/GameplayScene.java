@@ -327,6 +327,7 @@ public class GameplayScene implements Scene
                 win = true;
                 powerupManager.collectDroppedPowerups();
                 gameOverTime = System.currentTimeMillis();
+                MusicManager.getInstance().playVictory();
             }
         }
         else if (gameOver)
@@ -428,7 +429,6 @@ public class GameplayScene implements Scene
                 else if(win && x >= Constants.GAMEOVER_TIME)
                 {
                     pause = false;
-                    MusicManager.getInstance().pause();
                     SceneManager.ACTIVE_SCENE = 6;
                 }
 

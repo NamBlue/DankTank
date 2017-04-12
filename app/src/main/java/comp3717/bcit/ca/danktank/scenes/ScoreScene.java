@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 import comp3717.bcit.ca.danktank.Constants;
+import comp3717.bcit.ca.danktank.managers.MusicManager;
 import comp3717.bcit.ca.danktank.managers.PowerupManager;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
 import comp3717.bcit.ca.danktank.managers.LevelManager;
@@ -185,6 +186,7 @@ public class ScoreScene implements Scene {
                 if (levelselect_button.contains((int) event.getX(), (int) event.getY()))
                 {
                     SceneManager.ACTIVE_SCENE = 2;
+                    MusicManager.getInstance().playTitle();
                     GameplayScene.pause = false;
                     break;
                 }
