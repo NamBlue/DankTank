@@ -98,6 +98,7 @@ public class BulletManager
                 if (bullet.collided(rect))
                 {
                     playerBullets.remove(bullet);
+                    SFX_Manager.impact();
                     return true;
                 }
             }
@@ -109,6 +110,7 @@ public class BulletManager
                 if (ebullet.collided(rect))
                 {
                     enemyBullets.remove(ebullet);
+                    SFX_Manager.impact();
                     return true;
                 }
             }
@@ -147,6 +149,7 @@ public class BulletManager
             if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
             {
                 playerBullets.remove(0);
+                SFX_Manager.impact();
             }
         }
         if(enemyBullets.size() > 0)
@@ -155,6 +158,7 @@ public class BulletManager
             if (y <= 0 || y >= Constants.SCREEN_HEIGHT || x <= 0 || x >= Constants.SCREEN_WIDTH)
             {
                 enemyBullets.remove(0);
+                SFX_Manager.impact();
             }
         }
     }

@@ -323,6 +323,7 @@ public class GameplayScene implements Scene
             if(powerupManager.collided(player.getRectangle()))
             {
                 score += 100;
+                SFX_Manager.pickup();
             }
             powerupManager.update();
             enemyManager.update();
