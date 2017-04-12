@@ -23,14 +23,14 @@ import static comp3717.bcit.ca.danktank.MainThread.canvas;
  */
 
 public class LevelManager implements Scene {
-    private Rect testrect = new Rect();
     private boolean [][] map;
     private Bitmap Brick_image;
     private Bitmap Ice_image;
+    private Bitmap Tree_image;
     private Random r;
     public static int level = 1;
     private ArrayList<Rect> spawnpoints;
-    private ArrayList<Rect> brick_tiles;
+    private ArrayList<Rect> wallTiles;
     private Rect player_spawn;
     private static int totalEnemiesForThisLevel;
     private int maxEnemySize;
@@ -41,7 +41,8 @@ public class LevelManager implements Scene {
         BitmapFactory bitmapFactory = new BitmapFactory();
         Brick_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.brick);
         Ice_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.ice);
-        brick_tiles = new ArrayList<Rect>();
+        Tree_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.tree);
+        wallTiles = new ArrayList<Rect>();
         spawnpoints = new ArrayList<Rect>();
         paint = new Paint();
         r = new Random();
@@ -51,9 +52,10 @@ public class LevelManager implements Scene {
         if(level == 1) {
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.desert);
         }else if(level == 2) {
-            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.snow);
+            backGroundImage = bitmapFactory.decodeResource(Constants.
+                    CURRENT_CONTEXT.getResources(), R.drawable.snow);
         }else if(level == 3){
-            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.snow);
+            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.forest);
         }else if(level == 4){
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.snow);
         }
@@ -66,8 +68,8 @@ public class LevelManager implements Scene {
         return spawnpoints;
     }
 
-    public ArrayList<Rect> getBrickTiles(){
-        return brick_tiles;
+    public ArrayList<Rect> getWallTiles(){
+        return wallTiles;
     }
 
     public Rect getPlayerSpawn(){
@@ -76,7 +78,7 @@ public class LevelManager implements Scene {
 
     public boolean collided(Rect object)
     {
-        for(Rect rect: brick_tiles)
+        for(Rect rect: wallTiles)
         {
             if(Rect.intersects(rect, object))
                 return true;
@@ -233,7 +235,7 @@ public class LevelManager implements Scene {
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
-                            brick_tiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
+                            wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
                                     Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
                                     Constants.SCREEN_HEIGHT * (j + 1) / 20));
                         }
@@ -337,7 +339,7 @@ public class LevelManager implements Scene {
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
-                            brick_tiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
+                            wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
                                     Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
                                     Constants.SCREEN_HEIGHT * (j + 1) / 20));
                         }
@@ -461,7 +463,7 @@ public class LevelManager implements Scene {
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
-                            brick_tiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
+                            wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
                                     Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
                                     Constants.SCREEN_HEIGHT * (j + 1) / 20));
                         }
@@ -568,7 +570,7 @@ public class LevelManager implements Scene {
                 for(int i = 0; i < 10; i++){
                     for(int j = 0; j < 20; j++){
                         if(map[i][j] == true) {
-                            brick_tiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
+                            wallTiles.add(new Rect(Constants.SCREEN_WIDTH * i / 10,
                                     Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH * (i + 1) / 10,
                                     Constants.SCREEN_HEIGHT * (j + 1) / 20));
                         }
@@ -602,7 +604,7 @@ public class LevelManager implements Scene {
                                 (i + 1) / 10, Constants.SCREEN_HEIGHT * (j + 1) / 20), paint);
                             break;
                         case 3 :
-                            canvas.drawBitmap(Ice_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
+                            canvas.drawBitmap(Tree_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
                                     Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH *
                                     (i + 1) / 10, Constants.SCREEN_HEIGHT * (j + 1) / 20), paint);
                             break;

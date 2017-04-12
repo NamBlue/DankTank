@@ -9,7 +9,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import comp3717.bcit.ca.danktank.managers.BulletManager;
@@ -24,7 +23,6 @@ import comp3717.bcit.ca.danktank.objects.Enemy;
 import comp3717.bcit.ca.danktank.objects.Player;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.managers.SceneManager;
-import comp3717.bcit.ca.danktank.objects.Powerup;
 
 /**
  * Created by NamBlue on 1/20/2017.
@@ -100,9 +98,9 @@ public class GameplayScene implements Scene
         bulletManager = new BulletManager();
         powerupManager = new PowerupManager();
         levelManager = new LevelManager(level);
-        walls = levelManager.getBrickTiles();
+        walls = levelManager.getWallTiles();
         enemyManager = new EnemyManager(levelManager.getSpawnpoints(),
-                levelManager.getBrickTiles(),
+                levelManager.getWallTiles(),
                 levelManager.getTotalEnemiesForThisLevel(),
                 levelManager.getMaxEnemySize());
         playerPoint = new Point(levelManager.getPlayerSpawn().centerX(), levelManager.getPlayerSpawn().centerY());
@@ -123,9 +121,9 @@ public class GameplayScene implements Scene
         if(!pause)
         {
             levelManager = new LevelManager(level);
-            walls = levelManager.getBrickTiles();
+            walls = levelManager.getWallTiles();
             enemyManager = new EnemyManager(levelManager.getSpawnpoints(),
-                    levelManager.getBrickTiles(),
+                    levelManager.getWallTiles(),
                     levelManager.getTotalEnemiesForThisLevel(),
                     levelManager.getMaxEnemySize());
             enemies = enemyManager.getEnemies();
