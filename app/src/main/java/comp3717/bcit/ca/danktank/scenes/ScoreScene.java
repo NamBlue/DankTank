@@ -194,11 +194,6 @@ public class ScoreScene implements Scene {
                 {
                     ++index;
                 }
-                else
-                {
-                    SceneManager.ACTIVE_SCENE = 2;
-                    GameplayScene.pause = false;
-                }
         }
     }
     /**

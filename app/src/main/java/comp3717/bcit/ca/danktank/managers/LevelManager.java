@@ -28,7 +28,7 @@ public class LevelManager implements Scene {
     private Bitmap Brick_image;
     private Bitmap Ice_image;
     private Random r;
-    private int level;
+    public static int level = 1;
     private ArrayList<Rect> spawnpoints;
     private ArrayList<Rect> brick_tiles;
     private Rect player_spawn;
@@ -36,7 +36,7 @@ public class LevelManager implements Scene {
     private int maxEnemySize;
     private Bitmap backGroundImage;
 
-    public LevelManager(int level){
+    public LevelManager(int lvl){
         BitmapFactory bitmapFactory = new BitmapFactory();
         Brick_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.brick);
         Ice_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.ice);
@@ -44,7 +44,7 @@ public class LevelManager implements Scene {
         spawnpoints = new ArrayList<Rect>();
         r = new Random();
         map = new boolean[10][20];
-        this.level = level;
+        level = lvl;
         populateMap(level);
         if(level == 1) {
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.desert);

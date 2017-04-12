@@ -270,6 +270,7 @@ public class GameplayScene implements Scene
             {
                 player.dying = true;
                 gameOver = true;
+                MusicManager.getInstance().playGameOver();
                 gameOverTime = System.currentTimeMillis();
             }
 
@@ -425,6 +426,8 @@ public class GameplayScene implements Scene
                 {
                     pause = false;
                     reset();
+                    SceneManager.ACTIVE_SCENE = 2;
+                    MusicManager.getInstance().playTitle();
                 }
                 else if(win && x >= Constants.GAMEOVER_TIME)
                 {
