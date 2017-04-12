@@ -130,14 +130,20 @@ public class MusicManager {
                             switch (LevelManager.level)
                             {
                                 case 1:
-                                case 3:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
-                                    mPlayer.setVolume(.20f, .20f);
+                                    mPlayer.setVolume(.15f, .15f);
                                     break;
                                 case 2:
-                                case 4:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage2);
-                                    mPlayer.setVolume(.25f, .25f);
+                                    mPlayer.setVolume(.20f, .20f);
+                                    break;
+                                case 3:
+                                    mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage3);
+                                    mPlayer.setVolume(.20f, .20f);
+                                    break;
+                                case 4:
+                                    mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage4);
+                                    mPlayer.setVolume(.50f, .50f);
                                     break;
                             }
                             mPlayer.setLooping(true);
