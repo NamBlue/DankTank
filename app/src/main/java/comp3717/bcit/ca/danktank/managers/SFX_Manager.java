@@ -2,6 +2,8 @@ package comp3717.bcit.ca.danktank.managers;
 
 import android.media.MediaPlayer;
 
+import java.util.ArrayList;
+
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.R;
 
@@ -15,8 +17,7 @@ public class SFX_Manager
     private static MediaPlayer fire = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.fire);
     private static MediaPlayer pickup = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.pickup);
     private static MediaPlayer impact = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.impact);
-    private static MediaPlayer warp = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp);
-    private static MediaPlayer warp1 = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp);
+    private static ArrayList<MediaPlayer> warp = new ArrayList<>();
 
     public static void explode()
     {
@@ -32,17 +33,35 @@ public class SFX_Manager
     public static void warp()
     {
         try {
-            if(!warp1.isPlaying())
+            if(warp.size() == 0)
             {
-                warp1.seekTo(0);
-                warp1.setVolume(.5f, .5f);
-                warp1.start();
+                warp.add(MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp));
             }
             else
             {
-                warp.seekTo(0);
-                warp.setVolume(.5f, .5f);
-                warp.start();
+                int i = 0;
+                while(i < warp.size())
+                {
+                    if(!warp.get(i).isPlaying())
+                    {
+                        warp.get(i).seekTo(0);
+                        warp.get(i).setVolume(.5f, .5f);
+                        warp.get(i).start();
+                        break;
+                    }
+                    ++i;
+                }
+                if(i == warp.size())
+                {
+                    warp.add(MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp));
+                    warp.get(i).seekTo(0);
+                    warp.get(i).setVolume(.5f, .5f);
+                    warp.get(i).start();
+                }
+                else if (i < warp.size() - 1)
+                {
+                    warp.remove(warp.size() - 1);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

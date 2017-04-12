@@ -149,7 +149,6 @@ public class GameplayScene implements Scene
         else
         {
             pause = false;
-            SFX_Manager.resume();
         }
     }
 
@@ -431,7 +430,6 @@ public class GameplayScene implements Scene
                     if (pauseButton.contains((int) event.getX(), (int) event.getY()))
                     {
                         pause = true;
-                        SFX_Manager.pause();
                         SceneManager.ACTIVE_SCENE = 3;
                     }
                 }
