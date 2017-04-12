@@ -47,7 +47,7 @@ public class InstructionScene implements Scene {
         tank1_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.e_idle);
         art_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.flag);
 
-        moveLeftButton = new Rect(0, Constants.SCREEN_HEIGHT*26/30, Constants.SCREEN_WIDTH*3/30, Constants.SCREEN_HEIGHT*28/30);
+        moveLeftButton = new Rect(Constants.SCREEN_WIDTH*6/20, Constants.SCREEN_HEIGHT*8/20, Constants.SCREEN_WIDTH*7/20, Constants.SCREEN_HEIGHT*9/20);
         moveRightButton = new Rect(Constants.SCREEN_WIDTH*8/20, Constants.SCREEN_HEIGHT*8/20, Constants.SCREEN_WIDTH*9/20, Constants.SCREEN_HEIGHT*9/20);
         moveUpButton = new Rect(Constants.SCREEN_WIDTH*7/20, Constants.SCREEN_HEIGHT*7/20, Constants.SCREEN_WIDTH*8/20, Constants.SCREEN_HEIGHT*8/20);
         moveDownButton = new Rect(Constants.SCREEN_WIDTH*7/20, Constants.SCREEN_HEIGHT*8/20, Constants.SCREEN_WIDTH*8/20, Constants.SCREEN_HEIGHT*9/20);
@@ -94,7 +94,8 @@ public class InstructionScene implements Scene {
         canvas.drawText("-Shoot down as many enemy tanks as you can", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*4/20 ,paint);
         canvas.drawText("-Recover the paintings to unlock art:", Constants.SCREEN_WIDTH/30, Constants.SCREEN_HEIGHT*5/20 ,paint);
         canvas.drawBitmap(art_image, null, art, paint);
-        canvas.drawText("1. To move press the directional buttons:", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*8/20 ,paint);
+        canvas.drawText("1. Press the", Constants.SCREEN_WIDTH/20, Constants.SCREEN_HEIGHT*8/20 ,paint);
+        canvas.drawText("  buttons to move your tank", Constants.SCREEN_WIDTH*9/20, Constants.SCREEN_HEIGHT*8/20 ,paint);
         canvas.drawBitmap(up_image, null, moveUpButton, paint);
         canvas.drawBitmap(down_image, null, moveDownButton, paint);
         canvas.drawBitmap(left_image, null, moveLeftButton, paint);
