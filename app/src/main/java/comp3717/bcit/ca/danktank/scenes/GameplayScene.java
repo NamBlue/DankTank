@@ -60,7 +60,7 @@ public class GameplayScene implements Scene
 
     private ArrayList<Enemy> enemies;
     private int score = 0;
-    private Paint scorePaint, controlsPaint;
+    private Paint scorePaint, winLosePaint, controlsPaint;
     private ArrayList<Rect> walls;
     public static int level = 1;
 
@@ -109,11 +109,15 @@ public class GameplayScene implements Scene
         enemies = enemyManager.getEnemies();
 
         frameTime = System.currentTimeMillis();
+        winLosePaint = new Paint();
+        winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
+        winLosePaint.setColor(Color.BLUE);
+        winLosePaint.setTextAlign(Paint.Align.CENTER);
+        controlsPaint = new Paint();
         scorePaint = new Paint();
         scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         scorePaint.setColor(Color.BLUE);
-        scorePaint.setTextAlign(Paint.Align.CENTER);
-        controlsPaint = new Paint();
+        scorePaint.setTextAlign(Paint.Align.LEFT);
     }
 
     public void reset()
@@ -355,20 +359,20 @@ public class GameplayScene implements Scene
         canvas.drawBitmap(fire_image, null, fireButton, controlsPaint);
         if (gameOver)
         {
-            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-            canvas.drawText("Game Over", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * gameOverTextPos / 20, scorePaint);
+            winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
+            canvas.drawText("Game Over", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * gameOverTextPos / 20, winLosePaint);
         }
         if (win)
         {
-            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
-            canvas.drawText("You win!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, scorePaint);
-            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .06));
-            canvas.drawText("New West is safe!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 12 / 20, scorePaint);
-            canvas.drawText("    but for how long...", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 13 / 20, scorePaint);
-            canvas.drawText("Press anywhere to continue", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 14 / 20, scorePaint);
-            scorePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
+            winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
+            canvas.drawText("You win!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, winLosePaint);
+            winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .06));
+            canvas.drawText("New West is safe!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 12 / 20, winLosePaint);
+            canvas.drawText("    but for how long...", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 13 / 20, winLosePaint);
+            canvas.drawText("Press anywhere to continue", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 14 / 20, winLosePaint);
+            winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
         }
-        canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, scorePaint);
+        canvas.drawText("" + score, Constants.SCREEN_WIDTH * 0.10f, Constants.SCREEN_HEIGHT * 0.10f, winLosePaint);
     }
 
     @Override

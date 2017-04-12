@@ -135,7 +135,7 @@ public class MusicManager {
                                     break;
                                 case 2:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage2);
-                                    mPlayer.setVolume(.20f, .20f);
+                                    mPlayer.setVolume(.60f, .60f);
                                     break;
                                 case 3:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage3);
@@ -143,7 +143,7 @@ public class MusicManager {
                                     break;
                                 case 4:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage4);
-                                    mPlayer.setVolume(.50f, .50f);
+                                    mPlayer.setVolume(.60f, .60f);
                                     break;
                             }
                             mPlayer.setLooping(true);

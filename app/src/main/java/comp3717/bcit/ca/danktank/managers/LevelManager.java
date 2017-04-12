@@ -26,7 +26,7 @@ public class LevelManager implements Scene {
     private boolean [][] map;
     private Bitmap Brick_image;
     private Bitmap Ice_image;
-    private Bitmap Tree_image;
+    private Bitmap Tree_image, Volcano_image;
     private Random r;
     public static int level = 1;
     private ArrayList<Rect> spawnpoints;
@@ -42,6 +42,7 @@ public class LevelManager implements Scene {
         Brick_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.brick);
         Ice_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.ice);
         Tree_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.tree);
+        Volcano_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.volcano);
         wallTiles = new ArrayList<Rect>();
         spawnpoints = new ArrayList<Rect>();
         paint = new Paint();
@@ -57,7 +58,7 @@ public class LevelManager implements Scene {
         }else if(level == 3){
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.forest);
         }else if(level == 4){
-            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.snow);
+            backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lava);
         }
 
     }
@@ -609,7 +610,7 @@ public class LevelManager implements Scene {
                                     (i + 1) / 10, Constants.SCREEN_HEIGHT * (j + 1) / 20), paint);
                             break;
                         case 4 :
-                            canvas.drawBitmap(Ice_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
+                            canvas.drawBitmap(Volcano_image, null, new Rect(Constants.SCREEN_WIDTH * i / 10,
                                     Constants.SCREEN_HEIGHT * j / 20, Constants.SCREEN_WIDTH *
                                     (i + 1) / 10, Constants.SCREEN_HEIGHT * (j + 1) / 20), paint);
                             break;
