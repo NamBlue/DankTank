@@ -270,6 +270,7 @@ public class GameplayScene implements Scene
             {
                 player.dying = true;
                 gameOver = true;
+                MusicManager.getInstance().playGameOver();
                 gameOverTime = System.currentTimeMillis();
             }
 
@@ -327,6 +328,7 @@ public class GameplayScene implements Scene
                 win = true;
                 powerupManager.collectDroppedPowerups();
                 gameOverTime = System.currentTimeMillis();
+                MusicManager.getInstance().playVictory();
             }
         }
         else if (gameOver)
@@ -424,11 +426,12 @@ public class GameplayScene implements Scene
                 {
                     pause = false;
                     reset();
+                    SceneManager.ACTIVE_SCENE = 2;
+                    MusicManager.getInstance().playTitle();
                 }
                 else if(win && x >= Constants.GAMEOVER_TIME)
                 {
                     pause = false;
-                    MusicManager.getInstance().pause();
                     SceneManager.ACTIVE_SCENE = 6;
                 }
 

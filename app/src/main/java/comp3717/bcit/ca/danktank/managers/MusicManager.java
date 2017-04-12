@@ -44,6 +44,57 @@ public class MusicManager {
         mPlayer.start();
     }
 
+    public void playVictory()
+    {
+        try {
+            if (mPlayer != null && (mPlayer.isPlaying())) {
+                mPlayer.stop();
+                mPlayer.release();
+                mPlayer = null;
+                mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.victory);
+                mPlayer.setLooping(true);
+                mPlayer.setVolume(.25f, .25f);
+                mPlayer.start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playGameOver()
+    {
+        try {
+            if (mPlayer != null && (mPlayer.isPlaying())) {
+                mPlayer.stop();
+                mPlayer.release();
+                mPlayer = null;
+                mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.game_over);
+                mPlayer.setLooping(true);
+                mPlayer.setVolume(.50f, .50f);
+                mPlayer.start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playTitle()
+    {
+        try {
+            if (mPlayer != null && (mPlayer.isPlaying())) {
+                mPlayer.stop();
+                mPlayer.release();
+                mPlayer = null;
+                mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.title);
+                mPlayer.setLooping(true);
+                mPlayer.setVolume(1f, 1f);
+                mPlayer.start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void update()
     {
         if (sceneChanged) {
@@ -76,9 +127,17 @@ public class MusicManager {
                             mPlayer.stop();
                             mPlayer.release();
                             mPlayer = null;
-                            mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
+                            switch (LevelManager.level)
+                            {
+                                case 1:
+                                    mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
+                                    break;
+                                case 2:
+                                    mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage2);
+                                    break;
+                            }
                             mPlayer.setLooping(true);
-                            mPlayer.setVolume(.10f, .10f);
+                            mPlayer.setVolume(.25f, .25f);
                             mPlayer.start();
                         }
                     } catch(Exception e){
