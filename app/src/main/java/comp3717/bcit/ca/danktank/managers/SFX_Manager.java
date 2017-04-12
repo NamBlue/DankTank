@@ -12,6 +12,7 @@ import comp3717.bcit.ca.danktank.R;
 public class SFX_Manager
 {
     private static MediaPlayer explode = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.explode);
+    private static MediaPlayer fire = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.fire);
 
     public static void explode()
     {
@@ -19,6 +20,17 @@ public class SFX_Manager
             explode.seekTo(0);
             explode.setVolume(.5f, .5f);
             explode.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void fire()
+    {
+        try {
+            fire.seekTo(0);
+            fire.setVolume(1f, 1f);
+            fire.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
