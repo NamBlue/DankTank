@@ -326,7 +326,7 @@ public class GameplayScene implements Scene
             if(enemyManager.getEnemiesDied() == levelManager.getTotalEnemiesForThisLevel())
             {
                 win = true;
-                powerupManager.collectDroppedPowerups();
+                //powerupManager.collectDroppedPowerups(); //Disable automatic collection of powerups
                 gameOverTime = System.currentTimeMillis();
                 MusicManager.getInstance().playVictory();
             }
