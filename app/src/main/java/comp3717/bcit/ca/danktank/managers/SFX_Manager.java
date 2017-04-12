@@ -15,6 +15,8 @@ public class SFX_Manager
     private static MediaPlayer fire = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.fire);
     private static MediaPlayer pickup = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.pickup);
     private static MediaPlayer impact = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.impact);
+    private static MediaPlayer warp = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp);
+    private static MediaPlayer warp1 = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp);
 
     public static void explode()
     {
@@ -22,6 +24,26 @@ public class SFX_Manager
             explode.seekTo(0);
             explode.setVolume(.5f, .5f);
             explode.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void warp()
+    {
+        try {
+            if(!warp1.isPlaying())
+            {
+                warp1.seekTo(0);
+                warp1.setVolume(.5f, .5f);
+                warp1.start();
+            }
+            else
+            {
+                warp.seekTo(0);
+                warp.setVolume(.5f, .5f);
+                warp.start();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -144,10 +144,12 @@ public class GameplayScene implements Scene
             score = 0;
             powerupManager.reset();
             frameTime = System.currentTimeMillis();
+            SFX_Manager.warp();
         }
         else
         {
             pause = false;
+            SFX_Manager.resume();
         }
     }
 
@@ -429,13 +431,13 @@ public class GameplayScene implements Scene
                     if (pauseButton.contains((int) event.getX(), (int) event.getY()))
                     {
                         pause = true;
+                        SFX_Manager.pause();
                         SceneManager.ACTIVE_SCENE = 3;
                     }
                 }
                 else if (gameOver && System.currentTimeMillis() - gameOverTime >= Constants.GAMEOVER_TIME)
                 {
                     pause = false;
-                    reset();
                     SceneManager.ACTIVE_SCENE = 2;
                     MusicManager.getInstance().playTitle();
                 }

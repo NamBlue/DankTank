@@ -133,7 +133,7 @@ public class Player implements GameObject
         {
             animationState = 8;
             spawnFrames++;
-            if(spawnFrames > 45)
+            if(spawnFrames > 90)
             {
                 spawnFrames = 0;
                 startingState = false;

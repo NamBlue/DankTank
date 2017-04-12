@@ -56,6 +56,7 @@ public class EnemyManager
             {
                 enemies.add(new Enemy(new Rect(0, 0, Constants.ENEMY_SIZE, Constants.ENEMY_SIZE), Color.rgb(255, 0, 0)));
                 enemies.get(enemies.size() - 1).update(new Point(temp.centerX(), temp.centerY()));
+                SFX_Manager.warp();
             }
             frames = 0;
         }

@@ -171,7 +171,7 @@ public class Enemy implements GameObject
         {
             animationState = 9;
             spawnFrames++;
-            if(spawnFrames > 30)
+            if(spawnFrames > 90)
             {
                 spawning = false;
                 animationState = 1;
