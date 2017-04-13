@@ -377,7 +377,7 @@ public class GameplayScene implements Scene
             winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
             canvas.drawText("You win!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 10 / 20, winLosePaint);
             winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .06));
-            canvas.drawText("New West Minister is safe!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 12 / 20, winLosePaint);
+            canvas.drawText("New Westminster is safe!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 12 / 20, winLosePaint);
             canvas.drawText("but for how long...", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 13 / 20, winLosePaint);
             canvas.drawText("Press anywhere to continue", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT * 14 / 20, winLosePaint);
             winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));
