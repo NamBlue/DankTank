@@ -32,8 +32,12 @@ public class GameplayScene implements Scene
 {
     //Used to set the bounds for the gameover text box
     private Rect rectBound = new Rect();
+    //The GUI buttons
     private Rect pauseButton, moveLeftButton, moveRightButton,
             moveUpButton, moveDownButton, fireButton;
+    //The zone that it will detect the touch
+    private Rect pauseZone, moveLeftZone, moveRightZone,
+            moveUpZone, moveDownZone, fireZone;
     private Player player;
     private Point playerPoint;
     private BulletManager bulletManager;
@@ -80,7 +84,6 @@ public class GameplayScene implements Scene
         gameOverTextPos = 22;
 
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
-        pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
         BitmapFactory bitmapFactory = new BitmapFactory();
         up_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.up_button);
         down_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.down_button);
@@ -88,11 +91,21 @@ public class GameplayScene implements Scene
         left_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.left_button);
         pause_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pause_button);
         fire_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.fire_button);
-        moveLeftButton = new Rect(0, Constants.SCREEN_HEIGHT*26/30, Constants.SCREEN_WIDTH*3/30, Constants.SCREEN_HEIGHT*28/30);
-        moveRightButton = new Rect(Constants.SCREEN_WIDTH*6/30, Constants.SCREEN_HEIGHT*26/30, Constants.SCREEN_WIDTH*9/30, Constants.SCREEN_HEIGHT*28/30);
-        moveUpButton = new Rect(Constants.SCREEN_WIDTH*3/30, Constants.SCREEN_HEIGHT*24/30, Constants.SCREEN_WIDTH*6/30, Constants.SCREEN_HEIGHT*26/30);
-        moveDownButton = new Rect(Constants.SCREEN_WIDTH*3/30, Constants.SCREEN_HEIGHT*28/30, Constants.SCREEN_WIDTH*6/30, Constants.SCREEN_HEIGHT*30/30);
+
+        moveLeftButton = new Rect(0, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
+        moveRightButton = new Rect(Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*12/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
+        moveUpButton = new Rect(Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*22.5/30), Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*25.5/30));
+        moveDownButton = new Rect(Constants.SCREEN_WIDTH*4/30, Constants.SCREEN_HEIGHT*27/30, Constants.SCREEN_WIDTH*8/30, Constants.SCREEN_HEIGHT*30/30);
         fireButton = new Rect(Constants.SCREEN_WIDTH*49/60, Constants.SCREEN_HEIGHT*25/30, Constants.SCREEN_WIDTH*58/60, Constants.SCREEN_HEIGHT*28/30);
+        pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
+
+        moveLeftZone = new Rect(0, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
+        moveRightZone = new Rect(Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*12/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
+        moveUpZone = new Rect(Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*22.5/30), Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*25.5/30));
+        moveDownZone = new Rect(Constants.SCREEN_WIDTH*4/30, Constants.SCREEN_HEIGHT*27/30, Constants.SCREEN_WIDTH*8/30, Constants.SCREEN_HEIGHT*30/30);
+        fireZone = new Rect(Constants.SCREEN_WIDTH*42/60, (int)(Constants.SCREEN_HEIGHT*22.5/30), Constants.SCREEN_WIDTH*60/60, Constants.SCREEN_HEIGHT*30/30);
+        pauseZone = new Rect(Constants.SCREEN_WIDTH*24/30, 0, Constants.SCREEN_WIDTH*30/30, Constants.SCREEN_HEIGHT*4/30);
+
         moveDirection = Enums.MoveDirection.Up;
         gameoverFrames = 0;
         winFrames = 0;
@@ -407,36 +420,36 @@ public class GameplayScene implements Scene
                     }
                     */
 
-                    if (fireButton.contains((int) event.getX(), (int) event.getY()))
+                    if (fireZone.contains((int) event.getX(), (int) event.getY()))
                     {
                         playerFiring = true;
                     }
 
-                    if (moveLeftButton.contains((int) event.getX(), (int) event.getY()))
+                    if (moveLeftZone.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Left;
                     }
 
-                    if (moveRightButton.contains((int) event.getX(), (int) event.getY()))
+                    if (moveRightZone.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Right;
                     }
 
-                    if (moveUpButton.contains((int) event.getX(), (int) event.getY()))
+                    if (moveUpZone.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Up;
                     }
 
-                    if (moveDownButton.contains((int) event.getX(), (int) event.getY()))
+                    if (moveDownZone.contains((int) event.getX(), (int) event.getY()))
                     {
                         movingPlayer = true;
                         moveDirection = Enums.MoveDirection.Down;
                     }
                     //Added by harman to test the pause button
-                    if (pauseButton.contains((int) event.getX(), (int) event.getY()))
+                    if (pauseZone.contains((int) event.getX(), (int) event.getY()))
                     {
                         pause = true;
                         SceneManager.ACTIVE_SCENE = 3;
