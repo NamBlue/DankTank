@@ -155,6 +155,7 @@ public class Enemy implements GameObject
                     return true;
                 }
             }
+            readyToFire = false;
         }
         return false;
     }

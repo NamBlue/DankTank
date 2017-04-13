@@ -106,7 +106,7 @@ public class ScoreScene implements Scene {
         if(powerups.size() > 0)
             canvas.drawText("Art Unlocked!!!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
         else
-            canvas.drawText("No Art Saved!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
+            canvas.drawText("No Art, You Failed!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
 
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         paint.setTextAlign(Paint.Align.LEFT);
