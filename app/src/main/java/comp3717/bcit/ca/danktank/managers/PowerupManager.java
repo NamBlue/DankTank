@@ -94,7 +94,7 @@ public class PowerupManager
     public void reset()
     {
         powerups.clear();
-        collectedPowerups.clear();
+        collectedPowerups = new ArrayList<>();
     }
 
     private void readJsonFromFile()

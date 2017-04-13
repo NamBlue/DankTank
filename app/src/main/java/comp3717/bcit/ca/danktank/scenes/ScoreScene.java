@@ -22,7 +22,7 @@ import comp3717.bcit.ca.danktank.objects.Powerup;
 public class ScoreScene implements Scene {
     private Rect levelselect_button = new Rect(Constants.SCREEN_WIDTH*2/20,Constants.SCREEN_HEIGHT*18/20,Constants.SCREEN_WIDTH*18/20,Constants.SCREEN_HEIGHT);
     private String name, desc, address, line;
-    private int index = 0, oldIndex = -1;
+    private int index, oldIndex;
     private boolean start = true;
     private ArrayList<Powerup> powerups = new ArrayList<>();
     private int powerUpsLeft = 0;
@@ -40,6 +40,8 @@ public class ScoreScene implements Scene {
         name = "";
         desc = "";
         address = "";
+        index = 0;
+        oldIndex = -1;
     }
 
     public void update(){
@@ -202,7 +204,12 @@ public class ScoreScene implements Scene {
     public void reset(){
         start = true;
         powerUpsLeft = 0;
-        powerups.clear();
+        powerups = new ArrayList<>();
+        name = "";
+        desc = "";
+        address = "";
+        index = 0;
+        oldIndex = -1;
     }
     /**
      * Invoked on exit of a scene, used to clean up resources
