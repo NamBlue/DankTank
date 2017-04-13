@@ -26,7 +26,7 @@ public class ScoreScene implements Scene {
     private boolean start = true;
     private ArrayList<Powerup> powerups = new ArrayList<>();
     private int powerUpsLeft = 0;
-    private int maxLineSize = 35;
+    private int maxLineSize = 44;
     private int lineSize, row, score;
     private boolean decreasing = true;
     private int alpha = 255;
@@ -105,10 +105,12 @@ public class ScoreScene implements Scene {
         canvas.drawText("Powerups Left: " + powerUpsLeft, Constants.SCREEN_WIDTH *12/20, Constants.SCREEN_HEIGHT*3/20 ,paint);
         if(powerups.size() > 0)
             canvas.drawText("Art Unlocked!!!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
+        else
+            canvas.drawText("No Art Saved!", Constants.SCREEN_WIDTH *3/6, Constants.SCREEN_HEIGHT*5/20 ,artUnlockedPaint);
 
         paint.setTextSize((int)(Constants.SCREEN_WIDTH * .045));
         paint.setTextAlign(Paint.Align.LEFT);
-        row = 7;
+        row = 6;
 
         //Display Name
         lineSize = name.length();

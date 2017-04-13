@@ -450,6 +450,7 @@ public class GameplayScene implements Scene
                 }
                 else if(win && winFrames >= Constants.GAMEOVER_TIME)
                 {
+                    powerupManager.collectDroppedPowerups();
                     pause = false;
                     SceneManager.ACTIVE_SCENE = 6;
                 }

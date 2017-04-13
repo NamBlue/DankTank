@@ -31,6 +31,10 @@ public class Powerup implements GameObject
         {
             desc = "No Summary Exists";
         }
+        else if (desc.isEmpty())
+        {
+            desc = "No Summary Exists";
+        }
         if(address == null)
         {
             address = "No Address Exists";
@@ -40,6 +44,10 @@ public class Powerup implements GameObject
             city = "No City Exists";
         }
         this.Name = name;
+        if(desc.length() > 75)
+        {
+            desc = desc.substring(0, 75) + "...";
+        }
         this.Descriptn = desc;
         this.Address = address;
         this.city = city;
