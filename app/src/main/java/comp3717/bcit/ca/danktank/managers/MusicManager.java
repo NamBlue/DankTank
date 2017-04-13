@@ -131,7 +131,7 @@ public class MusicManager {
                             {
                                 case 1:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.gameplay);
-                                    mPlayer.setVolume(.15f, .15f);
+                                    mPlayer.setVolume(.13f, .13f);
                                     break;
                                 case 2:
                                     mPlayer = MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.stage2);

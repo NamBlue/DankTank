@@ -63,7 +63,7 @@ public class EnemyManager
         }
         for(int i = 0; i < enemies.size(); ++i)
         {
-            if(enemies.get(i).dieFrames > 30)
+            if(enemies.get(i).dieFrames > Constants.TANK_DIE_FRAMES)
             {
                 dyingEnemy = enemies.get(i);
             }

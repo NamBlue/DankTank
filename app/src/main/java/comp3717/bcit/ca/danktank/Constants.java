@@ -14,6 +14,7 @@ public class Constants
     public static int GAMEOVER_TIME = 165;
     public static Context CURRENT_CONTEXT;
     public static long INIT_TIME;
+    public static int TANK_DIE_FRAMES = 70;
     //Below are all set in GameplayScene
     public static int PLAYER_SIZE = 90;
     public static int ENEMY_SIZE = 90;

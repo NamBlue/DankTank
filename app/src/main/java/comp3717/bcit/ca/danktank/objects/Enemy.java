@@ -351,19 +351,20 @@ public class Enemy implements GameObject
           8 explode, 9 spawn
          */
         // > 5 for bigger movements before animating movements, else idle
-        if (rectangle.left - oldleft > 5)
+        int deadzone = (int) (Constants.SCREEN_WIDTH * .004);
+        if (rectangle.left - oldleft > deadzone)
         {
             animationState = 7;
         }
-        else if (rectangle.left - oldleft < -5)
+        else if (rectangle.left - oldleft < -deadzone)
         {
             animationState = 6;
         }
-        else if (rectangle.top - oldtop > 5)
+        else if (rectangle.top - oldtop > deadzone)
         {
             animationState = 5;
         }
-        else if (rectangle.top - oldtop < - 5)
+        else if (rectangle.top - oldtop < - deadzone)
         {
             animationState = 4;
         }

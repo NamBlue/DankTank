@@ -37,7 +37,7 @@ public class SFX_Manager
             {
                 warp.add(MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp));
                 warp.get(0).seekTo(0);
-                warp.get(0).setVolume(.25f, .25f);
+                warp.get(0).setVolume(.15f, .15f);
                 warp.get(0).start();
             }
             else
@@ -48,7 +48,7 @@ public class SFX_Manager
                     if(!warp.get(i).isPlaying())
                     {
                         warp.get(i).seekTo(0);
-                        warp.get(i).setVolume(.25f, .25f);
+                        warp.get(i).setVolume(.15f, .15f);
                         warp.get(i).start();
                         break;
                     }
@@ -58,7 +58,7 @@ public class SFX_Manager
                 {
                     warp.add(MediaPlayer.create(Constants.CURRENT_CONTEXT, R.raw.warp));
                     warp.get(i).seekTo(0);
-                    warp.get(i).setVolume(.25f, .25f);
+                    warp.get(i).setVolume(.15f, .15f);
                     warp.get(i).start();
                 }
                 else if (i < warp.size() - 1)

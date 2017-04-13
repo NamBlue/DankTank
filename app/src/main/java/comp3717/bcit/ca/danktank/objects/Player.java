@@ -100,7 +100,7 @@ public class Player implements GameObject
         //Paint paint = new Paint();
         //paint.setColor(color);
         //canvas.drawRect(rectangle, paint);
-        if(dieFrames < 45)
+        if(dieFrames < Constants.TANK_DIE_FRAMES)
             animationManager.draw(canvas, rectangle);
     }
 
@@ -147,21 +147,22 @@ public class Player implements GameObject
         }
         else
         {
+            int deadzone = (int) (Constants.SCREEN_WIDTH * .004);
             //0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight, 4 walkUP, 5 walkDown, 6 walking left, 7 walking right animations;
             // > 5 for bigger movements before animating movements, else idle
-            if (rectangle.left - oldleft > 5)
+            if (rectangle.left - oldleft > deadzone)
             {
                 animationState = 7;
             }
-            else if (rectangle.left - oldleft < -5)
+            else if (rectangle.left - oldleft < -deadzone)
             {
                 animationState = 6;
             }
-            else if (rectangle.top - oldtop > 5)
+            else if (rectangle.top - oldtop > deadzone)
             {
                 animationState = 5;
             }
-            else if (rectangle.top - oldtop < -5)
+            else if (rectangle.top - oldtop < -deadzone)
             {
                 animationState = 4;
             }
