@@ -6,5 +6,5 @@ package comp3717.bcit.ca.danktank.objects;
 
 public class Art
 {
-    public String Name, Description, Address, city;
+    public String Name, summary, Address, city;
 }

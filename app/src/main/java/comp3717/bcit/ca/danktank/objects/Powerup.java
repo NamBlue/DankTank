@@ -29,7 +29,7 @@ public class Powerup implements GameObject
         }
         if(desc == null)
         {
-            desc = "No Description Exists";
+            desc = "No Summary Exists";
         }
         if(address == null)
         {

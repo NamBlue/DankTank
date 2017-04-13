@@ -54,7 +54,7 @@ public class ScoreScene implements Scene {
             if(index < powerups.size())
             {
                 name = "Name: " + powerups.get(index).getName();
-                desc = "Description: " + powerups.get(index).getDescriptn();
+                desc = "Summary: " + powerups.get(index).getDescriptn();
                 address = "Address: " + powerups.get(index).getAddress();
             }
             powerUpsLeft = powerups.size() - (index + 1);
@@ -129,7 +129,7 @@ public class ScoreScene implements Scene {
         }
         row++;
 
-        //Display Description
+        //Display summary
         lineSize = desc.length();
         line = "";
         if(lineSize > maxLineSize) {

@@ -2,7 +2,6 @@ package comp3717.bcit.ca.danktank.managers;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -56,7 +55,7 @@ public class PowerupManager
         }
         int p_index = (int) Math.floor(Math.random() * artsList.size());
         Art temp = artsList.get(p_index);
-        collectedPowerups.add(new Powerup(temp.Name, temp.Description, temp.Address, temp.city, new Rect()));
+        collectedPowerups.add(new Powerup(temp.Name, temp.summary, temp.Address, temp.city, new Rect()));
         powerups.clear();
     }
 
@@ -71,7 +70,7 @@ public class PowerupManager
         {
             int p_index = (int) Math.floor(Math.random() * artsList.size());
             Art temp = artsList.get(p_index);
-            Powerup p = new Powerup(temp.Name, temp.Description, temp.Address, temp.city, rect);
+            Powerup p = new Powerup(temp.Name, temp.summary, temp.Address, temp.city, rect);
             powerups.add(p);
         }
     }
