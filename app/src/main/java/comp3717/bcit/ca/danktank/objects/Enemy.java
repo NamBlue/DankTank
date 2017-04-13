@@ -232,7 +232,7 @@ public class Enemy implements GameObject
                     moveDirection = Enums.MoveDirection.Idle;
                     break;
             }
-            if(ran.nextFloat() < .5f)
+            if(ran.nextFloat() < Constants.ENEMY_FIRE_CHANCE)
                 readyToFire = true;
         }
         Point temp;
