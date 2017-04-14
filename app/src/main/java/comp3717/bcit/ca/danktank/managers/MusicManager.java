@@ -41,7 +41,8 @@ public class MusicManager {
 
     public void resume()
     {
-        mPlayer.start();
+        if(ACTIVE_SCENE != 3)
+            mPlayer.start();
     }
 
     public void playVictory()
