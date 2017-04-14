@@ -61,7 +61,7 @@ public class Animation
         {
             return;
         }
-        scaleRect(destination);
+
         //null for src rect if want to draw entire image
         canvas.drawBitmap(frames[frameIndex], null, destination, null);
     }
