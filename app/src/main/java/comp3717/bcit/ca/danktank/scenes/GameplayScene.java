@@ -455,6 +455,7 @@ public class GameplayScene implements Scene
                 else if(win && winFrames >= Constants.GAMEOVER_TIME)
                 {
                     pause = false;
+                    //powerupManager.collectDroppedPowerups();
                     SceneManager.ACTIVE_SCENE = 6;
                 }
                 /* Deprecated - for drag controls

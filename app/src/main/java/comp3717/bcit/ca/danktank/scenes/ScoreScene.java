@@ -31,6 +31,7 @@ public class ScoreScene implements Scene {
     private boolean decreasing = true;
     private int alpha = 255;
     private Paint artUnlockedPaint = new Paint();
+    private ArrayList<String> summaryLines;
 
     public ScoreScene()
     {
@@ -42,6 +43,7 @@ public class ScoreScene implements Scene {
         address = "";
         index = 0;
         oldIndex = -1;
+        summaryLines = new ArrayList<>();
     }
 
     public void update(){
@@ -58,6 +60,21 @@ public class ScoreScene implements Scene {
                 name = "Name: " + powerups.get(index).getName();
                 desc = "Summary: " + powerups.get(index).getDescriptn();
                 address = "Address: " + powerups.get(index).getAddress();
+                int i = 0, j = 0;
+                while (i + 46 < desc.length() && (i = desc.lastIndexOf(" ", i + 46)) != -1) {
+                    line = desc.substring(j, i);
+                    j = i + 1;
+                    summaryLines.add(line);
+                    line = desc.substring(j, desc.length());
+                    if(line.length() < 46)
+                    {
+                        summaryLines.add(line);
+                    }
+                }
+                if(summaryLines.size() == 0)
+                {
+                    summaryLines.add(desc);
+                }
             }
             powerUpsLeft = powerups.size() - (index + 1);
             if(powerups.size() == 0)
@@ -134,25 +151,11 @@ public class ScoreScene implements Scene {
         row++;
 
         //Display summary
-        lineSize = desc.length();
-        line = "";
-        if(lineSize > maxLineSize) {
-            while (lineSize > maxLineSize) {
-                for (int i = 0; i < lineSize; ++i) {
-                    line = line + desc.charAt(i);
-                    if (line.length() == maxLineSize) {
-                        canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
-                        row++;
-                        line = "";
-                    }
-                }
-                lineSize = lineSize - maxLineSize;
-            }
-            canvas.drawText(line, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
-        }else{
-            canvas.drawText(desc, Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+        for(int i = 0; i < summaryLines.size(); ++i)
+        {
+            canvas.drawText(summaryLines.get(i), Constants.SCREEN_WIDTH / 20, Constants.SCREEN_HEIGHT * row / 20, paint);
+            row++;
         }
-        row++;
 
         //Display Address
         lineSize = address.length();
@@ -207,6 +210,7 @@ public class ScoreScene implements Scene {
         start = true;
         powerUpsLeft = 0;
         powerups = new ArrayList<>();
+        summaryLines = new ArrayList<>();
         name = "";
         desc = "";
         address = "";
