@@ -19,7 +19,7 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
 
 public class InstructionScene implements Scene {
     private Rect screen = new Rect();
-    private Rect backButton;
+    private Rect backButton, backZone;
     private Bitmap back_image;
     private Bitmap up_image;
     private Bitmap down_image;
@@ -35,6 +35,7 @@ public class InstructionScene implements Scene {
 
     public InstructionScene(){
         backButton= new Rect(0, 0, (int)(Constants.SCREEN_WIDTH * .15), (int)(Constants.SCREEN_WIDTH * .15));
+        backZone = new Rect(0, 0, (int)(Constants.SCREEN_WIDTH * .20), (int)(Constants.SCREEN_WIDTH * .20));
         BitmapFactory bitmapFactory = new BitmapFactory();
         back_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.back_button);
         pause_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pause_button);
@@ -121,7 +122,7 @@ public class InstructionScene implements Scene {
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                if(backButton.contains((int)event.getX(), (int)event.getY())){
+                if(backZone.contains((int)event.getX(), (int)event.getY())){
                     SceneManager.ACTIVE_SCENE = 0;
                 }
                 break;

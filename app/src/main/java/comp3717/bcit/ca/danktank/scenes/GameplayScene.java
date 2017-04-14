@@ -33,8 +33,7 @@ public class GameplayScene implements Scene
     //Used to set the bounds for the gameover text box
     private Rect rectBound = new Rect();
     //The GUI buttons
-    private Rect pauseButton, moveLeftButton, moveRightButton,
-            moveUpButton, moveDownButton, fireButton;
+    private Rect pauseButton, fireButton, dpadButton;
     //The zone that it will detect the touch
     private Rect pauseZone, moveLeftZone, moveRightZone,
             moveUpZone, moveDownZone, fireZone;
@@ -60,6 +59,7 @@ public class GameplayScene implements Scene
     private Bitmap left_image;
     private Bitmap pause_image;
     private Bitmap fire_image;
+    private Bitmap dpad_image;
     private float gameOverTextPos;
 
     private ArrayList<Enemy> enemies;
@@ -85,24 +85,18 @@ public class GameplayScene implements Scene
 
         player = new Player(new Rect(0, 0, Constants.PLAYER_SIZE, Constants.PLAYER_SIZE), Color.rgb(255, 0, 0));
         BitmapFactory bitmapFactory = new BitmapFactory();
-        up_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.up_button);
-        down_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.down_button);
-        right_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.right_button);
-        left_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.left_button);
         pause_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pause_button);
         fire_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.fire_button);
+        dpad_image = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.pad);
 
-        moveLeftButton = new Rect(0, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
-        moveRightButton = new Rect(Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*12/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
-        moveUpButton = new Rect(Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*22.5/30), Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*25.5/30));
-        moveDownButton = new Rect(Constants.SCREEN_WIDTH*4/30, Constants.SCREEN_HEIGHT*27/30, Constants.SCREEN_WIDTH*8/30, Constants.SCREEN_HEIGHT*30/30);
         fireButton = new Rect(Constants.SCREEN_WIDTH*49/60, Constants.SCREEN_HEIGHT*25/30, Constants.SCREEN_WIDTH*58/60, Constants.SCREEN_HEIGHT*28/30);
         pauseButton = new Rect(Constants.SCREEN_WIDTH*26/30, Constants.SCREEN_HEIGHT/30, Constants.SCREEN_WIDTH*29/30, Constants.SCREEN_HEIGHT*3/30);
+        dpadButton = new Rect(Constants.SCREEN_WIDTH*0/30, (int)(Constants.SCREEN_HEIGHT*22.5/30), Constants.SCREEN_WIDTH*12/30, Constants.SCREEN_HEIGHT*30/30);
 
-        moveLeftZone = new Rect(0, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
-        moveRightZone = new Rect(Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*24.75/30), Constants.SCREEN_WIDTH*12/30, (int)(Constants.SCREEN_HEIGHT*27.75/30));
-        moveUpZone = new Rect(Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*22.5/30), Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*25.5/30));
-        moveDownZone = new Rect(Constants.SCREEN_WIDTH*4/30, Constants.SCREEN_HEIGHT*27/30, Constants.SCREEN_WIDTH*8/30, Constants.SCREEN_HEIGHT*30/30);
+        moveLeftZone = new Rect(0, (int)(Constants.SCREEN_HEIGHT*24.50/30), Constants.SCREEN_WIDTH*4/30, (int)(Constants.SCREEN_HEIGHT*28/30));
+        moveRightZone = new Rect(Constants.SCREEN_WIDTH*8/30, (int)(Constants.SCREEN_HEIGHT*24.50/30), Constants.SCREEN_WIDTH*12/30, (int)(Constants.SCREEN_HEIGHT*28/30));
+        moveUpZone = new Rect((int)(Constants.SCREEN_WIDTH*3/30), (int)(Constants.SCREEN_HEIGHT*22/30), (int)(Constants.SCREEN_WIDTH*9/30), (int)(Constants.SCREEN_HEIGHT*25.5/30));
+        moveDownZone = new Rect((int)(Constants.SCREEN_WIDTH*3/30), Constants.SCREEN_HEIGHT*27/30, (int)(Constants.SCREEN_WIDTH*9/30), Constants.SCREEN_HEIGHT*30/30);
         fireZone = new Rect(Constants.SCREEN_WIDTH*42/60, (int)(Constants.SCREEN_HEIGHT*22.5/30), Constants.SCREEN_WIDTH*60/60, Constants.SCREEN_HEIGHT*30/30);
         pauseZone = new Rect(Constants.SCREEN_WIDTH*24/30, 0, Constants.SCREEN_WIDTH*30/30, Constants.SCREEN_HEIGHT*4/30);
 
@@ -374,12 +368,9 @@ public class GameplayScene implements Scene
         powerupManager.draw(canvas);
         enemyManager.draw(canvas);
 
-        canvas.drawBitmap(up_image, null, moveUpButton, controlsPaint);
-        canvas.drawBitmap(down_image, null, moveDownButton, controlsPaint);
-        canvas.drawBitmap(left_image, null, moveLeftButton, controlsPaint);
-        canvas.drawBitmap(right_image, null, moveRightButton, controlsPaint);
         canvas.drawBitmap(pause_image, null, pauseButton, controlsPaint);
         canvas.drawBitmap(fire_image, null, fireButton, controlsPaint);
+        canvas.drawBitmap(dpad_image, null, dpadButton, controlsPaint);
         if (gameOver)
         {
             winLosePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .1));

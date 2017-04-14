@@ -17,7 +17,7 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
  */
 
 public class LevelSelectScene implements Scene {
-    private Rect backButton;
+    private Rect backButton, backZone;
     private Rect level1Button;
     private Rect level2Button;
     private Rect level3Button;
@@ -31,6 +31,7 @@ public class LevelSelectScene implements Scene {
 
     public LevelSelectScene(){
         backButton = new Rect(0, 0, (int)(Constants.SCREEN_WIDTH * .15), (int)(Constants.SCREEN_WIDTH * .15));
+        backZone = new Rect(0, 0, (int)(Constants.SCREEN_WIDTH * .20), (int)(Constants.SCREEN_WIDTH * .20));
         level1Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*3/20, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT *9/20);
         level2Button = new Rect(Constants.SCREEN_WIDTH*6/10, Constants.SCREEN_HEIGHT*3/20, Constants.SCREEN_WIDTH*9/10, Constants.SCREEN_HEIGHT*9/20);
         level3Button = new Rect(Constants.SCREEN_WIDTH/10, Constants.SCREEN_HEIGHT*12/20, Constants.SCREEN_WIDTH*4/10, Constants.SCREEN_HEIGHT*18/20);
@@ -124,7 +125,7 @@ public class LevelSelectScene implements Scene {
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:
-                if(backButton.contains((int)event.getX(), (int)event.getY())){
+                if(backZone.contains((int)event.getX(), (int)event.getY())){
                     SceneManager.ACTIVE_SCENE = 0;
                 }
                 else if(level1Button.contains((int)event.getX(), (int)event.getY())){
