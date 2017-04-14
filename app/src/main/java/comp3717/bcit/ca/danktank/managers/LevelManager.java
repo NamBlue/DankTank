@@ -15,6 +15,7 @@ import java.util.Random;
 import comp3717.bcit.ca.danktank.Constants;
 import comp3717.bcit.ca.danktank.R;
 import comp3717.bcit.ca.danktank.scenes.Scene;
+import comp3717.bcit.ca.danktank.scenes.TitleScene;
 
 import static comp3717.bcit.ca.danktank.MainThread.canvas;
 
@@ -27,7 +28,6 @@ public class LevelManager implements Scene {
     private Bitmap Brick_image;
     private Bitmap Ice_image;
     private Bitmap Tree_image, Volcano_image;
-    private Random r;
     public static int level = 1;
     private ArrayList<Rect> spawnpoints;
     private ArrayList<Rect> wallTiles;
@@ -46,43 +46,49 @@ public class LevelManager implements Scene {
         wallTiles = new ArrayList<Rect>();
         spawnpoints = new ArrayList<Rect>();
         paint = new Paint();
-        r = new Random();
         map = new boolean[10][20];
         level = lvl;
         populateMap(level);
         if(level == 1)
         {
-            Constants.ENEMY_FIRE_CHANCE = .4f;
-            totalEnemiesForThisLevel = 4;
-            maxEnemySize = 2;
+            Constants.ENEMY_FIRE_CHANCE = .6f;
+            totalEnemiesForThisLevel = 6;
+            maxEnemySize = 3;
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.desert);
-            Constants.ENEMY_ACTIVENESS = 1;
+            Constants.ENEMY_ACTIVENESS = .7f;
         }
         else if(level == 2)
         {
-            Constants.ENEMY_FIRE_CHANCE = .5f;
-            totalEnemiesForThisLevel = 6;
+            Constants.ENEMY_FIRE_CHANCE = .7f;
+            totalEnemiesForThisLevel = 8;
             maxEnemySize = 4;
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.snow);
-            Constants.ENEMY_ACTIVENESS = .8f;
+            Constants.ENEMY_ACTIVENESS = .6f;
         }
         else if(level == 3)
         {
-            Constants.ENEMY_FIRE_CHANCE = .6f;
-            totalEnemiesForThisLevel = 8;
+            Constants.ENEMY_FIRE_CHANCE = .8f;
+            totalEnemiesForThisLevel = 10;
             maxEnemySize = 5;
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.forest);
-            Constants.ENEMY_ACTIVENESS = .6f;
+            Constants.ENEMY_ACTIVENESS = .5f;
         }
         else if(level == 4)
         {
-            Constants.ENEMY_FIRE_CHANCE = .7f;
-            totalEnemiesForThisLevel = 10;
+            Constants.ENEMY_FIRE_CHANCE = .9f;
+            totalEnemiesForThisLevel = 12;
             maxEnemySize = 8;
             backGroundImage = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.lava);
-            Constants.ENEMY_ACTIVENESS = .4f;
+            Constants.ENEMY_ACTIVENESS = .3f;
         }
-
+        if(TitleScene.easterEgg >= 5)
+        {
+            Constants.ENEMY_FIRE_CHANCE = 1.0f;
+            totalEnemiesForThisLevel = 30;
+            maxEnemySize = 12;
+            Constants.ENEMY_ACTIVENESS = .2f;
+            Constants.BULLET_SPEED = (Constants.SCREEN_WIDTH * .03f);
+        }
     }
 
     public static int gettotalEnemiesForThisLevel(){return totalEnemiesForThisLevel;}

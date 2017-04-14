@@ -32,7 +32,9 @@ public class TitleScene implements Scene
     private Paint titlePaint;
     private int alpha;
     private boolean decreasing;
+    private String message;
     private AlertDialog credits;
+    public static int easterEgg = 0;
 
     public TitleScene()
     {
@@ -46,10 +48,11 @@ public class TitleScene implements Scene
         titlePaint.setColor(Color.YELLOW);
         titlePaint.setTextAlign(Paint.Align.CENTER);
         alpha = 255;
+        message = "Lead Developer:\nGeorge Lee\n\nLevel Designer:\nSteven Ma\n\nDatasets:\nHarman Mahal";
         decreasing = true;
         credits = new AlertDialog.Builder(Constants.CURRENT_CONTEXT)
                 .setTitle("Credits")
-                .setMessage("Lead Developer:\nGeorge Lee\n\nLevel Designer:\nSteven Ma\n\nDatasets:\nHarman Mahal")
+                .setMessage(message)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                     }
@@ -124,6 +127,13 @@ public class TitleScene implements Scene
                     SceneManager.ACTIVE_SCENE = 4;
                 }
                 else if(credits_button.contains((int) event.getX(), (int) event.getY())){
+                    easterEgg++;
+                    if(easterEgg >= 5)
+                    {
+                        message = "You have found hell, prepare to die!";
+                        credits.setTitle("Easter Egg Found!");
+                        credits.setMessage(message);
+                    }
                     credits.show();
                 }
                 else{
