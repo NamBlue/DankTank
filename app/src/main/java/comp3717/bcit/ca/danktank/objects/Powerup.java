@@ -44,9 +44,9 @@ public class Powerup implements GameObject
             city = "No City Exists";
         }
         this.Name = name;
-        if(desc.length() > 150)
+        if(desc.length() > 155)
         {
-            desc = desc.substring(0, 150) + "...";
+            desc = desc.substring(0, 155) + "...";
         }
         this.Descriptn = desc;
         this.Address = address;

@@ -1,2 +1,0 @@
-Duplicated arts are added in, make sure to not add if existed before
-Improve direction pad controls as the pad is too small to control

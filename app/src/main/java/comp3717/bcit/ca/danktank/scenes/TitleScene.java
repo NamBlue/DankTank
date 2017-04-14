@@ -1,5 +1,8 @@
 package comp3717.bcit.ca.danktank.scenes;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,24 +25,37 @@ import comp3717.bcit.ca.danktank.managers.SceneManager;
 public class TitleScene implements Scene
 {
     //Used to set the bounds for the gameover text box
-    private Rect screen = new Rect(0,0,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
-    private Rect instructions_button = new Rect(0,Constants.SCREEN_HEIGHT*17/20,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
+    private Rect screen;
+    private Rect instructions_button, credits_button;
     private BitmapFactory bitmapFactory;
     private Bitmap title;
     private Paint titlePaint;
     private int alpha;
     private boolean decreasing;
+    private AlertDialog credits;
 
     public TitleScene()
     {
         bitmapFactory = new BitmapFactory();
+        screen = new Rect(0,0,Constants.SCREEN_WIDTH,Constants.SCREEN_HEIGHT);
         title = bitmapFactory.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.titlebackground);
+        instructions_button = new Rect(0,Constants.SCREEN_HEIGHT*15/20,Constants.SCREEN_WIDTH, (int)(Constants.SCREEN_HEIGHT*17.5/20));
+        credits_button = new Rect(0,(int)(Constants.SCREEN_HEIGHT*17.5/20),Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
         titlePaint = new Paint();
         titlePaint.setTextSize((int)(Constants.SCREEN_WIDTH * .08));
         titlePaint.setColor(Color.YELLOW);
         titlePaint.setTextAlign(Paint.Align.CENTER);
         alpha = 255;
         decreasing = true;
+        credits = new AlertDialog.Builder(Constants.CURRENT_CONTEXT)
+                .setTitle("Credits")
+                .setMessage("Lead Developer:\nGeorge Lee\n\nLevel Designer:\nSteven Ma\n\nDatasets:\nHarman Mahal")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .setIcon(android.R.drawable.ic_menu_myplaces)
+                .create();
     }
 
 
@@ -89,9 +105,10 @@ public class TitleScene implements Scene
         paint.setColor(Color.YELLOW);
         paint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText("The Dank Tank", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*2/20 ,paint);
-        canvas.drawText("Click to Start!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 ,titlePaint);
+        canvas.drawText("Tap to Start!", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT/2 ,titlePaint);
         paint.setColor(Color.WHITE);
-        canvas.drawText("Instructions", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*19/20 ,paint);
+        canvas.drawText("Instructions", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*17/20 ,paint);
+        canvas.drawText("Credits", Constants.SCREEN_WIDTH/2, Constants.SCREEN_HEIGHT*19/20 ,paint);
     }
 
     @Override
@@ -106,9 +123,11 @@ public class TitleScene implements Scene
                 if(instructions_button.contains((int) event.getX(), (int) event.getY())){
                     SceneManager.ACTIVE_SCENE = 4;
                 }
+                else if(credits_button.contains((int) event.getX(), (int) event.getY())){
+                    credits.show();
+                }
                 else{
                     SceneManager.ACTIVE_SCENE = 2;
-
                 }
                 break;
         }

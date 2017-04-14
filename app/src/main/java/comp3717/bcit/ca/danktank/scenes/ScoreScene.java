@@ -99,12 +99,12 @@ public class ScoreScene implements Scene {
         String temp = "";
         list.clear();
         int i = 0, j = 0;
-        while (i + 46 < string.length() && (i = string.lastIndexOf(" ", i + 46)) != -1) {
+        while (i + 45 < string.length() && (i = string.lastIndexOf(" ", i + 45)) != -1) {
             temp = string.substring(j, i);
             j = i + 1;
             list.add(temp);
             temp = string.substring(j, string.length());
-            if(temp.length() < 46)
+            if(temp.length() < 45)
             {
                 list.add(temp);
             }

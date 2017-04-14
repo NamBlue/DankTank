@@ -65,13 +65,38 @@ public class PowerupManager
 
     public void spawnPowerup(Rect rect)
     {
+        boolean exists = false, spawned = false;
         double spawnPercentage = Math.random();
         if ((spawnPercentage >= 0))
         {
-            int p_index = (int) Math.floor(Math.random() * artsList.size());
-            Art temp = artsList.get(p_index);
-            Powerup p = new Powerup(temp.Name, temp.summary, temp.Address, temp.city, rect);
-            powerups.add(p);
+            while(!spawned && (collectedPowerups.size() + powerups.size()) < artsList.size())
+            {
+                exists = false;
+                int p_index = (int) Math.floor(Math.random() * artsList.size());
+                Art temp = artsList.get(p_index);
+                for (Powerup pwr : powerups)
+                {
+                    if (pwr.getName().equals(temp.Name))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+                for (Powerup pwr : collectedPowerups)
+                {
+                    if (pwr.getName().equals(temp.Name))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists)
+                {
+                    Powerup p = new Powerup(temp.Name, temp.summary, temp.Address, temp.city, rect);
+                    powerups.add(p);
+                    spawned = true;
+                }
+            }
         }
     }
 
