@@ -125,10 +125,10 @@ public class Player implements GameObject
         float oldleft = rectangle.left;
         float oldtop = rectangle.top;
 
-        rectangle.set(point.x - rectangle.width()/2,
-                        point.y - rectangle.height()/2,
-                        point.x + rectangle.width()/2,
-                        point.y + rectangle.height()/2);
+        rectangle.set(point.x - Constants.PLAYER_SIZE/2,
+                        point.y - Constants.PLAYER_SIZE/2,
+                        point.x + Constants.PLAYER_SIZE/2,
+                        point.y + Constants.PLAYER_SIZE/2);
         if (startingState)
         {
             animationState = 8;

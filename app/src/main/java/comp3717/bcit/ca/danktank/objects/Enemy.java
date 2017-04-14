@@ -342,10 +342,10 @@ public class Enemy implements GameObject
         float oldleft = rectangle.left;
         float oldtop = rectangle.top;
 
-        rectangle.set(point.x - rectangle.width()/2,
-                        point.y - rectangle.height()/2,
-                        point.x + rectangle.width()/2,
-                        point.y + rectangle.height()/2);
+        rectangle.set(point.x - Constants.ENEMY_SIZE/2,
+                        point.y - Constants.ENEMY_SIZE/2,
+                        point.x + Constants.ENEMY_SIZE/2,
+                        point.y + Constants.ENEMY_SIZE/2);
         /*0 for idleUp, 1 idleDown, 2 idleLeft, 3 idleRight,
           4 walkUP, 5 walkDown, 6 walking left, 7 walking right
           8 explode, 9 spawn
